@@ -1,0 +1,682 @@
+{
+    "applications": [{
+        "var.application_idunaasnew": {
+            "type": "string",
+            "defaultValue": "idunaasnew",
+            "description": "New idun aaS spinnaker application folder where pipelines located",
+            "Usage": "Used in every template and pipeline",
+            "name": "application_idunaasnew"
+        },
+        "var.application_idunaas": {
+            "type": "string",
+            "defaultValue": "idunaas",
+            "description": "idun aaS spinnaker application folder where pipelines located",
+            "Usage": "Used in every template and pipeline",
+            "name": "application_idunaas"
+        }
+    }],
+    "submodulepaths": [{
+        "var.submodule_path": {
+            "type": "string",
+            "defaultValue": "com.ericsson.idunaas.ci",
+            "description": "Location where our idunaas repo is checkout to as a submodule under oss-integration-ci checkout",
+            "Usage": "Used in the install and upgrade template and pipelines",
+            "name": "submodule_path"
+        }
+    }],
+    "kubedownscaler": [{
+        "var.pause_resume_kubedownscaler": {
+            "type": "string",
+            "defaultValue": "pause",
+            "description": "Pause or Resume action for kube downscaler",
+            "Usage": "Used in mass trigger pipeline, kubedownscaler pipelines, and upgrade-rollback pipeline",
+            "name": "pause_resume_kubedownscaler"
+        }
+    }],
+    "emails": [{
+        "var.team_email": {
+            "type": "string",
+            "defaultValue": "pdlteammuo@pdl.internal.ericsson.com",
+            "description": "Team Muon email",
+            "Usage": "Used in dev02 mass trigger and mass rollout e2e flow templates",
+            "name": "team_email"
+        }
+    }],
+    "jenkins": [{
+        "var.jenkins_fem": {
+            "type": "string",
+            "defaultValue": "oss-aeonic-fem2s11",
+            "description": "Jenkins Fem that idun aaS are using",
+            "Usage": "Used in install, rollback and upgrade template/pipelines, standalone export backup pipelines, setup cluster template, uds cleanup template, gather env logs template and dev02 mass trigger template",
+            "name": "jenkins_fem"
+        },
+        "var.jenkins_maintrack_fem": {
+            "type": "string",
+            "defaultValue": "maintrack-aispinn-fem12s11-eiffel004",
+            "description": "Jenkins Maintrack Fem that we are using for RTP",
+            "Usage": "Used in install, rollback, upgrade rollback, uds cleanup, standalone export backup, gather env logs and dev02 mass trigger templates",
+            "name": "jenkins_maintrack_fem"
+        }
+    }],
+    "slaves": [{
+        "var.jenkins_fem_slave": {
+            "type": "string",
+            "defaultValue": "IDUN_CICD_ONE_POD_H",
+            "description": "Jenkins Fem slave that idun aaS are using",
+            "Usage": "Used everywhere",
+            "name": "jenkins_fem_slave"
+        }
+    }],
+    "secrets": [{
+        "var.armdocker_user_secret": {
+            "type": "string",
+            "defaultValue": "ossadm_docker_config",
+            "description": "Armdocker user secret",
+            "Usage": "Used in all upgrade-rollback and rollback template/pipelines, install template and install public pipeline, setup cluster template, both standalone export backup pipelines and dev02 mass trigger template",
+            "name": "armdocker_user_secret"
+        },
+        "var.functional_user_secret": {
+            "type": "string",
+            "defaultValue": "SELI_ARTIFACTORY",
+            "description": "Seli artifactory",
+            "Usage": "Used in all upgrade-rollback and rollback template/pipelines, install template and install public pipeline, setup cluster template, both standalone export backup pipelines and mass rollout trigger template",
+            "name": "functional_user_secret"
+        },
+        "var.idun_user_secret": {
+            "type": "string",
+            "defaultValue": "idun_credentials",
+            "description": "Idun user secret",
+            "Usage": "Used in all install, rollback template/pipelines, both standalone export backup pipelines, upgrade-rollback template and mass rollout e2e flow pipelines",
+            "name": "idun_user_secret"
+        },
+        "var.cassandra_user_secret": {
+            "type": "string",
+            "defaultValue": "idunaas_cassandra_credentials",
+            "descript   ion": "Idun aaS cassandra user secret",
+            "Usage": "Used in uds cleanup template/pipelines",
+            "name": "cassandra_user_secret"
+        },
+        "var.backup_user_secret": {
+            "type": "string",
+            "defaultValue": "idunaas_backup_user_credentials",
+            "description": "Idun aaS backup user secret",
+            "Usage": "Used in standalone backup template/pipelines",
+            "name": "backup_user_secret"
+        }
+    }],
+    "pipelines": [{
+        "var.mass_rollout_trigger_pipeline": {
+            "type": "string",
+            "defaultValue": "${#pipelineId(\\\"idunaas-idun-mass-rollout-trigger-pipeline\\\")}",
+            "description": "Mass rollout trigger pipeline",
+            "Usage": "No where",
+            "name": "mass_rollout_trigger_pipeline"
+        },
+        "var.mass_rollout_e2e_flow_pipeline": {
+            "type": "string",
+            "defaultValue": "${#pipelineId(\\\"IDUNAAS-MASS-ROLLOUT-E2E-Flow\\\")}",
+            "description": "Mass rollout e2e flow pipeline",
+            "Usage": "Used in the mass rollout trigger template",
+            "name": "mass_rollout_e2e_flow_pipeline"
+        },
+        "var.mass_rollout_kube_downscaler_e2e_flow_pipeline": {
+            "type": "string",
+            "defaultValue": "${#pipelineId(\\\"idunaas-idun-mass-rollout-kube-downscaler-e2e-flow-pipeline\\\")}",
+            "description": "Kube downscaler e2e flow pipeline that triggers kube downscaler on all environments",
+            "Usage": "Used in the mass rollout trigger template",
+            "name": "mass_rollout_kube_downscaler_e2e_flow_pipeline"
+        },
+        "var.kube_downscaler_pause_resume_pipeline": {
+            "type": "string",
+            "defaultValue": "${#pipelineId(\\\"idunaas-idun-kube-downscaler-pause-resume-pipeline\\\")}",
+            "description": "Kube downscaler pipeline that calls kube downscaler pause or resume for a specific environment",
+            "Usage": "Used in the mass rollout trigger template",
+            "name": "kube_downscaler_pause_resume_pipeline"
+        },
+        "var.upgrade_rollback_pipeline": {
+            "type": "string",
+            "defaultValue": "${#pipelineId(\\\"idunaas-idun-upgrade-rollback-helmfile-pipeline\\\")}",
+            "description": "The upgrade rollback pipeline",
+            "Usage": "Used in the dev02 mass trigger and mass rollout e2e flow template",
+            "name": "upgrade_rollback_pipeline"
+        },
+        "var.upgrade_rollback_public_pipeline": {
+            "type": "string",
+            "defaultValue": "${#pipelineId(\\\"idunaas-idun-upgrade-rollback-helmfile-public-pipeline\\\")}",
+            "description": "The upgrade rollback public pipeline",
+            "Usage": "Used in the mass rollout e2e flow template",
+            "name": "upgrade_rollback_public_pipeline"
+        },
+        "var.rollback_pipeline": {
+            "type": "string",
+            "defaultValue": "${#pipelineId(\\\"idunaas-idun-rollback-helmfile-pipeline\\\")}",
+            "description": "The rollback pipeline",
+            "Usage": "Used in the upgrade-rollback pipeline",
+            "name": "rollback_pipeline"
+        },
+        "var.rollback_public_pipeline": {
+            "type": "string",
+            "defaultValue": "${#pipelineId(\\\"idunaas-idun-rollback-helmfile-public-pipeline\\\")}",
+            "description": "The rollback public pipeline",
+            "Usage": "Used in the upgrade-rollback public pipeline",
+            "name": "rollback_public_pipeline"
+        },
+        "var.install_pipeline": {
+            "type": "string",
+            "defaultValue": "${#pipelineId(\\\"idunaas-idun-install-helmfile-pipeline\\\")}",
+            "description": "The install pipeline",
+            "Usage": "Used in the dev02 mass trigger template and the rollback pipeline",
+            "name": "install_pipeline"
+        },
+        "var.install_public_pipeline": {
+            "type": "string",
+            "defaultValue": "${#pipelineId(\\\"idunaas-idun-install-helmfile-public-pipeline\\\")}",
+            "description": "The install public pipeline",
+            "Usage": "Used in the rollback public pipeline",
+            "name": "install_public_pipeline"
+        },
+        "var.gather_env_logs_pipeline": {
+            "type": "string",
+            "defaultValue": "${#pipelineId(\\\"idunaas-idun-gather-env-logs-pipeline\\\")}",
+            "description": "The gather env logs pipeline",
+            "Usage": "Used in the gather env logs flow template",
+            "name": "gather_env_logs_pipeline"
+        }
+    }],
+    "deployment_env": [{
+        "var.deployment_environment": {
+            "type": "string",
+            "defaultValue": "idunaasdev01",
+            "description": "Deployment environment",
+            "Usage": "Used in gather env logs, setup cluster and uds cleanup templates",
+            "name": "deployment_environment"
+        }
+    }],
+    "chart_things": [{
+        "var.int_chart_version": {
+            "type": "string",
+            "defaultValue": "0.0.0",
+            "description": "Used in install, rollback, upgrade-rollback and mass rollout e2e flow templates",
+            "Usage": "Used in gather env logs, setup cluster and uds cleanup templates",
+            "name": "int_chart_version"
+        },
+        "var.select_chart_version": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "Used mass rollout trigger template",
+            "Usage": "To select latest chart version or dev2 installed successful chart version. Set it to true to get the latest chart version",
+            "name": "int_chart_version"
+        },
+        "var.int_chart_name": {
+            "type": "string",
+            "defaultValue": "eric-eiae-helmfile",
+            "description": "Integration Chart Name",
+            "Usage": "Used in the install, rollback and upgrade-rollback templates",
+            "name": "int_chart_name"
+        },
+        "var.helm_chart_repo_name": {
+            "type": "string",
+            "defaultValue": "proj-eo-drop-helm",
+            "description": "Helm chart repo name",
+            "Usage": "Used in the install, upgrade-rollback and standalone export templates",
+            "name": "helm_chart_repo_name"
+        },
+        "var.int_chart_repo": {
+            "type": "string",
+            "defaultValue": "https://arm.seli.gic.ericsson.se/artifactory/proj-eric-oss-drop-helm",
+            "description": "Integration Chart Repo",
+            "Usage": "Used in the install and upgrade-rollback templates",
+            "name": "int_chart_repo"
+        }
+    }],
+    "gather_logs": [{
+        "var.collect_logs_with_dm": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "Use adp to collect logs or deployment manager. Default is to use adp",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "collect_logs_with_dm"
+        },
+        "var.gather_logs_ossautoapp01": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from ossautoapp01 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_ossautoapp01"
+        },
+        "var.gather_logs_bnewidun01": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from bnewidun01 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_bnewidun01"
+        },
+        "var.gather_logs_bnewidun02": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from bnewidun02 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_bnewidun02"
+        },
+        "var.gather_logs_bnewidun03": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from bnewidun03 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_bnewidun03"
+        },
+        "var.gather_logs_bnewidun05": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from bnewidun05 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_bnewidun05"
+        },
+        "var.gather_logs_bmasidun01": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from bmasidun01 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_bmasidun01"
+        },
+        "var.gather_logs_ernidun01": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from ernidun01 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_ernidun01"
+        },
+        "var.gather_logs_openlab01": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from openlab01 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_openlab01"
+        },
+        "var.gather_logs_idunaasdev01": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from idunaasdev01 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_idunaasdev01"
+        },
+        "var.gather_logs_idunaasdev02": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from idunaasdev02 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_idunaasdev02"
+        },
+        "var.gather_logs_bnew03": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from bnew03 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_bnew03"
+        },
+        "var.gather_logs_ecosystem01": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from ecosystem01 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_ecosystem01"
+        },
+        "var.gather_logs_viavieiap01": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from viavieiap01 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_viavieiap01"
+        },
+        "var.gather_logs_infoveiap01": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from infoveiap01 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_infoveiap01"
+        },
+        "var.gather_logs_cranscoeiap01": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To retrieve log from cranscoeiap01 deployment",
+            "Usage": "Used in the gather env logs e2e flow template",
+            "name": "gather_logs_cranscoeiap01"
+        }
+    }],
+    "skips": [{
+        "var.skip_ossautoapp01": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To skip the upgrade of ossautoapp01 deployment",
+            "Usage": "Used in the mass rollout trigger and mass rollback e2e flow templates",
+            "name": "skip_ossautoapp01"
+        },
+        "var.skip_bnewidun01": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To skip the upgrade of bnewidun01 deployment",
+            "Usage": "Used in the mass rollout trigger and mass rollback e2e flow templates",
+            "name": "skip_bnewidun01"
+        },
+        "var.skip_openlab01": {
+            "type": "string",
+            "defaultValue": "true",
+            "description": "To skip the upgrade of openlab01 deployment",
+            "Usage": "Used in the mass rollout trigger and mass rollback e2e flow templates",
+            "name": "skip_openlab01"
+        },
+        "var.skip_bnewidun02": {
+            "type": "string",
+            "defaultValue": "true",
+            "description": "To skip the upgrade of bnewidun02 deployment",
+            "Usage": "Used in the mass rollout trigger and mass rollback e2e flow templates",
+            "name": "skip_bnewidun02"
+        },
+        "var.skip_ernidun01": {
+            "type": "string",
+            "defaultValue": "true",
+            "description": "To skip the upgrade of ernidun01 deployment",
+            "Usage": "Used in the mass rollout trigger and mass rollback e2e flow templates",
+            "name": "skip_ernidun01"
+        },
+        "var.skip_bnewidun03": {
+            "type": "string",
+            "defaultValue": "true",
+            "description": "To skip the upgrade of bnewidun03 deployment",
+            "Usage": "Used in the mass rollout trigger and mass rollback e2e flow templates",
+            "name": "skip_bnewidun03"
+        },
+        "var.skip_bmasidun01": {
+            "type": "string",
+            "defaultValue": "true",
+            "description": "To skip the upgrade of bmasidun01 deployment",
+            "Usage": "Used in the mass rollout trigger and mass rollback e2e flow templates",
+            "name": "skip_bmasidun01"
+        },
+        "var.skip_bnew03": {
+            "type": "string",
+            "defaultValue": "true",
+            "description": "To skip the upgrade of bnew03 deployment",
+            "Usage": "Used in the mass rollout trigger and mass rollback e2e flow templates",
+            "name": "skip_bnew03"
+        },
+        "var.skip_ecosystem01": {
+            "type": "string",
+            "defaultValue": "true",
+            "description": "To skip the upgrade of ecosystem01 deployment",
+            "Usage": "Used in the mass rollout trigger and mass rollback e2e flow templates",
+            "name": "skip_ecosystem01"
+        },
+        "var.skip_viavieiap01": {
+            "type": "string",
+            "defaultValue": "true",
+            "description": "To skip the upgrade of viavieiap01 deployment",
+            "Usage": "Used in the mass rollout trigger and mass rollback e2e flow templates",
+            "name": "skip_viavieiap01"
+        },
+        "var.skip_infoveiap01": {
+            "type": "string",
+            "defaultValue": "true",
+            "description": "To skip the upgrade of infoveiap01 deployment",
+            "Usage": "Used in the mass rollout trigger and mass rollback e2e flow templates",
+            "name": "skip_infoveiap01"
+        }
+    }],
+    "dev02": [{
+        "var.dev02_mass_trigger_skip_ossautoapp01": {
+            "type": "string",
+            "defaultValue": "false",
+            "description": "To skip the upgrade of ossautoapp01 deployment in the dev02 mass trigger pipeline",
+            "Usage": "Used in the dev02 mass rollout trigger template",
+            "name": "dev02_mass_trigger_skip_ossautoapp01"
+        },
+        "var.dev02_mass_trigger_upgrade_env_name": {
+            "type": "string",
+            "defaultValue": "idunaasdev02",
+            "description": "Name of environment to upgrade in the dev02 mass trigger pipeline",
+            "Usage": "Used in the dev02 mass rollout trigger template",
+            "name": "dev02_mass_trigger_upgrade_env_name"
+        },
+        "var.dev02_mass_trigger_upgrade_env_name1": {
+            "type": "string",
+            "defaultValue": "ossautoapp01",
+            "description": "Name of environment to upgrade in the dev02 mass trigger pipeline",
+            "Usage": "Used in the dev02 mass rollout trigger template",
+            "name": "dev02_mass_trigger_upgrade_env_name1"
+        }
+    }],
+    "deploys": [{
+        "var.so_deploy": {
+            "type": "string",
+            "defaultValue": "true",
+            "description": "so deploy",
+            "Usage": "Used in the install, standalone backup export and upgrade-rollback templates",
+            "name": "so_deploy"
+        },
+        "var.uds_deploy": {
+            "type": "string",
+            "defaultValue": "true",
+            "description": "uds deploy",
+            "Usage": "Used in the install, standalone backup export and upgrade-rollback templates",
+            "name": "uds_deploy"
+        },
+        "var.pf_deploy": {
+            "type": "string",
+            "defaultValue": "true",
+            "description": "pf deploy",
+            "Usage": "Used in the install, standalone backup export and upgrade-rollback templates",
+            "name": "pf_deploy"
+        },
+        "var.platform_deploy": {
+            "type": "string",
+            "defaultValue": "true",
+            "description": "platform deploy",
+            "Usage": "Used in the install, standalone backup export and upgrade-rollback templates",
+            "name": "platform_deploy"
+        }
+    }],
+    "aws_ecr": [{
+        "var.aws_ecr_url": {
+            "type": "string",
+            "defaultValue": "236811837820.dkr.ecr.eu-west-1.amazonaws.com",
+            "description": "AWS elastic container registry (ECR) url",
+            "Usage": "Used in the install and upgrade-rollback public pipelines",
+            "name": "aws_ecr_url"
+        }
+    }],
+    "aws_regions": [{
+        "var.aws_region": {
+            "type": "string",
+            "defaultValue": "eu-west-1",
+            "description": "AWS Region",
+            "Usage": "Used in the install, upgrade-rollback public pipelines and setup cluster template",
+            "name": "aws_region"
+        }
+    }],
+    "webhooks": [{
+        "var.webhook_url": {
+            "type": "string",
+            "defaultValue": "https://spinnaker-api.rnd.gic.ericsson.se/webhooks/webhook/idun-canary-healthcheck",
+            "description": "Webhook Url",
+            "Usage": "Used in the upgrade-rollback pipeline",
+            "name": "webhook_url"
+        }
+    }],
+    "setups": [{
+        "var.kubernetes_version": {
+            "type": "string",
+            "defaultValue": "1.19",
+            "description": "The Kubernetes version to install on the cluster",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "kubernetes_version"
+        },
+        "var.primary_vpc_id": {
+            "type": "string",
+            "defaultValue": "0.0.0.0",
+            "description": "Primary VPC ID",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "primary_vpc_id"
+        },
+        "var.control_plane_subnet_ids": {
+            "type": "string",
+            "defaultValue": "0.0.0.0",
+            "description": "Subnet IDs ",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "control_plane_subnet_ids"
+        },
+        "var.worker_node_subnet_id": {
+            "type": "string",
+            "defaultValue": "0.0.0.0",
+            "description": "Worker Node Subnet ID",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "worker_node_subnet_id"
+        },
+        "var.secondary_vpc_cidr": {
+            "type": "string",
+            "defaultValue": "0.0.0.0",
+            "description": "Secondary CIDR block for the VPC ID",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "secondary_vpc_cidr"
+        },
+        "var.node_instance_type": {
+            "type": "string",
+            "defaultValue": "c5.2xlarge",
+            "description": "Node Instance Type",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "node_instance_type"
+        },
+        "var.disk_size": {
+            "type": "string",
+            "defaultValue": "20",
+            "description": "Disk size for the deployment, in GB",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "disk_size"
+        },
+        "var.min_nodes": {
+            "type": "string",
+            "defaultValue": "2",
+            "description": "Minimum number of nodes in the cluster",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "min_nodes"
+        },
+        "var.max_nodes": {
+            "type": "string",
+            "defaultValue": "14",
+            "description": "Maximum number of nodes in the cluster",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "max_nodes"
+        },
+        "var.ssh_key_pair": {
+            "type": "string",
+            "defaultValue": "ssh key pair",
+            "description": "SSH keypair for the instance",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "ssh_key_pair"
+        },
+        "var.private_domain_name": {
+            "type": "string",
+            "defaultValue": "testing",
+            "description": "Private domain name for the deployment",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "private_domain_name"
+        },
+        "var.install_kubedownscaler": {
+            "type": "string",
+            "defaultValue": "True",
+            "description": "Install Kubedownscaler on the EKS cluster",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "install_kubedownscaler"
+        },
+        "var.iam_hostname": {
+            "type": "string",
+            "defaultValue": "iam hostname",
+            "description": "Hostname for the IAM service",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "iam_hostname"
+        },
+        "var.pf_hostname": {
+            "type": "string",
+            "defaultValue": "pf hostname",
+            "description": "Hostname for the PF service",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "pf_hostname"
+        },
+        "var.so_hostname": {
+            "type": "string",
+            "defaultValue": "so hostname",
+            "description": "Hostname for the SO service",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "so_hostname"
+        },
+        "var.uds_hostname": {
+            "type": "string",
+            "defaultValue": "uds hostname",
+            "description": "Hostname for the UDS service",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "uds_hostname"
+        },
+        "var.gas_hostname": {
+            "type": "string",
+            "defaultValue": "gas hostname",
+            "description": "Hostname for the GAS service",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "gas_hostname"
+        },
+        "var.monitoring_hostname": {
+            "type": "string",
+            "defaultValue": "monitoring hostname",
+            "description": "Hostname for the monitoring service",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "monitoring_hostname"
+        },
+        "var.backup_server_instance_family": {
+            "type": "string",
+            "defaultValue": "backup server instance family",
+            "description": "AWS Instance family for the backup server",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "backup_server_instance_family"
+        },
+        "var.backup_server_ami_id": {
+            "type": "string",
+            "defaultValue": "backup server ami id",
+            "description": "ID of the AMI on AWS for the backup server",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "backup_server_ami_id"
+        },
+        "var.backup_server_disk_capacity": {
+            "type": "string",
+            "defaultValue": "backup server disk capacity",
+            "description": "Capacity of the disk for the backup server",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "backup_server_disk_capacity"
+        },
+        "var.adc_hostname": {
+            "type": "string",
+            "defaultValue": "adc hostname",
+            "description": "Hostname for adc",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "adc_hostname"
+        },
+        "var.appmgr_hostname": {
+            "type": "string",
+            "defaultValue": "appmgr hostname",
+            "description": "Hostname for appmgr",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "appmgr_hostname"
+        },
+        "var.os_hostname": {
+            "type": "string",
+            "defaultValue": "os hostname",
+            "description": "Hostname for os",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "os_hostname"
+        },
+        "var.disable_public_access": {
+            "type": "string",
+            "defaultValue": "True",
+            "description": "True for ECN conncected instances and False for public account",
+            "Usage": "Used in the setup cluster pipeline",
+            "name": "disable_public_access"
+        }
+    }]
+}

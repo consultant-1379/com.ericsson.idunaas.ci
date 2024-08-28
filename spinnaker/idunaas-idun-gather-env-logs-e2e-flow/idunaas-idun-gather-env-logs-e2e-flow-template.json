@@ -1,0 +1,697 @@
+{
+  "schema": "v2",
+  "variables": [],
+  "id": "idunaas-idun-gather-env-logs-e2e-flow-template",
+  "protect": false,
+  "metadata": {
+    "description": "Parent Template for idunaas-idun-gather-env-logs-e2e-pipeline 123",
+    "name": "idunaas-idun-gather-env-logs-e2e-flow-template",
+    "owner": "idunaas",
+    "scopes": [
+      "${ var.application_idunaas }"
+    ]
+  },
+  "pipeline": {
+    "keepWaitingPipelines": true,
+    "lastModifiedBy": "zlaigar",
+    "limitConcurrent": false,
+    "parameterConfig": [
+      {
+        "default": "${ var.gather_logs_idunaasdev01 }",
+        "description": "Gather logs from idunaasdev01",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_IDUNAASDEV01",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_idunaasdev02 }",
+        "description": "Gather logs from idunaasdev02",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_IDUNAASDEV02",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_ossautoapp01 }",
+        "description": "Gather logs from ossautoapp01",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_OSSAUTOAPP01",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_bnewidun01 }",
+        "description": "Gather logs from bnewidun01",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_BNEWIDUN01",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_bnewidun02 }",
+        "description": "Gather logs from bnewidun02",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_BNEWIDUN02",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_bnewidun03 }",
+        "description": "Gather logs from bnewidun03",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_BNEWIDUN03",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_bnewidun05 }",
+        "description": "Gather logs from bnewidun05",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_BNEWIDUN05",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_bnew03 }",
+        "description": "Gather logs from bnew03",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_BNEW03",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_bmasidun01 }",
+        "description": "Gather logs from bmasidun01",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_BMASIDUN01",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_ernidun01 }",
+        "description": "Gather logs from ernidun01",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_ERNIDUN01",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_ecosystem01 }",
+        "description": "Gather logs from ecosystem01",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_ECOSYSTEM01",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_openlab01 }",
+        "description": "Gather logs from openlab01",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_OPENLAB01",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_infoveiap01 }",
+        "description": "Gather logs from infoveiap01",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_INFOVEIAP01",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_viavieiap01 }",
+        "description": "Gather logs from viavieiap01",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_VIAVIEIAP01",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.gather_logs_cranscoeiap01 }",
+        "description": "Gather logs from cranscoeiap01",
+        "hasOptions": true,
+        "label": "",
+        "name": "GATHER_LOGS_CRANSCOEIAP01",
+        "options": [
+          {
+            "value": "false"
+          },
+          {
+            "value": "true"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      }
+    ],
+    "spelEvaluator": "v4",
+    "stages": [
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Ossautoapp01",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "ossautoapp01"
+        },
+        "refId": "Gather_Logs_Ossautoapp01",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_OSSAUTOAPP01\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Bnewidun01",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "bnewidun01"
+        },
+        "refId": "Gather_Logs_Bnewidun01",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_BNEWIDUN01\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Bnewidun02",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "bnewidun02"
+        },
+        "refId": "Gather_Logs_Bnewidun02",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_BNEWIDUN02\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Bnewidun03",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "bnewidun03"
+        },
+        "refId": "Gather_Logs_Bnewidun03",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_BNEWIDUN03\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Bnewidun05",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "bnewidun05"
+        },
+        "refId": "Gather_Logs_Bnewidun05",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_BNEWIDUN05\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Bmasidun01",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "bmasidun01"
+        },
+        "refId": "Gather_Logs_Bmasidun01",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_BMASIDUN01\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Ernidun01",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "ernidun01"
+        },
+        "refId": "Gather_Logs_Ernidun01",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_ERNIDUN01\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Openlab01",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "openlab01"
+        },
+        "refId": "Gather_Logs_Openlab01",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_OPENLAB01\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Idunaasdev01",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "idunaasdev01"
+        },
+        "refId": "Gather_Logs_Idunaasdev01",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_IDUNAASDEV01\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Idunaasdev02",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "idunaasdev02"
+        },
+        "refId": "Gather_Logs_Idunaasdev02",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_IDUNAASDEV02\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Bnew03",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "bnew03"
+        },
+        "refId": "Gather_Logs_Bnew03",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_BNEW03\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Infoveiap01",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "Infoveiap01"
+        },
+        "refId": "Gather_Logs_Infoveiap01",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_INFOVEIAP01\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Viavieiap01",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "viavieiap01"
+        },
+        "refId": "Gather_Logs_Viavieiap01",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_VIAVIEIAP01\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Ecosystem01",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "ecosystem01"
+        },
+        "refId": "Gather_Logs_Ecosystem01",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_ECOSYSTEM01\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Gather Logs Cranscoeiap01",
+        "pipeline": "${ var.gather_env_logs_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "cranscoeiap01"
+        },
+        "refId": "Gather_Logs_Cranscoeiap01",
+        "requisiteStageRefIds": [],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"GATHER_LOGS_CRANSCOEIAP01\"] } == true",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": false,
+        "failPipeline": false,
+        "name": "Flow Completion",
+        "preconditions": [
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Ossautoapp01')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Ossautoapp01')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Bnewidun01')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Bnewidun01')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Bnewidun02')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Bnewidun02')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Bnewidun03')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Bnewidun03')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Bnewidun05')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Bnewidun05')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Bmasidun01')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Bmasidun01')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Ernidun01')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Ernidun01')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Openlab01')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Openlab01')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Idunaasdev01')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Idunaasdev01')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Idunaasdev02')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Idunaasdev02')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Bnew03')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Bnew03')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Infoveiap01')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Infoveiap01')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Viavieiap01')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Viavieiap01')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Ecosystem01')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Ecosystem01')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Gather Logs Cranscoeiap01')['status']}\" == \"SUCCEEDED\" or \"${#stage('Gather Logs Cranscoeiap01')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          }
+        ],
+        "refId": "Flow_Completion",
+        "requisiteStageRefIds": [
+          "Gather_Logs_Ossautoapp01",
+          "Gather_Logs_Bnewidun01",
+          "Gather_Logs_Bnewidun02",
+          "Gather_Logs_Bnewidun03",
+          "Gather_Logs_Bnewidun05",
+          "Gather_Logs_Bmasidun01",
+          "Gather_Logs_Ernidun01",
+          "Gather_Logs_Openlab01",
+          "Gather_Logs_Idunaasdev01",
+          "Gather_Logs_Idunaasdev02",
+          "Gather_Logs_Bnew03",
+          "Gather_Logs_Infoveiap01",
+          "Gather_Logs_Viavieiap01",
+          "Gather_Logs_Ecosystem01",
+          "Gather_Logs_Cranscoeiap01"
+        ],
+        "type": "checkPreconditions"
+      }
+    ],
+    "triggers": []
+  }
+}

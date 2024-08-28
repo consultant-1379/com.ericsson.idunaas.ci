@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: create-eiap-user
+  labels:
+    app: create-eiap-user
+spec:
+  containers:
+  - name: create-eiap-user
+    image: armdocker.rnd.ericsson.se/proj-idun-aas/ci-utils:latest
+    imagePullPolicy: IfNotPresent
+    command: [/bin/sleep, 3650d]
+  restartPolicy: Never
+  imagePullSecrets:
+  - name: k8s-registry-secret

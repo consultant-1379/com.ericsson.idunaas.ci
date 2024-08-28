@@ -1,0 +1,400 @@
+{
+  "schema": "v2",
+  "variables": [],
+  "id": "idunaas-idun-mass-rollout-trigger-template",
+  "protect": false,
+  "metadata": {
+    "description": "Parent Template for idunaas-idun-mass-rollout-trigger-pipeline",
+    "name": "idunaas-idun-mass-rollout-trigger-template",
+    "owner": "idunaas",
+    "scopes": [
+      "${ var.application_idunaas }"
+    ]
+  },
+  "pipeline": {
+    "keepWaitingPipelines": false,
+    "lastModifiedBy": "zlaigar",
+    "limitConcurrent": true,
+    "parameterConfig": [
+      {
+        "default": "${ var.skip_ossautoapp01 }",
+        "description": "To skip the upgrade of ossautoapp01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_OSSAUTOAPP01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_bnewidun01 }",
+        "description": "To skip the upgrade of bnewidun01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_BNEWIDUN01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_openlab01 }",
+        "description": "To skip the upgrade of openlab01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_OPENLAB01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_bnewidun02 }",
+        "description": "To skip the upgrade of bnewidun02 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_BNEWIDUN02",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_ernidun01 }",
+        "description": "To skip the upgrade of ernidun01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_ERNIDUN01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_bnewidun03 }",
+        "description": "To skip the upgrade of bnewidun03 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_BNEWIDUN03",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_bmasidun01 }",
+        "description": "To skip the upgrade of bmasidun01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_BMASIDUN01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_bnew03 }",
+        "description": "To skip the upgrade of bnew03 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_BNEW03",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_ecosystem01 }",
+        "description": "To skip the upgrade of ecosystem01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_ECOSYSTEM01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_viavieiap01 }",
+        "description": "To skip the upgrade of viavieiap01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_VIAVIEIAP01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_infoveiap01 }",
+        "description": "To skip the upgrade of infoveiap01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_INFOVEIAP01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.select_chart_version }",
+        "description": "To select latest chart version or dev2 installed successful chart version. Set it to true to get the latest chart version",
+        "hasOptions": true,
+        "label": "",
+        "name": "SELECT_CHART_VERSION",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      }
+    ],
+    "spelEvaluator": "v4",
+    "stages": [
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "OSS-Integration-Retrieve-Environment-Details",
+        "master": "${ var.jenkins_maintrack_fem }",
+        "name": "Gather Dev2 Env Details",
+        "parameters": {
+          "ENV_NAME": "idunaasdev02"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Gather_Dev2_Env_Details",
+        "requisiteStageRefIds": [],
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "idunaas_get_installed_chart",
+        "master": "${ var.jenkins_fem }",
+        "name": "Get Installed Dev2 Chart Version",
+        "parameters": {
+          "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+          "IAM_AUTHENTICATOR": "${#stage(\"Gather Dev2 Env Details\")[\"context\"][\"IAM_AUTHENTICATOR\"]}",
+          "NAMESPACE": "${#stage(\"Gather Dev2 Env Details\")[\"context\"][\"NAMESPACE\"]}",
+          "PATH_TO_AWS_FILES": "${#stage(\"Gather Dev2 Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+          "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Dev2 Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Get_Installed_Dev2_Chart_Version",
+        "requisiteStageRefIds": [
+          "Gather_Dev2_Env_Details"
+        ],
+        "stageEnabled": {
+          "expression": "${'parameters.SELECT_CHART_VERSION'} == 'false'",
+          "type": "expression"
+        },
+        "type": "jenkins"
+      },
+      {
+        "failOnFailedExpressions": true,
+        "name": "Evaluate Chart Version",
+        "refId": "Evaluate_Chart_Version",
+        "requisiteStageRefIds": [
+          "Get_Installed_Dev2_Chart_Version"
+        ],
+        "type": "evaluateVariables",
+        "variables": [
+          {
+            "key": "INT_CHART_VERSION",
+            "value": "${parameters[\"SELECT_CHART_VERSION\"] == \"false\" ? #stage(\"Get Installed Dev2 Chart Version\")[\"context\"][\"INSTALLED_CHART_VERSION\"]: \"0.0.0\"}"
+          }
+        ]
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "idunaas_get_latest_helmfile",
+        "master": "${ var.jenkins_fem }",
+        "name": "Get Chart Version",
+        "parameters": {
+          "FUNCTIONAL_USER_SECRET": "${ var.functional_user_secret }",
+          "INT_CHART_VERSION": "${INT_CHART_VERSION}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Get_Chart_Version",
+        "requisiteStageRefIds": [
+          "Evaluate_Chart_Version"
+        ],
+        "type": "jenkins"
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Mass Rollout Kube Downscaler Pause",
+        "pipeline":"${ var.mass_rollout_kube_downscaler_e2e_flow_pipeline }",
+        "pipelineParameters": {
+          "SKIP_BMASIDUN01": "${trigger['parameters']['SKIP_BMASIDUN01']}",
+          "SKIP_ECOSYSTEM01": "${trigger['parameters']['SKIP_ECOSYSTEM01']}",
+          "SKIP_ERNIDUN01": "${trigger['parameters']['SKIP_ERNIDUN01']}",
+          "SKIP_INFOVEIAP01": "${trigger['parameters']['SKIP_INFOVEIAP01']}",
+          "SKIP_OPENLAB01": "${trigger['parameters']['SKIP_OPENLAB01']}",
+          "SKIP_OSSAUTOAPP01": "${trigger['parameters']['SKIP_OSSAUTOAPP01']}",
+          "SKIP_VIAVIEIAP01": "${trigger['parameters']['SKIP_VIAVIEIAP01']}"
+        },
+        "refId": "Mass_Rollout_Kube_Downscaler_Pause",
+        "requisiteStageRefIds": [
+          "Get_Chart_Version"
+        ],
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "failPipeline": true,
+        "name": "Mass Rollout Trigger",
+        "notifications": [],
+        "pipeline": "${ var.mass_rollout_e2e_flow_pipeline }",
+        "pipelineParameters": {
+          "CHART_VERSION": "${#stage(\"Get Chart Version\")[\"context\"][\"INT_CHART_VERSION\"]}",
+          "SKIP_BMASIDUN01": "${trigger['parameters']['SKIP_BMASIDUN01']}",
+          "SKIP_BNEWIDUN01": "${trigger['parameters']['SKIP_BNEWIDUN01']}",
+          "SKIP_BNEWIDUN02": "${trigger['parameters']['SKIP_BNEWIDUN02']}",
+          "SKIP_BNEWIDUN03": "${trigger['parameters']['SKIP_BNEWIDUN03']}",
+          "SKIP_ERNIDUN01": "${trigger['parameters']['SKIP_ERNIDUN01']}",
+          "SKIP_OPENLAB01": "${trigger['parameters']['SKIP_OPENLAB01']}",
+          "SKIP_OSSAUTOAPP01": "${trigger['parameters']['SKIP_OSSAUTOAPP01']}",
+          "SKIP_BNEW03": "${trigger['parameters']['SKIP_BNEW03']}",
+          "SKIP_ECOSYSTEM01": "${trigger['parameters']['SKIP_ECOSYSTEM01']}",
+          "SKIP_VIAVIEIAP01": "${trigger['parameters']['SKIP_VIAVIEIAP01']}",
+          "SKIP_INFOVEIAP01": "${trigger['parameters']['SKIP_INFOVEIAP01']}"
+        },
+        "refId": "Mass_Rollout_Trigger",
+        "requisiteStageRefIds": [
+          "Mass_Rollout_Kube_Downscaler_Pause"
+        ],
+        "sendNotifications": false,
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Mass Rollout Kube Downscaler Resume",
+        "pipeline":"${ var.mass_rollout_kube_downscaler_e2e_flow_pipeline }",
+        "pipelineParameters": {
+          "ACTION": "resume",
+          "SKIP_BMASIDUN01": "${trigger['parameters']['SKIP_BMASIDUN01']}",
+          "SKIP_ECOSYSTEM01": "${trigger['parameters']['SKIP_ECOSYSTEM01']}",
+          "SKIP_ERNIDUN01": "${trigger['parameters']['SKIP_ERNIDUN01']}",
+          "SKIP_INFOVEIAP01": "${trigger['parameters']['SKIP_INFOVEIAP01']}",
+          "SKIP_OPENLAB01": "${trigger['parameters']['SKIP_OPENLAB01']}",
+          "SKIP_OSSAUTOAPP01": "${trigger['parameters']['SKIP_OSSAUTOAPP01']}",
+          "SKIP_VIAVIEIAP01": "${trigger['parameters']['SKIP_VIAVIEIAP01']}"
+        },
+        "refId": "Mass_Rollout_Kube_Downscaler_Resume",
+        "requisiteStageRefIds": [
+          "Mass_Rollout_Trigger"
+        ],
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "name": "Flow Completion",
+        "preconditions": [
+          {
+            "context": {
+              "expression": "\"${#stage('Mass Rollout Trigger')['status']}\" == \"SUCCEEDED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          }
+        ],
+        "refId": "Flow_Completion",
+        "requisiteStageRefIds": [
+          "Mass_Rollout_Kube_Downscaler_Resume"
+        ],
+        "type": "checkPreconditions"
+      }
+    ],
+    "triggers": [
+      {
+        "cronExpression": "0 0 22 1/1 * ? *",
+        "enabled": false,
+        "id": "idunaas-idun-mass-rollout-triger_cron_time",
+        "type": "cron"
+      }
+    ]
+  }
+}

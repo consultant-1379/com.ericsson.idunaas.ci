@@ -1,0 +1,141 @@
+eric-oss-common-base:
+  system-user:
+    credentials:
+      username: sys-user
+      password: IDUN_CRED_REPLACE
+  eric-oss-ddc:
+    autoUpload:
+      enabled: true
+      ddpid: lmi_idunaasdev01
+      account: lmi_idunaasdev01@ddpi.athtem.eei.ericsson.se
+      password: "_idunaasdev01"
+
+  service-mesh-ingress-gateway:
+    service:
+      loadBalancerIP: "10.10.10.10" # Dummy Value for AWS
+      annotations:
+        # Cloud Provider(for ex. AWS):
+        #  < Keys are to be placed in the cloudProviderLB hash. >
+        cloudProviderLB:
+          service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+          service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: '60'
+          service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
+          service.beta.kubernetes.io/aws-load-balancer-type: "external"
+          service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+          service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+          service.beta.kubernetes.io/aws-load-balancer-private-ipv4-addresses: "172.31.65.132, 172.31.65.204"
+
+  gas:
+    defaultUser:
+      password: IDUN_CRED_REPLACE
+
+eric-cloud-native-base:
+  eric-ctrl-bro:
+    persistence:
+      persistentVolumeClaim:
+        size: 20Gi
+    sftp:
+      username: backup
+      password: BACKUP_CRED_REPLACE
+  eric-lm-combined-server:
+    licenseServerClient:
+      licenseServer:
+        thrift:
+          host: ""
+  
+  eric-fh-snmp-alarm-provider:
+    service:
+      loadBalancerIP: ""
+      annotations:
+        cloudProviderLB:
+          service.beta.kubernetes.io/aws-load-balancer-backend-protocol: udp
+          service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: '60'
+          service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
+          service.beta.kubernetes.io/aws-load-balancer-type: "external"
+          service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+          service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+          service.beta.kubernetes.io/aws-load-balancer-private-ipv4-addresses: "172.31.65.134, 172.31.65.203"
+
+
+
+eric-eo-so:
+  stubs:
+    enabled: false
+  defaultUser:
+    password: IDUN_CRED_REPLACE
+
+eric-oss-pf:
+  defaultUser:
+    password: IDUN_CRED_REPLACE
+
+eric-oss-uds:
+  defaultUser:
+    password: IDUN_CRED_REPLACE
+
+eric-oss-config-handling:
+  cps-user:
+    credentials:
+      password: IDUN_CRED_REPLACE
+  dmi-user:
+    credentials:
+      password: IDUN_CRED_REPLACE
+
+eric-eo-playbook-service:
+  enabled: true
+
+eric-oss-oran-support:
+  eric-oss-a1-policy-mngmt-svc:
+    defaultUser:
+      password: IDUN_CRED_REPLACE
+      
+eric-oss-ericsson-adaptation:
+  eric-oss-ran-topology-adapter:
+    rtaUser:
+      password: IDUN_CRED_REPLACE
+
+eric-oss-task-automation-ae:
+  defaultUser:
+    password: IDUN_CRED_REPLACE
+
+eric-topology-handling:
+  eric-oss-common-topology-svc:
+    eric-oss-cmn-topology-svc-core:
+      defaultUser:
+        password: IDUN_CRED_REPLACE
+
+eric-oss-adc:
+  eric-oss-enm-fns:
+    configuredQueries: |-
+      enms:
+        - name: v5cenm05
+          periodSeconds: 60
+          queries:
+            - name: query1
+              topic: sftp-filetrans
+              dataType: PM_STATISTICAL
+              nodeType: ""
+              fileType: ""
+              id: 33882183
+    dmm:
+      dataCatalog:
+        messageBusNamespace: "ossdev01"
+        messageBusName: "eric-oss-dmm-data-message-bus-kf-client"
+  eric-oss-sftp-filetrans:
+    subsystem:
+      name: "v5cenm05"
+    dmm:
+      enabled: true
+      data_catalog:
+        message_bus_name: "eric-oss-dmm-data-message-bus-kf-client"
+        message_bus_namespace: "ossdev01"
+        data_provider_type_version_id: "v5cenm05"
+        data_collector_name: "pm-counter-sftp-filetrans-v5cenm05"
+    spring:
+      kafka:
+        auto:
+          start: true
+        topics:
+          enm_id: "v5cenm05"
+    connected:
+      systems:
+        enabled: true

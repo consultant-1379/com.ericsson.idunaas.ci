@@ -1,0 +1,134 @@
+global:
+  hosts:
+    gr: ''
+    gas: gas.viavi01.idunaas.ericsson.se
+    iam: iam.viavi01.idunaas.ericsson.se
+    pf: pf.viavi01.idunaas.ericsson.se
+    so: so.viavi01.idunaas.ericsson.se
+    uds: uds.viavi01.idunaas.ericsson.se
+    adc: adc.viavi01.idunaas.ericsson.se
+    appmgr: appmgr.viavi01.idunaas.ericsson.se
+  pullSecret: k8s-registry-secret
+  registry:
+    password: PASSWORD_REPLACE
+    url: armdocker.rnd.ericsson.se
+    username: USERNAME_REPLACE
+  support:
+    ipv6:
+      enabled: false
+  timezone: UTC
+  createClusterRoles: true
+  ingressClass: "oss_iccr"
+  iccrAppIngresses: false
+  # when serviceMesh is enabled, networkPolicy must be disabled
+  serviceMesh:
+    enabled: false
+    annotations:
+      serviceMesh: 5.0.0+114
+  networkPolicy:
+    enabled: true
+# Warning! If changing these application tags from true to false and that application
+# is already installed, then that application will be removed and data will be lost!
+tags:
+  pf: true
+  so: true
+  uds: true
+  adc: false
+  dmm: false
+  th: false
+  eas: false
+  appmgr: true
+  ch: false
+  ta: false
+
+eric-oss-common-base:
+  system-user:
+    credentials:
+      username: sys-user
+      password: IDUN_CRED_REPLACE
+
+  eric-eo-api-gateway:
+    iam:
+      kubernetesSecret: eric-oss-common-base-iam-client-secret
+  service-mesh-ingress-gateway:
+    enabled: false
+    service:
+      loadBalancerIP: ""
+      annotations:
+        # Cloud Provider(for ex. AWS):
+        #  < Keys are to be placed in the cloudProviderLB hash. >
+        cloudProviderLB: {}
+  gas:
+    defaultUser:
+      username: gas-user
+      password: IDUN_CRED_REPLACE
+
+eric-cloud-native-base:
+  eric-sec-access-mgmt:
+    replicaCount: 2
+    ingress:
+      type: "nginx"
+  eric-tm-ingress-controller-cr:
+    enabled: false
+    service:
+      loadBalancerIP: ""
+      annotations:
+        # Cloud Provider(for ex. AWS):
+        #  < Keys are to be placed in the cloudProviderLB hash. >
+        cloudProviderLB: {}
+
+  # Please refer to the EO dimensioning guide for the appropriate size of the BRO volume
+  # The size will be dependent on which applications are being deployed
+  eric-ctrl-bro:
+    persistence:
+      persistentVolumeClaim:
+        size: 50Gi
+    sftp:
+      username: "dummy"
+      password: "dummy"
+
+  eric-data-search-engine:
+    service:
+      network:
+        protocol:
+          IPv6: false
+    persistence:
+      data:
+        persistentVolumeClaim:
+          size: 30Gi
+
+eric-eo-playbook-service:
+  enabled: true
+
+eric-eo-so:
+  stubs:
+    enabled: true
+  defaultUser:
+    password: IDUN_CRED_REPLACE
+    username: so-user
+
+eric-oss-pf:
+  defaultUser:
+    password: IDUN_CRED_REPLACE
+    username: pf-user
+
+eric-oss-uds:
+  defaultUser:
+    password: IDUN_CRED_REPLACE
+    username: uds-user
+
+# For EAS tests
+eric-oss-ericsson-adaptation:
+  stubs:
+    enabled: false
+
+# For Config Handling tests
+eric-oss-config-handling:
+  cps-user:
+    credentials:
+      username: cps-user
+      password: IDUN_CRED_REPLACE
+  dmi-user:
+    credentials:
+      username: dmi-user
+      password: IDUN_CRED_REPLACE

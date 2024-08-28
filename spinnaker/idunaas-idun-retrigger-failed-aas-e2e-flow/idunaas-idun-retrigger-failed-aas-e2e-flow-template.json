@@ -1,0 +1,42 @@
+{
+  "schema": "v2",
+  "variables": [],
+  "id": "idunaas-idun-retrigger-failed-aas-e2e-flow-template",
+  "metadata": {
+    "description": "Parent Template for the idunaas-idun-retrigger-failed-aas-e2e-flow-pipeline",
+    "name": "idunaas-idun-retrigger-failed-aas-e2e-flow-template",
+    "owner": "idunaas",
+    "scopes": [
+      "${ var.application_idunaas }"
+    ]
+  },
+  "pipeline": {
+    "disabled": false,
+    "keepWaitingPipelines": false,
+    "lastModifiedBy": "zlaigar",
+    "limitConcurrent": true,
+    "parameterConfig": [],
+    "spelEvaluator": "v4",
+    "stages": [
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "idunaas_retrigger_failed_aas_e2e_flows",
+        "master": "${ var.jenkins_maintrack_fem }",
+        "name": "Retrigger Failed Aas E2E Flows",
+        "parameters": {},
+        "refId": "Retrigger_Failed_Aas_E2E_Flows",
+        "requisiteStageRefIds": [],
+        "type": "jenkins"
+      }
+    ],
+    "triggers": [
+      {
+        "cronExpression": "0 0 21 1/1 * ? *",
+        "enabled": false,
+        "id": "idunaas-idun-retrigger-failed-aas-e2e-flow-cron-job",
+        "type": "cron"
+      }
+    ]
+  }
+}

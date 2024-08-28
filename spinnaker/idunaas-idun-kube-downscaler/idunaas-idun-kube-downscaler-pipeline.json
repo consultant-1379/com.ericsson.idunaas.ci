@@ -1,0 +1,11 @@
+{
+    "schema": "v2",
+    "application": "${ var.application_idunaas }",
+    "name": "idunaas-idun-kube-downscaler-pause-resume-pipeline",
+    "description": "idunaas-idun-kube-downscaler-pause-resume-pipeline, which inherits from the idunaas-idun-kube-downscaler-pause-resume-template",
+    "template": {
+      "artifactAccount": "front50ArtifactCredentials",
+      "reference": "spinnaker://idunaas-idun-kube-downscaler-pause-resume-template:latest",
+      "type": "front50/pipelineTemplate"
+    }
+  }

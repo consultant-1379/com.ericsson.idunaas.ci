@@ -1,0 +1,365 @@
+{
+  "schema": "v2",
+  "variables": [
+    {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Disable concurrency",
+      "name": "disable_concurrency"
+    }
+  ],
+  "id": "idunaas-idun-install-helmfile-template",
+  "protect": false,
+  "metadata": {
+    "description": "Parent Template for idunaas-idun-install-helmfile-pipeline and idunaas-idun-install-helmfile-public-pipeline",
+    "name": "idunaas-idun-install-helmfile-template",
+    "owner": "idunaas",
+    "scopes": [
+      "${ var.application_idunaas }"
+    ]
+  },
+  "pipeline": {
+    "keepWaitingPipelines": true,
+    "lastModifiedBy": "zlaigar",
+    "limitConcurrent": "${ templateVariables.disable_concurrency }",
+    "notifications": [],
+    "parameterConfig": [
+      {
+        "default": "${ var.int_chart_version }",
+        "description": "Chart Version to Upgrade to. LATEST will get latest version",
+        "hasOptions": false,
+        "label": "",
+        "name": "INT_CHART_VERSION",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.so_deploy }",
+        "description": "SO Deploy, set true or false",
+        "hasOptions": true,
+        "label": "",
+        "name": "SO_DEPLOY",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.uds_deploy }",
+        "description": "UDS Deploy, set true or false",
+        "hasOptions": true,
+        "label": "",
+        "name": "UDS_DEPLOY",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.pf_deploy }",
+        "description": "PF Deploy, set true or false",
+        "hasOptions": true,
+        "label": "",
+        "name": "PF_DEPLOY",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.platform_deploy }",
+        "description": "Platform Deploy, set true or false",
+        "hasOptions": true,
+        "label": "",
+        "name": "PLATFORM_DEPLOY",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.helm_chart_repo_name }",
+        "description": "Helm Chart Repository name",
+        "hasOptions": false,
+        "label": "",
+        "name": "HELM_REPOSITORY_NAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.int_chart_name }",
+        "description": "Integration Chart Name",
+        "hasOptions": false,
+        "label": "",
+        "name": "INT_CHART_NAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.int_chart_repo }",
+        "description": "Integration Chart Repo",
+        "hasOptions": false,
+        "label": "",
+        "name": "INT_CHART_REPO",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      }
+    ],
+    "spelEvaluator": "v4",
+    "stages": [
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "OSS-Integration-Retrieve-Environment-Details",
+        "master": "${ var.jenkins_maintrack_fem }",
+        "name": "Gather Env Details",
+        "parameters": {
+          "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Gather_Env_Details",
+        "requisiteStageRefIds": [],
+        "restrictExecutionDuringTimeWindow": false,
+        "restrictedExecutionWindow": {
+          "jitter": {
+            "enabled": false,
+            "maxDelay": 600,
+            "minDelay": 0,
+            "skipManual": false
+          },
+          "whitelist": []
+        },
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "idunaas_get_latest_helmfile",
+        "master": "${ var.jenkins_fem }",
+        "name": "Get Chart Version",
+        "parameters": {
+          "FUNCTIONAL_USER_SECRET": "${ var.functional_user_secret }",
+          "INT_CHART_NAME": "${trigger['parameters']['INT_CHART_NAME']}",
+          "INT_CHART_REPO": "${trigger['parameters']['INT_CHART_REPO']}",
+          "INT_CHART_VERSION": "${trigger['parameters']['INT_CHART_VERSION']}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Get_Chart_Version",
+        "requisiteStageRefIds": [
+          "Gather_Env_Details"
+        ],
+        "restrictExecutionDuringTimeWindow": false,
+        "restrictedExecutionWindow": {
+          "whitelist": []
+        },
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "eiapaas__get_helmfile_version_to_clean",
+        "master": "${ var.jenkins_fem }",
+        "name": "Get Version To Clean",
+        "parameters": {
+          "INT_CHART_VERSION": "${#stage(\"Get Chart Version\")[\"context\"][\"INT_CHART_VERSION\"]}",
+          "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+          "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+          "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Get_Version_To_Clean",
+        "requisiteStageRefIds": [
+          "Get_Chart_Version"
+        ],
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "idunaas_preinstall_helmfile",
+        "master": "${ var.jenkins_fem }",
+        "name": "Pre Install",
+        "parameters": {
+          "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+          "DEPLOYMENT_TYPE": "install",
+          "DOCKER_REGISTRY": "${#stage(\"Gather Env Details\")[\"context\"][\"DOCKER_REGISTRY\"]}",
+          "FUNCTIONAL_USER_SECRET": "${ var.functional_user_secret }",
+          "IDUN_USER_SECRET": "${ var.idun_user_secret }",
+          "INT_CHART_VERSION": "${#stage(\"Get Version To Clean\")[\"context\"][\"VERSION_TO_CLEAN\"]}",
+          "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+          "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+          "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+          "PATH_TO_SITE_VALUES_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_SITE_VALUES\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "refId": "Pre_Install",
+        "requisiteStageRefIds": [
+          "Get_Version_To_Clean"
+        ],
+        "type": "jenkins"
+      },
+      {
+        "failOnFailedExpressions": true,
+        "name": "Pre-Append Submodule Path",
+        "refId": "Pre_Append_Submodule_Path",
+        "requisiteStageRefIds": [
+          "Pre_Install"
+        ],
+        "stageEnabled": {
+          "expression": "false",
+          "type": "expression"
+        },
+        "type": "evaluateVariables",
+        "variables": [
+          {
+            "key": "PATH_TO_AWS_FILES",
+            "value": "${ var.submodule_path }/${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}"
+          },
+          {
+            "key": "PATH_TO_SITE_VALUES_OVERRIDE_FILE",
+            "value": "${ var.submodule_path }/${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_SITE_VALUES\"]}"
+          },
+          {
+            "key": "PATH_TO_CERTIFICATES_FILES",
+            "value": "${ var.submodule_path }/${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_CERTIFICATES_FILES\"]}"
+          },
+          {
+            "key": "KUBECONFIG_FILE",
+            "value": "${trigger['parameters']['ENVIRONMENT_NAME']}_kubeconfig"
+          }
+        ]
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "idunaas_deploy_helmfile",
+        "master": "${ var.jenkins_fem }",
+        "name": "Install Charts",
+        "parameters": {
+          "ADC_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"ADC_HOSTNAME\"]}",
+          "APPMGR_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"APPMGR_HOSTNAME\"]}",
+          "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+          "DEPLOYMENT_TYPE": "install",
+          "DOCKER_REGISTRY": "${#stage(\"Gather Env Details\")[\"context\"][\"DOCKER_REGISTRY\"]}",
+          "FUNCTIONAL_USER_SECRET": "${ var.functional_user_secret }",
+          "GAS_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_GAS_HOSTNAME\"]}",
+          "HELM_TIMEOUT": "5400",
+          "IAM_AUTHENTICATOR": "${#stage(\"Gather Env Details\")[\"context\"][\"IAM_AUTHENTICATOR\"]}",
+          "IAM_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"IAM_HOSTNAME\"]}",
+          "IDUN_USER_SECRET": "${ var.idun_user_secret }",
+          "INT_CHART_NAME": "${trigger['parameters']['INT_CHART_NAME']}",
+          "INT_CHART_REPO": "${trigger['parameters']['INT_CHART_REPO']}",
+          "INT_CHART_VERSION": "${#stage(\"Get Chart Version\")[\"context\"][\"INT_CHART_VERSION\"]}",
+          "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+          "OS_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"OS_HOSTNAME\"]}",
+          "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+          "PATH_TO_CERTIFICATES_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_CERTIFICATES_FILES\"]}",
+          "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+          "PATH_TO_SITE_VALUES_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_SITE_VALUES\"]}",
+          "PF_DEPLOY": "${trigger['parameters']['PF_DEPLOY']}",
+          "PF_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_PF_HOSTNAME\"]}",
+          "PLATFORM_DEPLOY": "${trigger['parameters']['PLATFORM_DEPLOY']}",
+          "SO_DEPLOY": "${trigger['parameters']['SO_DEPLOY']}",
+          "SO_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_SO_HOSTNAME\"]}",
+          "TAGS": "${#stage(\"Gather Env Details\")[\"context\"][\"TAGS\"]}",
+          "UDS_DEPLOY": "${trigger['parameters']['UDS_DEPLOY']}",
+          "UDS_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_UDS_HOSTNAME\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "refId": "Install_Charts",
+        "requisiteStageRefIds": [
+          "Pre_Append_Submodule_Path"
+        ],
+        "restrictExecutionDuringTimeWindow": false,
+        "restrictedExecutionWindow": {
+          "whitelist": []
+        },
+        "stageTimeoutMs": 36000000,
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "idunaas_post_install",
+        "master": "${ var.jenkins_fem }",
+        "name": "Post Install",
+        "parameters": {
+          "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+          "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}",
+          "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+          "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+          "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "refId": "Post_Install",
+        "requisiteStageRefIds": [
+          "Install_Charts"
+        ],
+        "type": "jenkins"
+      },
+      {
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "OSS-Integration-Update-Environment-Details",
+        "master": "${ var.jenkins_maintrack_fem }",
+        "name": "Update Latest Chart Version to RPT",
+        "parameters": {
+          "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}",
+          "version": "${#stage(\"Get Chart Version\")[\"context\"][\"INT_CHART_VERSION\"]}"
+        },
+        "refId": "Update_Latest_Chart_Version_to_RPT",
+        "requisiteStageRefIds": [
+          "Post_Install"
+        ],
+        "type": "jenkins"
+      }
+    ],
+    "triggers": []
+  }
+}

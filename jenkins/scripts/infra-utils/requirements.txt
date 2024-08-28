@@ -1,0 +1,6 @@
+requests==2.25.0
+click==7.0
+docker
+boto3
+pyyaml
+kubernetes

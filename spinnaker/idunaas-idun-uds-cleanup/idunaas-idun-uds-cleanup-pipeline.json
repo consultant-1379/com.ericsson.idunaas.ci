@@ -1,0 +1,11 @@
+{
+  "schema": "v2",
+  "application": "${ var.application_idunaas }",
+  "name": "idunaas-idun-uds-cleanup-pipeline",
+  "description": "idunaas-idun-uds-cleanup-pipeline, which inherits from the idunaas-idun-uds-cleanup-template",
+  "template": {
+    "artifactAccount": "front50ArtifactCredentials",
+    "reference": "spinnaker://idunaas-idun-uds-cleanup-template:latest",
+    "type": "front50/pipelineTemplate"
+  }
+}

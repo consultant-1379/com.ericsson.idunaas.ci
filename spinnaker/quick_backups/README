@@ -1,0 +1,16 @@
+When a pipeline is created in Spinnaker there is no actual place to save the
+pipeline. This folder include the JSON representation of some Spinnaker's
+pipeline obtained by Spinnaker web UI following this steps:
+- Choose a pipeline and click on
+    Configure -> Pipeline Actions -> Edit as JSON
+- Copy everything you find in the pop-up window
+- Paste in this folder with a name <pipeline name>.json
+
+To restore the state of a pipeline use its JSON representation from a file in
+this folder:
+- Choose the pipeline you want to restore and click on
+    Configure -> Pipeline Actions -> Edit as JSON
+- Copy the content of the corresponding file in this folder
+- Paste it in the window
+- Click on "Update Pipeline"
+- Click on "Save Changes"

@@ -1,0 +1,29 @@
+{
+  "keepWaitingPipelines": false,
+  "lastModifiedBy": "zcapett",
+  "limitConcurrent": true,
+  "schema": "1",
+  "spelEvaluator": "v4",
+  "stages": [
+    {
+      "application": "idunaas",
+      "failPipeline": true,
+      "name": "mass-update-ami",
+      "pipeline": "e5bd779c-caa8-49a5-8091-6103d2540d5e",
+      "pipelineParameters": {},
+      "refId": "1",
+      "requisiteStageRefIds": [],
+      "type": "pipeline",
+      "waitForCompletion": true
+    }
+  ],
+  "triggers": [
+    {
+      "cronExpression": "0 0 8 ? 1/1 MON#1 *",
+      "enabled": false,
+      "id": "e65357a6-a432-4048-81d6-ffefac9d4e6b",
+      "type": "cron"
+    }
+  ],
+  "updateTs": "1678962374942"
+}

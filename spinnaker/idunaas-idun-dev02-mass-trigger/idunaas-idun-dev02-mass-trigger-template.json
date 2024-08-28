@@ -1,0 +1,236 @@
+{
+  "schema": "v2",
+  "variables": [],
+  "id": "idunaas-idun-dev02-mass-trigger-template",
+  "protect": false,
+  "metadata": {
+    "description": "Parent Template for the idunaas-idun-dev02-mass-trigger-pipeline",
+    "name": "idunaas-idun-dev02-mass-trigger-template",
+    "owner": "idunaas",
+    "scopes": [
+      "${ var.application_idunaas }"
+    ]
+  },
+  "pipeline": {
+    "appConfig": {},
+    "keepWaitingPipelines": false,
+    "lastModifiedBy": "zlaigar",
+    "limitConcurrent": true,
+    "parameterConfig": [
+      {
+        "default": "${ var.int_chart_version }",
+        "description": "Chart Version to Upgrade to. LATEST will get latest version",
+        "hasOptions": false,
+        "label": "",
+        "name": "INT_CHART_VERSION",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.dev02_mass_trigger_skip_ossautoapp01 }",
+        "description": "To skip the upgrade of ossautoapp01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_OSSAUTOAPP01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.dev02_mass_trigger_upgrade_env_name }",
+        "description": "Name of the Environment to upgrade",
+        "hasOptions": false,
+        "label": "",
+        "name": "Env_name",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.dev02_mass_trigger_upgrade_env_name1 }",
+        "description": "Name of the Environment to upgrade",
+        "hasOptions": false,
+        "label": "",
+        "name": "Env_name1",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      }
+    ],
+    "spelEvaluator": "v4",
+    "stages": [
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "OSS-Integration-Retrieve-Environment-Details",
+        "master": "${ var.jenkins_maintrack_fem }",
+        "name": "Gather Dev2 Env",
+        "parameters": {
+          "ENV_NAME": "${trigger['parameters']['Env_name']}"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Gather_Dev2_Env",
+        "requisiteStageRefIds": [],
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "OSS-Integration-Retrieve-Environment-Details",
+        "master": "${ var.jenkins_maintrack_fem }",
+        "name": "Gather Autoapp Env",
+        "parameters": {
+          "ENV_NAME": "${trigger['parameters']['Env_name1']}"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Gather_Autoapp_Env",
+        "requisiteStageRefIds": [],
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "idunaas_get_installed_chart",
+        "master": "${ var.jenkins_fem }",
+        "name": "Get Installed Dev2 Charts",
+        "parameters": {
+          "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+          "IAM_AUTHENTICATOR": "${#stage(\"Gather Dev2 Env\")[\"context\"][\"IAM_AUTHENTICATOR\"]}",
+          "NAMESPACE": "${#stage(\"Gather Dev2 Env\")[\"context\"][\"NAMESPACE\"]}",
+          "PATH_TO_AWS_FILES": "${#stage(\"Gather Dev2 Env\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+          "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Dev2 Env\")[\"context\"][\"KUBE_CONFIG\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Get_Installed_Dev2_Charts",
+        "requisiteStageRefIds": [
+          "Gather_Dev2_Env"
+        ],
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "idunaas_get_installed_chart",
+        "master": "${ var.jenkins_fem }",
+        "name": "Get Installed Autoapp Charts",
+        "parameters": {
+          "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+          "IAM_AUTHENTICATOR": "${#stage(\"Gather Autoapp Env\")[\"context\"][\"IAM_AUTHENTICATOR\"]}",
+          "NAMESPACE": "${#stage(\"Gather Autoapp Env\")[\"context\"][\"NAMESPACE\"]}",
+          "PATH_TO_AWS_FILES": "${#stage(\"Gather Autoapp Env\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+          "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Autoapp Env\")[\"context\"][\"KUBE_CONFIG\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Get_Installed_Autoapp_Charts",
+        "requisiteStageRefIds": [
+          "Gather_Autoapp_Env"
+        ],
+        "type": "jenkins"
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Trigger Install",
+        "pipeline": "${ var.install_pipeline }",
+        "pipelineParameters": {
+          "ENVIRONMENT_NAME": "idunaasdev02",
+          "INT_CHART_VERSION": "${#stage(\"Get Installed Autoapp Charts\")[\"context\"][\"INSTALLED_CHART_VERSION\"]}"
+        },
+        "refId": "Trigger_Install",
+        "requisiteStageRefIds": [
+          "Get_Installed_Dev2_Charts",
+          "Get_Installed_Autoapp_Charts"
+        ],
+        "stageEnabled": {
+          "expression": "\"${#stage(\"Get Installed Dev2 Charts\")[\"context\"][\"INSTALLED_CHART_VERSION\"]}\" != \"${#stage(\"Get Installed Autoapp Charts\")[\"context\"][\"INSTALLED_CHART_VERSION\"]}\"",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "failPipeline": true,
+        "name": "Trigger Upgrade",
+        "pipeline": "${ var.upgrade_rollback_pipeline }",
+        "pipelineParameters": {
+          "CHART_VERSION": "${trigger['parameters']['INT_CHART_VERSION']}",
+          "ENVIRONMENT_NAME": "idunaasdev02"
+        },
+        "refId": "Trigger_Upgrade",
+        "requisiteStageRefIds": [
+          "Trigger_Install"
+        ],
+        "stageEnabled": {
+          "expression": "\"${#stage('Trigger Install')['status']}\" == \"SUCCEEDED\" or \"${#stage('Trigger Install')['status']}\" == \"SKIPPED\"",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "name": "Flow Completion",
+        "notifications": [
+          {
+            "address": "${ var.team_email }",
+            "level": "stage",
+            "type": "email",
+            "when": [
+              "stage.failed"
+            ]
+          }
+        ],
+        "preconditions": [
+          {
+            "context": {
+              "expression": "\"${#stage('Trigger Upgrade')['status']}\" == \"SUCCEEDED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          }
+        ],
+        "refId": "Flow_Completion",
+        "requisiteStageRefIds": [
+          "Trigger_Upgrade"
+        ],
+        "sendNotifications": true,
+        "type": "checkPreconditions"
+      }
+    ],
+    "triggers": [
+      {
+        "cronExpression": "0 0 17 ? * MON-FRI *",
+        "enabled": false,
+        "id": "idunaas_idun_dev02_mass_trigger_cron_job",
+        "type": "cron"
+      }
+    ]
+  }
+}

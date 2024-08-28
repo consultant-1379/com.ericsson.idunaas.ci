@@ -1,0 +1,17 @@
+[
+    {
+        "name": "stsvp3aenm01",
+        "vendor": "Ericsson",
+        "url": "https://stsvp3aenm01-10.stsoss.sero.gic.ericsson.se ",
+            "subsystemType": {
+                "type": "DomainManager"
+            },
+            "connectionProperties": [
+            {
+                "name": "ENM",
+                "username": "administrator",
+                "password": "ENM_PASSWORD"
+            }
+        ]
+    }    
+]

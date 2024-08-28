@@ -1,0 +1,472 @@
+{
+ "users":[
+    {
+      "name": "appmgr-user",
+      "password": "PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "AppMgrOperator", "default-roles-master", "OSSPortalReader"],
+      "pwreset": false
+    },
+    {
+      "name": "cicd-rapp-hello-world_stsossflexeiap1004_tb_user",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "default-roles-master"],
+      "pwreset": false
+    },
+    {
+      "name": "cnr-user",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["DataCatalog_Producer_Application_Operator","System_SecurityAdministrator","Exposure_Application_Administrator","ConnectedSystemRegistry_Application_ReadOnly","SchemaRegistry_Producer_Application_Operator","LogAPI_ExtApps_Application_ReadOnly","LogViewer_System_Application_Operator","SchemaRegistry_Consumer_Application_Operator","UserAdministration_ExtAppRbac_Application_SecurityAdministrator","AppMgrAdmin","CTS","LogViewer_ExtApps_Application_Operator","DataCollectionControl_Subscriber_Application_Operator","OSSPortalReader","PMSCH_Application_Operator","System_Administrator","default-roles-master","NCMP"],
+      "pwreset": false
+    },
+    {
+      "name": "csw-ci",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["DataCatalog_Producer_Application_Operator","System_SecurityAdministrator","Exposure_Application_Administrator","ConnectedSystemRegistry_Application_ReadOnly","SchemaRegistry_Producer_Application_Operator","LogAPI_ExtApps_Application_ReadOnly","LogViewer_System_Application_Operator","SchemaRegistry_Consumer_Application_Operator","UserAdministration_ExtAppRbac_Application_SecurityAdministrator","AppMgrAdmin","CTS","LogViewer_ExtApps_Application_Operator","DataCollectionControl_Subscriber_Application_Operator","OSSPortalReader","PMSCH_Application_Operator","System_Administrator","default-roles-master","NCMP"],
+      "pwreset": false
+    },
+    {
+      "name": "ebacavi",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["DataCatalog_Producer_Application_Operator","NetworkTopology_Application_Administrator","Python_SampleabcdeApp_Administrator","SchemaRegistry_Producer_Application_Operator","LogAPI_ExtApps_Application_ReadOnly","A1PolicyManager_Application_ReadWrite","SchemaRegistry_Consumer_Application_Operator","UserAdministration_ExtAppRbac_Application_SecurityAdministrator","BUR_Application_Administrator","CTS","Python_SampleguangApp_Administrator","BUR_Application_Reader","System_Administrator","DataCatalog_Application_ReadOnly","default-roles-master","NCMP","PMSCH_Application_ReadOnly","AppMgr_Application_Administrator","System_SecurityAdministrator","AppMgrOperator","Exposure_Application_Administrator","NetworkTopology_Application_ReadOnly","NetworkConfiguration_Application_ReadWrite","ConnectedSystemRegistry_Application_ReadOnly","OSSSecurityAdmin","System_ReadOnly","NetworkConfiguration_Application_ReadOnly","LogViewer_System_Application_Operator","AppMgrAdmin","LogViewer_ExtApps_Application_Operator","ConnectedSystemRegistry_Application_SecurityAdministrator","System_Troubleshooter","NetworkConfiguration_Application_ReadUpdate","MachineLearning_Application_Administrator","DataCollectionControl_Subscriber_Application_Operator","OSSPortalReader","AppMgr_Application_Operator","Ericsson_Adaptation_Support_Application_Troubleshooter","PMSCH_Application_Operator","Monitoring_Application_ReadOnly","NetworkTopology_Adapter_Application_WriteOnly","OSSPortalAdmin","A1PolicyManager_Application_ReadOnly"],
+      "pwreset": false
+    },
+    {
+      "name": "eeogvvn",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["DataCatalog_Producer_Application_Operator","NetworkTopology_Application_Administrator","Python_SampleabcdeApp_Administrator","SchemaRegistry_Producer_Application_Operator","LogAPI_ExtApps_Application_ReadOnly","A1PolicyManager_Application_ReadWrite","SchemaRegistry_Consumer_Application_Operator","UserAdministration_ExtAppRbac_Application_SecurityAdministrator","BUR_Application_Administrator","CTS","Python_SampleguangApp_Administrator","BUR_Application_Reader","System_Administrator","DataCatalog_Application_ReadOnly","default-roles-master","NCMP","PMSCH_Application_ReadOnly","AppMgr_Application_Administrator","System_SecurityAdministrator","AppMgrOperator","Exposure_Application_Administrator","NetworkTopology_Application_ReadOnly","NetworkConfiguration_Application_ReadWrite","ConnectedSystemRegistry_Application_ReadOnly","OSSSecurityAdmin","System_ReadOnly","NetworkConfiguration_Application_ReadOnly","LogViewer_System_Application_Operator","AppMgrAdmin","LogViewer_ExtApps_Application_Operator","ConnectedSystemRegistry_Application_SecurityAdministrator","System_Troubleshooter","NetworkConfiguration_Application_ReadUpdate","MachineLearning_Application_Administrator","DataCollectionControl_Subscriber_Application_Operator","OSSPortalReader","AppMgr_Application_Operator","Ericsson_Adaptation_Support_Application_Troubleshooter","PMSCH_Application_Operator","Monitoring_Application_ReadOnly","NetworkTopology_Adapter_Application_WriteOnly","OSSPortalAdmin","A1PolicyManager_Application_ReadOnly"],
+      "pwreset": false
+    },
+    {
+      "name": "ekasviv",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["DataCatalog_Producer_Application_Operator","NetworkTopology_Application_Administrator","Python_SampleabcdeApp_Administrator","SchemaRegistry_Producer_Application_Operator","LogAPI_ExtApps_Application_ReadOnly","A1PolicyManager_Application_ReadWrite","SchemaRegistry_Consumer_Application_Operator","UserAdministration_ExtAppRbac_Application_SecurityAdministrator","BUR_Application_Administrator","CTS","Python_SampleguangApp_Administrator","BUR_Application_Reader","System_Administrator","DataCatalog_Application_ReadOnly","default-roles-master","NCMP","PMSCH_Application_ReadOnly","AppMgr_Application_Administrator","System_SecurityAdministrator","AppMgrOperator","Exposure_Application_Administrator","NetworkTopology_Application_ReadOnly","NetworkConfiguration_Application_ReadWrite","ConnectedSystemRegistry_Application_ReadOnly","OSSSecurityAdmin","System_ReadOnly","NetworkConfiguration_Application_ReadOnly","LogViewer_System_Application_Operator","AppMgrAdmin","LogViewer_ExtApps_Application_Operator","ConnectedSystemRegistry_Application_SecurityAdministrator","System_Troubleshooter","NetworkConfiguration_Application_ReadUpdate","MachineLearning_Application_Administrator","DataCollectionControl_Subscriber_Application_Operator","OSSPortalReader","AppMgr_Application_Operator","Ericsson_Adaptation_Support_Application_Troubleshooter","PMSCH_Application_Operator","Monitoring_Application_ReadOnly","NetworkTopology_Adapter_Application_WriteOnly","OSSPortalAdmin","A1PolicyManager_Application_ReadOnly"],
+      "pwreset": false
+    },
+    {
+      "name": "emaajrc",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["DataCatalog_Producer_Application_Operator","NetworkTopology_Application_Administrator","Python_SampleabcdeApp_Administrator","SchemaRegistry_Producer_Application_Operator","LogAPI_ExtApps_Application_ReadOnly","A1PolicyManager_Application_ReadWrite","SchemaRegistry_Consumer_Application_Operator","UserAdministration_ExtAppRbac_Application_SecurityAdministrator","BUR_Application_Administrator","CTS","Python_SampleguangApp_Administrator","BUR_Application_Reader","System_Administrator","DataCatalog_Application_ReadOnly","default-roles-master","NCMP","PMSCH_Application_ReadOnly","AppMgr_Application_Administrator","System_SecurityAdministrator","AppMgrOperator","Exposure_Application_Administrator","NetworkTopology_Application_ReadOnly","NetworkConfiguration_Application_ReadWrite","ConnectedSystemRegistry_Application_ReadOnly","OSSSecurityAdmin","System_ReadOnly","NetworkConfiguration_Application_ReadOnly","LogViewer_System_Application_Operator","AppMgrAdmin","LogViewer_ExtApps_Application_Operator","ConnectedSystemRegistry_Application_SecurityAdministrator","System_Troubleshooter","NetworkConfiguration_Application_ReadUpdate","MachineLearning_Application_Administrator","DataCollectionControl_Subscriber_Application_Operator","OSSPortalReader","AppMgr_Application_Operator","Ericsson_Adaptation_Support_Application_Troubleshooter","PMSCH_Application_Operator","Monitoring_Application_ReadOnly","NetworkTopology_Adapter_Application_WriteOnly","OSSPortalAdmin","A1PolicyManager_Application_ReadOnly"],
+      "pwreset": false
+    },
+    {
+      "name": "ematmla",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["DataCatalog_Producer_Application_Operator","NetworkTopology_Application_Administrator","Python_SampleabcdeApp_Administrator","SchemaRegistry_Producer_Application_Operator","LogAPI_ExtApps_Application_ReadOnly","A1PolicyManager_Application_ReadWrite","SchemaRegistry_Consumer_Application_Operator","UserAdministration_ExtAppRbac_Application_SecurityAdministrator","BUR_Application_Administrator","CTS","Python_SampleguangApp_Administrator","BUR_Application_Reader","System_Administrator","DataCatalog_Application_ReadOnly","default-roles-master","NCMP","PMSCH_Application_ReadOnly","AppMgr_Application_Administrator","System_SecurityAdministrator","AppMgrOperator","Exposure_Application_Administrator","NetworkTopology_Application_ReadOnly","NetworkConfiguration_Application_ReadWrite","ConnectedSystemRegistry_Application_ReadOnly","OSSSecurityAdmin","System_ReadOnly","NetworkConfiguration_Application_ReadOnly","LogViewer_System_Application_Operator","AppMgrAdmin","LogViewer_ExtApps_Application_Operator","ConnectedSystemRegistry_Application_SecurityAdministrator","System_Troubleshooter","NetworkConfiguration_Application_ReadUpdate","MachineLearning_Application_Administrator","DataCollectionControl_Subscriber_Application_Operator","OSSPortalReader","AppMgr_Application_Operator","Ericsson_Adaptation_Support_Application_Troubleshooter","PMSCH_Application_Operator","Monitoring_Application_ReadOnly","NetworkTopology_Adapter_Application_WriteOnly","OSSPortalAdmin","A1PolicyManager_Application_ReadOnly"],
+      "pwreset": false
+    },
+    {
+      "name": "fremen",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["DataCatalog_Producer_Application_Operator","NetworkTopology_Application_Administrator","Python_SampleabcdeApp_Administrator","SchemaRegistry_Producer_Application_Operator","LogAPI_ExtApps_Application_ReadOnly","A1PolicyManager_Application_ReadWrite","SchemaRegistry_Consumer_Application_Operator","UserAdministration_ExtAppRbac_Application_SecurityAdministrator","BUR_Application_Administrator","CTS","Python_SampleguangApp_Administrator","BUR_Application_Reader","System_Administrator","DataCatalog_Application_ReadOnly","default-roles-master","NCMP","PMSCH_Application_ReadOnly","AppMgr_Application_Administrator","System_SecurityAdministrator","AppMgrOperator","Exposure_Application_Administrator","NetworkTopology_Application_ReadOnly","NetworkConfiguration_Application_ReadWrite","ConnectedSystemRegistry_Application_ReadOnly","OSSSecurityAdmin","System_ReadOnly","NetworkConfiguration_Application_ReadOnly","LogViewer_System_Application_Operator","AppMgrAdmin","LogViewer_ExtApps_Application_Operator","ConnectedSystemRegistry_Application_SecurityAdministrator","System_Troubleshooter","NetworkConfiguration_Application_ReadUpdate","MachineLearning_Application_Administrator","DataCollectionControl_Subscriber_Application_Operator","OSSPortalReader","AppMgr_Application_Operator","Ericsson_Adaptation_Support_Application_Troubleshooter","PMSCH_Application_Operator","Monitoring_Application_ReadOnly","NetworkTopology_Adapter_Application_WriteOnly","OSSPortalAdmin","A1PolicyManager_Application_ReadOnly"],
+      "pwreset": false
+    },
+    {
+      "name": "ietest",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["DataCatalog_Producer_Application_Operator","NetworkTopology_Application_Administrator","Python_SampleabcdeApp_Administrator","SchemaRegistry_Producer_Application_Operator","LogAPI_ExtApps_Application_ReadOnly","A1PolicyManager_Application_ReadWrite","SchemaRegistry_Consumer_Application_Operator","UserAdministration_ExtAppRbac_Application_SecurityAdministrator","BUR_Application_Administrator","CTS","Python_SampleguangApp_Administrator","BUR_Application_Reader","System_Administrator","DataCatalog_Application_ReadOnly","default-roles-master","NCMP","PMSCH_Application_ReadOnly","AppMgr_Application_Administrator","System_SecurityAdministrator","AppMgrOperator","Exposure_Application_Administrator","NetworkTopology_Application_ReadOnly","NetworkConfiguration_Application_ReadWrite","ConnectedSystemRegistry_Application_ReadOnly","OSSSecurityAdmin","System_ReadOnly","NetworkConfiguration_Application_ReadOnly","LogViewer_System_Application_Operator","AppMgrAdmin","LogViewer_ExtApps_Application_Operator","ConnectedSystemRegistry_Application_SecurityAdministrator","System_Troubleshooter","NetworkConfiguration_Application_ReadUpdate","MachineLearning_Application_Administrator","DataCollectionControl_Subscriber_Application_Operator","OSSPortalReader","AppMgr_Application_Operator","Ericsson_Adaptation_Support_Application_Troubleshooter","PMSCH_Application_Operator","Monitoring_Application_ReadOnly","NetworkTopology_Adapter_Application_WriteOnly","OSSPortalAdmin","A1PolicyManager_Application_ReadOnly"],
+      "pwreset": false
+    },
+    {
+      "name": "eaaomhs",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eaicarj",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ealiarb",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eamfrra",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eamrami",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eantjaa",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eaoblub",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ebaijef",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ebeecon",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eborcan",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ecaymar",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "echeeng",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "echhach",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "econmcn",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "edlniut",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eeipsen",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eelaamr",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "emadvxx",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "egaagrr",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "egabzol",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "egankun",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "egiajel",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "egiubur",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "egrojos",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eguozqu",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ehiuita",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ehuiaja",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ejiahug",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ejjgjji",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ejolbeo",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ejosgly",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ejuargu",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ejunlio",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ekmnuaa",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ekrukos",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ekwckvn",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "elsztak",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "elucbal",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "emaghou",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "emirbud",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "emmakun",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "emolgui",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "emulsao",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "emusyil",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "enpaivt",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eonmhha",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "epaljes",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "epxxjay",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eravbhj",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "erbaham",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eredyer",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "esardsi",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eshaoga",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eshgwag",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "esreekj",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "etialan",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "eunnraj",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "euswdwj",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ewhegar",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ewuushi",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ewzabei",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ezaubar",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "ezirwei",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "testuser",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "xramear",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "zhtubas",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    },
+    {
+      "name": "zvidani",
+      "password": "USERS_PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "CTS", "ConnectedSystemRegistry_Application_ReadOnly", "DataCatalog_Producer_Application_Operator", "DataCollectionControl_Subscriber_Application_Operator", "Exposure_Application_Administrator", "LogAPI_ExtApps_Application_ReadOnly", "LogViewer", "LogViewer_ExtApps_Application_Operator", "LogViewer_System_Application_Operator", "MetricsViewer", "NCMP", "OSSPortalReader", "PMSCH_Application_Operator", "SchemaRegistry_Consumer_Application_Operator", "SchemaRegistry_Producer_Application_Operator", "System_Administrator", "UserAdministration_ExtAppRbac_Application_SecurityAdministrator", "System_SecurityAdministrator", "default-roles-master"],
+      "pwreset": true
+    }
+  ]
+}

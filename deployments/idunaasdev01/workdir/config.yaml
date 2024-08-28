@@ -1,0 +1,28 @@
+EnvironmentName: idunaasdev01
+AWSRegion: eu-west-1
+VPCID: vpc-00807c28bc36b5100
+ControlPlaneSubnetIds: subnet-0d599a3c13b85647c,subnet-080c49a72f13e432d
+WorkerNodeSubnetIds: subnet-0d599a3c13b85647c
+SecondaryVpcCIDR: 172.16.8.0/21
+DisablePublicAccess: True
+NodeInstanceType: m5.4xlarge
+DiskSize: 80
+MinNodes: 2
+MaxNodes: 10
+SshKeyPairName: test-idun-keypair
+PrivateDomainName: 212442621681.eu-west-1.ac.ericsson.se
+K8SVersion: '1.24'
+KubeDownscaler: true
+BackupInstanceType: t3.medium
+BackupAmiId: ami-020dc16c3d388b597
+BackupDisk: 50
+BackupPass: shroot12
+Hostnames:
+  so: so.212442621681.eu-west-1.ac.ericsson.se
+  pf: pf.212442621681.eu-west-1.ac.ericsson.se
+  iam: iam.212442621681.eu-west-1.ac.ericsson.se
+  uds: uds.212442621681.eu-west-1.ac.ericsson.se
+  gas: gas.212442621681.eu-west-1.ac.ericsson.se
+  th: th.212442621681.eu-west-1.ac.ericsson.se
+  dashboard: monitoring.212442621681.eu-west-1.ac.ericsson.se
+  prometheus: prometheus.212442621681.eu-west-1.ac.ericsson.se

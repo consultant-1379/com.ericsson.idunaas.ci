@@ -1,0 +1,63 @@
+{
+  "schema": "v2",
+  "application": "${ var.application_idunaas }",
+  "name": "idunaas-idun-standalone-export-backup-pipeline",
+  "description": "idunaas-idun-standalone-export-backup-pipeline, which inherits from the idunaas-idun-standalone-export-backup-template",
+  "template": {
+    "artifactAccount": "front50ArtifactCredentials",
+    "reference": "spinnaker://idunaas-idun-standalone-export-backup-template:latest",
+    "type": "front50/pipelineTemplate"
+  },
+  "parameters": [
+    {
+      "default": "idunaasdev01",
+      "description": "Name of the Environment to backup",
+      "hasOptions": false,
+      "label": "",
+      "name": "ENVIRONMENT_NAME",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    }
+  ],
+  "stages": [
+    {
+      "inject": {
+        "after": [
+          "Gather_Env_Details"
+        ]
+      },
+      "continuePipeline": false,
+      "failPipeline": true,
+      "job": "IDUNaaS_Perform_Backup",
+      "master": "${ var.jenkins_fem }",
+      "name": "Perform Backup",
+      "parameters": {
+        "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+        "BACKUP_SERVER": "${#stage(\"Gather Env Details\")[\"context\"][\"BACKUP_SERVER\"]}",
+        "BACKUP_USER_SECRET": "${ var.backup_user_secret }",
+        "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}",
+        "FUNCTIONAL_USER_SECRET": "${ var.functional_user_secret }",
+        "IAM_AUTHENTICATOR": "${#stage(\"Gather Env Details\")[\"context\"][\"IAM_AUTHENTICATOR\"]}",
+        "IDUN_USER_SECRET": "${ var.idun_user_secret }",
+        "INT_CHART_VERSION": "${#stage(\"Gather Env Details\")[\"context\"][\"VERSION\"]}",
+        "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+        "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+        "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+        "PATH_TO_SITE_VALUES_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_SITE_VALUES\"]}",
+        "SO_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_SO_HOSTNAME\"]}",
+        "TAGS": "${#stage(\"Gather Env Details\")[\"context\"][\"TAGS\"]}",
+        "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+      },
+      "refId": "Perform_Backup",
+      "requisiteStageRefIds": [
+        "Gather_Env_Details"
+      ],
+      "type": "jenkins"
+    }
+  ]
+}

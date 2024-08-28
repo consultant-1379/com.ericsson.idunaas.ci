@@ -1,0 +1,31 @@
+EnvironmentName : "openlab02"
+AWSRegion: "us-east-1"
+K8SVersion : "1.23"
+VPCID : "vpc-021615c00b82eb70c"
+ControlPlaneSubnetIds: "subnet-04342eda9a331de8a,subnet-092fd934ce1a59bc1"
+WorkerNodeSubnetIds: "subnet-092fd934ce1a59bc1"
+SecondaryVpcCIDR : "172.32.16.0/22"
+DisablePublicAccess: False
+NodeInstanceType : "m5.4xlarge"
+DiskSize : 80
+MinNodes : 2
+MaxNodes : 10
+SshKeyPairName : "openlabidun01-key-pair"
+PrivateDomainName : "openlab01.idunaas.ericsson.se"
+KubeDownscaler : True
+BackupInstanceType: t3.medium
+BackupAmiId: ami-0592fe4a334c8ff21
+BackupDisk: 50
+BackupPass: shroot12
+Hostnames:
+  iam: "iam-lab2.openlab01.idunaas.ericsson.se"
+  pf: "pf-lab2.openlab01.idunaas.ericsson.se"
+  so: "so-lab2.openlab01.idunaas.ericsson.se"
+  uds: "uds-lab2.openlab01.idunaas.ericsson.se"
+  gas: "gas-lab2.openlab01.idunaas.ericsson.se"
+  adc: "adc-lab2.openlab01.idunaas.ericsson.se"
+  appmgr: "appmgr-lab2.openlab01.idunaas.ericsson.se"
+  os: "os-lab2.openlab01.idunaas.ericsson.se"
+  th: "th-lab2.openlab01.idunaas.ericsson.se"
+  dashboard: "dashboard-lab2.openlab01.idunaas.ericsson.se"
+  prometheus: "monitoring-lab2.openlab01.idunaas.ericsson.se"

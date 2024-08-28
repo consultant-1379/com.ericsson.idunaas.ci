@@ -1,0 +1,88 @@
+{
+  "schema": "v2",
+  "application": "${ var.application_idunaas }",
+  "name": "idunaas-idun-rollback-helmfile-pipeline",
+  "description": "idunaas-idun-rollback-helmfile-pipeline, which inherits from the idunaas-idun-rollback-helmfile-template",
+  "template": {
+    "artifactAccount": "front50ArtifactCredentials",
+    "reference": "spinnaker://idunaas-idun-rollback-helmfile-template:latest",
+    "type": "front50/pipelineTemplate"
+  },
+  "parameters": [
+    {
+      "default": "idunaasdev01",
+      "description": "Name of the Environment to backup",
+      "hasOptions": false,
+      "label": "",
+      "name": "ENVIRONMENT_NAME",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    }
+  ],
+  "stages": [
+    {
+      "inject": {
+        "after": ["Check_Rollback_Needed"]
+      },
+      "application": "${ var.application_idunaas }",
+      "failPipeline": true,
+      "name": "Cleanup And Deploy",
+      "pipeline": "${ var.install_pipeline }",
+      "pipelineParameters": {
+        "ENVIRONMENT_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}",
+        "INT_CHART_VERSION": "${trigger['parameters']['INT_CHART_VERSION']}"
+      },
+      "refId": "Cleanup_And_Deploy",
+      "requisiteStageRefIds": [
+        "Check_Rollback_Needed"
+      ],
+      "stageEnabled": {
+        "expression": "\"${#stage('Check Rollback Needed')['status']}\" == \"SUCCEEDED\" and \"${#stage(\"Check Rollback Needed\")[\"context\"][\"ROLLBACK_REQUIRED\"]}\" == \"true\"",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "inject": {
+        "after": ["Cleanup_And_Deploy"]
+      },
+      "continuePipeline": false,
+      "failPipeline": true,
+      "job": "idunaas_restore_from_backup",
+      "master": "${ var.jenkins_fem }",
+      "name": "Restore From Backup",
+      "parameters": {
+        "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+        "BACKUP_SERVER": "${#stage(\"Gather Env Details\")[\"context\"][\"BACKUP_SERVER\"]}",
+        "BACKUP_USER_SECRET": "${ var.backup_user_secret }",
+        "CASSANDRA_USER_SECRET": "${ var.cassandra_user_secret }",
+        "FUNCTIONAL_USER_SECRET": "${ var.functional_user_secret }",
+        "IAM_AUTHENTICATOR": "${#stage(\"Gather Env Details\")[\"context\"][\"IAM_AUTHENTICATOR\"]}",
+        "IDUN_USER_SECRET": "${ var.idun_user_secret }",
+        "INT_CHART_VERSION": "${trigger['parameters']['INT_CHART_VERSION']}",
+        "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+        "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+        "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+        "PATH_TO_SITE_VALUES_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_SITE_VALUES\"]}",
+        "SO_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_SO_HOSTNAME\"]}",
+        "TAGS": "${#stage(\"Gather Env Details\")[\"context\"][\"TAGS\"]}",
+        "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+      },
+      "refId": "Restore_From_Backup",
+      "requisiteStageRefIds": [
+        "Cleanup_And_Deploy"
+      ],
+      "stageEnabled": {
+        "expression": "\"${#stage('Cleanup And Deploy')['status']}\" == \"SUCCEEDED\" and \"${#stage(\"Check Rollback Needed\")[\"context\"][\"ROLLBACK_REQUIRED\"]}\" == \"true\"",
+        "type": "expression"
+      },
+      "type": "jenkins"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "cluster_id": "stsvp1eic03",
+  "path_to_certs": "minio/eic/stsvp1eic03/certificates/",
+  "kubeconfig_path": "minio/eic/kubeconfigs/stsvp1eic03_kubeconfig",
+  "lock_status": false,
+  "fh_ah_alarm_ip": "10.129.164.83",
+  "external_lbs": {
+    "10.129.164.82": "*.pool.stsvp1eic03.stsoss.sero.gic.ericsson.se"
+  },
+  "fqdn_ns_map": {
+    "stsvp1eic03-eric-eic-0": "*.pool.stsvp1eic03.stsoss.sero.gic.ericsson.se"
+  }
+}

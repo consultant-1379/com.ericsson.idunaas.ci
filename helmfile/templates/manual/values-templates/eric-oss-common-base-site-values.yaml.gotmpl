@@ -1,0 +1,87 @@
+global:
+  iam:
+    clientId: {{ .Values | get "global.iam.clientId" }}
+  hosts:
+    so: {{ .Values | get "global.hosts.so" }}
+    uds: {{ .Values | get "global.hosts.uds" }}
+    pf: {{ .Values | get "global.hosts.pf" }}
+    iam: {{ .Values | get "global.hosts.iam" }}
+    gas: {{ .Values | get "global.hosts.gas" }}
+  registry:
+    url: {{ .Values | get "global.registry.url" }}
+    username: {{ .Values | get "global.registry.username" }}
+    password: {{ .Values | get "global.registry.password" }}
+  support:
+    ipv6:
+      enabled: {{ .Values | get "global.registry.url" }}
+  timezone: {{ .Values | get "global.timezone" }}
+  createClusterRoles: {{ .Values | get "global.createClusterRoles" }}
+
+system-user:
+  credentials:
+    username: {{ .Values | get "system-user.credentials.username" }}
+    password: {{ .Values | get "system-user.credentials.password" }}
+
+# Warning! If changing these application tags from true to false and that application
+# is already installed, then that application will be removed and data will be lost!
+tags:
+  so: {{ .Values | get "tags.so" }}
+  pf: {{ .Values | get "tags.pf" }}
+  uds: {{ .Values | get "tags.uds" }}
+  platform: {{ .Values | get "tags.platform" }}
+
+eric-eo-api-gateway:
+  iam:
+    kubernetesSecret: {{ .Values | get "eric-eo-api-gateway.iam.kubernetesSecret" }}
+
+# This is the same as the global.iam hostname
+eric-sec-access-mgmt:
+  ingress:
+    hostname: {{ .Values | get "global.hosts.iam" }}
+  replicaCount: {{ .Values | get "eric-sec-access-mgmt.replicaCount" }}
+
+gas:
+  defaultUser:
+    username: {{ .Values | get "gas.defaultUser.username" }}
+    password: {{ .Values | get "gas.defaultUser.password" }}
+
+# Please refer to the dimensioning guide for the appropriate size of the BRO volume
+# The size will be dependent on which applications are being deployed
+eric-ctrl-bro:
+  persistence:
+    persistentVolumeClaim:
+      size: {{ .Values | get "eric-ctrl-bro.persistence.persistentVolumeClaim.size" }}
+  sftp:
+    username: {{ .Values | get "eric-ctrl-bro.sftp.username" }}
+    password: {{ .Values | get "eric-ctrl-bro.sftp.password" }}
+
+eric-data-search-engine:
+  service:
+    network:
+      protocol:
+        IPv6: {{ .Values | get "eric-data-search-engine.service.network.protocol.IPv6" }}
+
+# Fill in values in the following section only if deploying EO Georedundancy
+# Please refer to EO Installation Documentation for guidance on geo-redundant config
+geo-redundancy:
+  enabled: {{ .Values | get "geo-redundancy.enabled" }}
+eric-gr-bur-orchestrator:
+  credentials:
+    username: {{ .Values | get "eric-gr-bur-orchestrator.credentials.username" }}
+    password: {{ .Values | get "eric-gr-bur-orchestrator.credentials.password" }}
+  gr:
+    bro:
+      autoDelete:
+        backupsLimit: {{ .Values | get "eric-gr-bur-orchestrator.gr.bro.autoDelete.backupsLimit" }}
+    sftp:
+      url: {{ .Values | get "eric-gr-bur-orchestrator.gr.sftp.url" }}
+      username: {{ .Values | get "eric-gr-bur-orchestrator.gr.sftp.username" }}
+      password: {{ .Values | get "eric-gr-bur-orchestrator.gr.sftp.password" }}
+    cluster:
+      role: {{ .Values | get "eric-gr-bur-orchestrator.gr.cluster.role" }}
+      # note that the secondary_hostnames variable should only be defined if the role is set to "PRIMARY".
+      # secondary_hostnames should be commented out if role is set to "SECONDARY".
+      secondary_hostnames:
+        - {{ .Values | get "eric-gr-bur-orchestrator.gr.cluster.secondary_hostnames" }}
+    registry:
+      secondarySiteContainerRegistryHostname: {{ .Values | get "eric-gr-bur-orchestrator.gr.registry.secondarySiteContainerRegistryHostname" }}

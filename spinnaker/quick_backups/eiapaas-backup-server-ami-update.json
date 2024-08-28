@@ -1,0 +1,144 @@
+{
+  "keepWaitingPipelines": false,
+  "lastModifiedBy": "zcapett",
+  "limitConcurrent": false,
+  "notifications": [],
+  "parameterConfig": [
+    {
+      "default": "idunaasdev01",
+      "description": "Name of the Environment to upgrade",
+      "hasOptions": false,
+      "label": "",
+      "name": "ENV_NAME",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "ami",
+      "description": "Latest AMI ID",
+      "hasOptions": false,
+      "label": "",
+      "name": "AMI_ID",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "IDUN_CICD_ONE_POD_H",
+      "description": "Set slave label.",
+      "hasOptions": false,
+      "label": "",
+      "name": "SLAVE_LABEL",
+      "options": [
+        {
+          "value": "IDUN_CICD_ONE_POD_H"
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "",
+      "description": "Shared Environment Name - Like bnewidun05 as the backup server is shared with bnewidun01",
+      "hasOptions": false,
+      "label": "",
+      "name": "SHARED_ENV_NAME",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": false
+    },
+    {
+      "default": "N",
+      "description": "Is this environment has backup server shared with another environment (Y/N)",
+      "hasOptions": false,
+      "label": "",
+      "name": "IS_SHARED_ENV",
+      "options": [
+        {
+          "value": "N"
+        },
+        {
+          "value": "Y"
+        }
+      ],
+      "pinned": true,
+      "required": true
+    }
+  ],
+  "schema": "1",
+  "spelEvaluator": "v4",
+  "stages": [
+    {
+      "continuePipeline": false,
+      "failPipeline": true,
+      "job": "eiapaas-backup-ami-update",
+      "master": "oss-aeonic-fem2s11",
+      "name": "Upgrade Backup AMI",
+      "parameters": {
+        "AMI_ID": "${trigger['parameters']['AMI_ID']}",
+        "ENV_NAME": "${trigger['parameters']['ENV_NAME']}"
+      },
+      "propertyFile": "backup_server_ip.properties",
+      "refId": "2",
+      "requisiteStageRefIds": [],
+      "restrictExecutionDuringTimeWindow": false,
+      "restrictedExecutionWindow": {
+        "whitelist": []
+      },
+      "type": "jenkins"
+    },
+    {
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "job": "OSS-Integration-Update-Environment-Details",
+      "master": "oss-fem5s11-eiffel216",
+      "name": "Update Backup Server IP to RPT",
+      "parameters": {
+        "ENV_NAME": "${trigger['parameters']['ENV_NAME']}",
+        "backupServer": "${#stage(\"Upgrade Backup AMI\")[\"context\"][\"ip\"]}",
+        "version": ""
+      },
+      "refId": "7",
+      "requisiteStageRefIds": [
+        "2"
+      ],
+      "type": "jenkins"
+    },
+    {
+      "continuePipeline": false,
+      "failPipeline": true,
+      "job": "OSS-Integration-Update-Environment-Details",
+      "master": "oss-fem5s11-eiffel216",
+      "name": "Update Backup Server IP to RPT for shared env",
+      "parameters": {
+        "ENV_NAME": "${trigger['parameters']['SHARED_ENV_NAME']}",
+        "backupServer": "${#stage(\"Upgrade Backup AMI\")[\"context\"][\"ip\"]}"
+      },
+      "refId": "8",
+      "requisiteStageRefIds": [
+        "7"
+      ],
+      "stageEnabled": {
+        "expression": "\"${trigger['parameters']['IS_SHARED_ENV']}\" == \"Y\"",
+        "type": "expression"
+      },
+      "type": "jenkins"
+    }
+  ],
+  "triggers": [],
+  "updateTs": "1678710627709"
+}

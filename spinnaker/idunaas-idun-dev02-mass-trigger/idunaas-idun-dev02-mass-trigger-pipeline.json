@@ -1,0 +1,11 @@
+{
+  "schema": "v2",
+  "application": "${ var.application_idunaas }",
+  "name": "idunaas-idun-dev02-mass-trigger-pipeline",
+  "description": "idunaas-idun-dev02-mass-trigger-pipeline, which inherits from the idunaas-idun-dev02-mass-trigger-template",
+  "template": {
+    "artifactAccount": "front50ArtifactCredentials",
+    "reference": "spinnaker://idunaas-idun-dev02-mass-trigger-template:latest",
+    "type": "front50/pipelineTemplate"
+  }
+}

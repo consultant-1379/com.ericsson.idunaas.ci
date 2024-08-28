@@ -1,0 +1,25 @@
+{
+    "cluster_id": "hart146",
+    "path_to_certs": "minio/eic/hart146/certificates/",
+    "kubeconfig_path": "minio/eic/kubeconfigs/hart146_kubeconfig",
+    "lock_status": false,
+    "external_lbs": {
+      "10.156.128.189": "*.pool.hart146-eiap.ews.gic.ericsson.se",
+      "10.156.128.190": "*.pool.hart146-x1.ews.gic.ericsson.se",
+      "10.156.128.191": "*.pool.hart146-x2.ews.gic.ericsson.se",
+      "10.156.128.192": "*.pool.hart146-x3.ews.gic.ericsson.se",
+      "10.156.128.193": "*.pool.hart146-x4.ews.gic.ericsson.se",
+      "10.156.128.194": "*.pool.hart146-x5.ews.gic.ericsson.se",
+      "10.156.128.195": "*.pool.hart146-x6.ews.gic.ericsson.se"
+    },
+    "fqdn_ns_map": {
+      "hart146-eric-eic-0": "*.pool.hart146-eiap.ews.gic.ericsson.se",
+      "hart146-eric-eic-1": "*.pool.hart146-x1.ews.gic.ericsson.se",
+      "hart146-eric-eic-2": "*.pool.hart146-x2.ews.gic.ericsson.se",
+      "hart146-eric-eic-3": "*.pool.hart146-x3.ews.gic.ericsson.se",
+      "hart146-eric-eic-4": "*.pool.hart146-x4.ews.gic.ericsson.se",
+      "hart146-eric-eic-5": "*.pool.hart146-x5.ews.gic.ericsson.se",
+      "hart146-eric-eic-6": "*.pool.hart146-x6.ews.gic.ericsson.se"
+    }
+  }
+  

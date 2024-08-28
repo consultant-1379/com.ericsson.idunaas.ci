@@ -1,0 +1,180 @@
+[
+    {
+        "release_version": "2.18.0",
+        "dimensions": {
+            "base_platform": {
+                "cpu": 41,
+                "memory":85,
+                "app_set": [],
+                "description": "Base Platform app_set"
+            },
+            "adc_e2e_cicd":{
+                "cpu": 60,
+                "memory": 106,
+                "app_set": ["adc", "dmm"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "eas_e2e_cicd": {
+                "cpu": 113, 
+                "memory": 138,
+                "app_set": ["dmm", "eas", "ch", "th"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit. For EAS hardcoded value of 23 for cpu is used."
+            },
+            "dmm_e2e_cicd": {
+                "cpu": 55, 
+                "memory": 96,
+                "app_set": ["dmm"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "topology_handling_e2e_cicd": {
+                "cpu": 60,
+                "memory": 114,
+                "app_set": ["th"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "app_mgr_e2e_cicd": {
+                "cpu": 51,
+                "memory": 94,
+                "app_set": ["appmgr"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "config_handling_e2e_cicd": {
+                "cpu": 99, 
+                "memory": 127, 
+                "app_set": ["eas", "ch", "th"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit. For EAS hardcoded value of 23 for cpu is used."
+            },
+            "ta_e2e_cicd": {
+                "cpu": 46,
+                "memory": 91,
+                "app_set": ["ta"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit. For TA hardcoded value of 5 for cpu."
+            },
+            "full_eiap": {
+                "cpu": 152, 
+                "memory": 188,
+                "app_set": ["adc", "dmm", "eas", "ch", "th", "appmgr", "ta", "os", "pmh"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit. For TA hardcoded value of 5 for cpu. for EAS 23, for OS 5"
+            },
+            "os_e2e_cicd": {
+                "cpu": 46, 
+                "memory": 90,
+                "app_set": ["os"],
+                "description": "CPU calculated by taking the min of each tag and added 5. For OS memory hardcoded for 5 and CPU hardcoded for 5"
+            },
+            "pmh_e2e_cicd": {
+                "cpu": 70,
+                "memory": 116,
+                "app_set": ["dmm", "pmh"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "adc_th_e2e_cicd": {
+                "cpu": 85,
+                "memory": 116,
+                "app_set": ["dmm", "adc", "th"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "os_th_e2e_cicd": {
+                "cpu": 100,
+                "memory": 150,
+                "app_set": ["os", "th"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "appmgr_dmm_e2e_cicd": {
+                "cpu": 65,
+                "memory": 105,
+                "app_set": ["appmgr", "dmm"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            }
+        }
+    },
+    {
+        "release_version": "1.2337",
+        "dimensions": {
+            "base_platform": {
+                "cpu": 41,
+                "memory":85,
+                "app_set": [],
+                "description": "Base Platform app_set"
+            },
+            "adc_e2e_cicd":{
+                "cpu": 60,
+                "memory": 130,
+                "app_set": ["adc", "dmm"],
+                "description": "Calculated based on the actual running values"
+            },
+            "eas_e2e_cicd": {
+                "cpu": 75, 
+                "memory": 115,
+                "app_set": ["dmm", "eas", "ch", "th"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit. For EAS hardcoded value of 23 for cpu is used."
+            },
+            "dmm_e2e_cicd": {
+                "cpu": 50, 
+                "memory": 100,
+                "app_set": ["dmm"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "topology_handling_e2e_cicd": {
+                "cpu": 63,
+                "memory": 155,
+                "app_set": ["th"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "app_mgr_e2e_cicd": {
+                "cpu": 45,
+                "memory": 100,
+                "app_set": ["appmgr"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "config_handling_e2e_cicd": {
+                "cpu": 71, 
+                "memory": 100, 
+                "app_set": ["eas", "ch", "th"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit. For EAS hardcoded value of 23 for cpu is used."
+            },            
+            "full_eiap": {
+                "cpu": 120, 
+                "memory": 185,
+                "app_set": ["adc", "dmm", "eas", "ch", "th", "appmgr", "os", "pmh", "ml"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit. For TA hardcoded value of 5 for cpu. for EAS 23, for OS 5"
+            },
+            "os_e2e_cicd": {
+                "cpu": 41, 
+                "memory": 90,
+                "app_set": ["os"],
+                "description": "CPU calculated by taking the min of each tag and added 5. For OS memory hardcoded for 5 and CPU hardcoded for 5"
+            },
+            "pmh_e2e_cicd": {
+                "cpu": 68,
+                "memory": 116,
+                "app_set": ["dmm", "pmh"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "adc_th_e2e_cicd": {
+                "cpu": 85,
+                "memory": 116,
+                "app_set": ["dmm", "adc", "th"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "os_th_e2e_cicd": {
+                "cpu": 100,
+                "memory": 150,
+                "app_set": ["os", "th"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "appmgr_dmm_e2e_cicd": {
+                "cpu": 65,
+                "memory": 105,
+                "app_set": ["appmgr", "dmm"],
+                "description": "CPU calculated by taking the min of each tag and added 5. Memory is taken from only min limit"
+            },
+            "reserve_namespace": {
+                "cpu": 70,
+                "memory": 40,
+                "app_set": ["N/A"],
+                "description": "CPU limits and Memory Limits are set here when reserving only a namespace. requests = limits in this scenario."
+            }
+        }
+    }
+]

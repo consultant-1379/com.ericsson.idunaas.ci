@@ -1,0 +1,196 @@
+global:
+  hosts:
+    bdr: BDR_HOST_REPLACE
+    eic: EIC_HOST_REPLACE
+    iam: EIC_HOST_REPLACE
+  bdr:
+    enabled: true
+  eic:
+    enabled: true
+
+eric-oss-common-base:
+  system-user:
+    credentials:
+      username: sys-user
+      password: IDUN_CRED_REPLACE
+  eric-oss-ddc:
+    autoUpload:
+      enabled: true
+      ddpid: lmi_stsossflexeic1010
+      account: lmi_stsossflexeic1010@ddpi.athtem.eei.ericsson.se
+      password: "_stsossflexeic1010"
+
+  service-mesh-ingress-gateway:
+    service:
+      loadBalancerIP: "10.237.220.15"
+      annotations:
+        cloudProviderLB:
+          metallb.universe.tf/allow-shared-ip: ECFE-SHARED-IP
+
+  gas:
+    defaultUser:
+      username: gas-user
+      password: IDUN_CRED_REPLACE
+
+eric-cloud-native-base:
+  eric-odca-diagnostic-data-collector:
+    sftpServerHost: "sftp-server:22"
+  eric-ctrl-bro:
+    persistence:
+      persistentVolumeClaim:
+        size: 50Gi
+    sftp:
+      username: backup
+      password: BACKUP_CRED_REPLACE
+  eric-data-object-storage-mn:
+    openID:
+      enabled: true
+  eric-fh-snmp-alarm-provider:
+    service:
+      loadBalancerIP: "10.237.220.15"
+      annotations:
+        cloudProviderLB:
+          metallb.universe.tf/allow-shared-ip: ECFE-SHARED-IP
+
+eric-oss-config-handling:
+  cps-user:
+    credentials:
+      password: IDUN_CRED_REPLACE
+  dmi-user:
+    credentials:
+      password: IDUN_CRED_REPLACE
+
+eric-eo-playbook-service:
+  enabled: true
+
+eric-oss-oran-support:
+  eric-oss-a1-policy-mngmt-svc:
+    defaultUser:
+      password: IDUN_CRED_REPLACE
+
+eric-oss-ericsson-adaptation:
+  eric-oss-ran-topology-adapter:
+    rtaUser:
+      password: IDUN_CRED_REPLACE
+
+eric-oss-task-automation-ae:
+  defaultUser:
+    password: IDUN_CRED_REPLACE
+
+eric-topology-handling:
+  eric-oss-common-topology-svc:
+    eric-oss-cmn-topology-svc-core:
+      defaultUser:
+        password: IDUN_CRED_REPLACE
+
+eric-oss-adc:
+  ingress:
+    tls:
+      secretName: ves-tls-secret
+  eric-oss-enm-fns:
+    ignoreSubscription: false
+    configuredQueries: |-
+      enms:
+        - name: restsimpm
+          periodSeconds: 60
+          queries:
+            - name: query2
+              topic: sftp-filetrans
+              dmmDataTypeRegistrationParameters:
+                dataSpace: "4G5G"
+                dataCategory: PM_COUNTERS
+              enmFileLookupServiceParameters:
+                dataType: PM_STATISTICAL
+                nodeType: "RadioNode"
+                id: -1
+              fileType: "xml.gz"
+            - name: query3
+              topic: 4g-event
+              fileType: ""
+              fileLocation: ".*_1\\.bin(?:\\.gz)?$"
+              dmmDataTypeRegistrationParameters:
+                dataSpace: "4G"
+                dataCategory: "PM_EVENTS"
+              enmFileLookupServiceParameters:
+                dataType: PM_CELLTRACE
+                nodeType: "RadioNode"
+                id: -1
+            - name: query4
+              topic: 5g-event
+              fileType: ""
+              fileLocation: ".*_1_\\d+\\.gpb(?:\\.gz)?$"
+              dmmDataTypeRegistrationParameters:
+                dataSpace: "5G"
+                dataCategory: "PM_EVENTS"
+              enmFileLookupServiceParameters:
+                dataType: "PM_CELLTRACE_*"
+                nodeType: "RadioNode"
+                id: -1
+            - name: query5
+              topic: sftp-filetrans
+              fileType: ""
+              fileLocation: ""
+              dmmDataTypeRegistrationParameters:
+                dataSpace: "4G5G"
+                dataCategory: PM_COUNTERS
+              enmFileLookupServiceParameters:
+                dataType: PM_STATISTICAL
+                nodeType: "Shared-CNF"
+                id: -1
+    dmm:
+      dataCatalog:
+        messageBusNamespace: "eric-eic"
+        messageBusName: "eric-oss-dmm-kf-op-sz-kafka-bootstrap"
+  eric-oss-5gpmevt-filetx-proc:
+    dmm:
+      dataCatalog:
+        dataCollectorName: "restsimpm"
+    spring:
+      kafka:
+        topics:
+          input:
+            name: "file-notification-service--5g-event--restsimpm"
+  eric-oss-4gpmevent-filetrans-proc:
+    dmm:
+      dataCatalog:
+        dataCollectorName: "restsimpm"
+  eric-oss-sftp-filetrans:
+    subsystem:
+      name: "restsimpm"
+    dmm:
+      enabled: true
+      data_catalog:
+        data_service:
+          data_service_instance:
+            consumed_data_provider: "restsimpm"
+    spring:
+      kafka:
+        topics:
+          enm_id: "restsimpm"
+    connected:
+      systems:
+        enabled: true
+
+eric-oss-app-mgr:
+  eric-oss-app-onboarding:
+    pythonJob:
+      activeDeadlineSeconds: 3900
+      ttlSecondsAfterFinished: 300
+      pythonJobPollingTime: 4800
+
+eric-service-exposure-framework:
+  eric-sef-exposure-api-gateway:
+    serviceMesh:
+      ingress:
+        hosts:
+        - EIC_HOST_REPLACE
+
+eric-cncs-oss-config:
+  sef:
+    enabled: true
+
+eric-oss-dmm:
+  eric-oss-dmm-kf-op-sz:
+    kafka-cluster:
+      kafka-listeners:
+        oauthIngressTlsSecretName : eic-tls-secret

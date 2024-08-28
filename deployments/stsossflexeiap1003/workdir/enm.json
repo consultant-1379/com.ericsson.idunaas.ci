@@ -1,0 +1,54 @@
+[
+    {
+        "name": "stsossflexcenm1009",
+        "vendor": "Ericsson",
+        "url": "https://stsossflexcenm1009-12360.stsoss.sero.gic.ericsson.se",
+        "adapterLink": "eric-eo-enm-adapter",
+        "subsystemType": {
+            "type": "DomainManager"
+        },
+        "connectionProperties": [
+            {
+                "name": "ENM",
+                "username": "administrator",
+                "password": "ENM_PASSWORD",
+                "scriptingVMs": "10.65.10.81",
+                "sftpPort": "22"
+            }
+        ]
+    },
+    {
+        "name": "RESTSim",
+        "vendor": "Ericsson",
+        "url": "http://restsim-stsossflexeiap1003-37354.flexilab.sero.gic.ericsson.se",
+        "adapterLink": "eric-eo-enm-adapter",
+        "subsystemType": {
+            "type": "DomainManager"
+        },
+        "connectionProperties": [
+            {
+                "name": "ENM",
+                "username": "administrator",
+                "password": "ENM_PASSWORD"
+            }
+        ]
+    },
+    {
+        "name": "restsimpm",
+        "vendor": "Ericsson",
+        "url": "http://restsim-pm-stsossflexeiap1003-37354.flexilab.sero.gic.ericsson.se",
+        "adapterLink": "eric-eo-enm-adapter",
+        "subsystemType": {
+            "type": "DomainManager"
+        },
+        "connectionProperties": [
+            {
+                "name": "ENM",
+                "username": "flsuser1",
+                "password": "flspass@12",
+                "scriptingVMs": "eric-oss-pm-solution-enm-1.restsim-pm",
+                "sftpPort": "2020"
+            }
+        ]
+    }
+]

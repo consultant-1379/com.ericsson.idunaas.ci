@@ -1,0 +1,64 @@
+---
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: pool-deployments
+  namespace: mongodb-operator
+spec:
+  members: 3
+  type: ReplicaSet
+  version: "6.0.5"
+  security:
+    authentication:
+      modes:
+      - SCRAM
+  users:
+  - name: admin-user
+    db: admin
+    passwordSecretRef:
+      name: admin-user-password
+    roles:
+    - name: clusterAdmin
+      db: admin
+    - name: userAdminAnyDatabase
+      db: admin
+    scramCredentialsSecretName: mongo-scram
+  replicaSetHorizons:
+  - horizon: pool-deployments-0.stsvp5mango01.stsoss.seli.gic.ericsson.se:27017
+  - horizon: pool-deployments-1.stsvp5mango02.stsoss.seli.gic.ericsson.se:27017
+  - horizon: pool-deployments-2.stsvp5mango03.stsoss.seli.gic.ericsson.se:27017
+  security:
+    tls:
+      enabled: true
+      certificateKeySecretRef:
+        name: mongodb-key-pair
+      caCertificateSecretRef:
+        name: mongodb-key-pair  
+    ### optional: true
+    authentication:
+      modes:
+      - SCRAM
+  additionalMongodConfig:
+    storage.wiredTiger.engineConfig.journalCompressor: zlib
+  statefulSet:
+    spec:
+      volumeClaimTemplates:
+      - metadata:
+          name: data-volume
+        spec:
+          storageClassName: network-block
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 50Gi
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: admin-user-password
+  namespace: mongodb-operator
+type: Opaque
+stringData:
+  password: idunEricss0n

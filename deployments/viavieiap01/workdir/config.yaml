@@ -1,0 +1,31 @@
+EnvironmentName: "viavieiap01"
+AWSRegion: eu-west-1
+K8SVersion: "1.24"
+VPCID: "vpc-0fd4e73fa0a3b81c6"
+ControlPlaneSubnetIds: "subnet-03705fb02fa1a5438,subnet-05a48550f847f2040"
+WorkerNodeSubnetIds: "subnet-03705fb02fa1a5438"
+SecondaryVpcCIDR: "172.32.12.0/22"
+DisablePublicAccess: False
+NodeInstanceType: "m5.4xlarge"
+DiskSize: 80
+MinNodes: 2
+MaxNodes: 10
+SshKeyPairName: "viavieiap01-keypair1"
+PrivateDomainName: "viavi01.idunaas.ericsson.se"
+KubeDownscaler: True
+BackupInstanceType: t3.medium
+BackupAmiId: ami-020dc16c3d388b597
+BackupDisk: 50
+BackupPass: shroot12
+Hostnames:
+  iam: "iam.viavi01.idunaas.ericsson.se"
+  pf: "pf.viavi01.idunaas.ericsson.se"
+  so: "so.viavi01.idunaas.ericsson.se"
+  uds: "uds.viavi01.idunaas.ericsson.se"
+  gas: "gas.viavi01.idunaas.ericsson.se"
+  adc: "adc.viavi01.idunaas.ericsson.se"
+  appmgr: "appmgr.viavi01.idunaas.ericsson.se"
+  os: "os.viavi01.idunaas.ericsson.se"
+  th: "th.viavi01.idunaas.ericsson.se"
+  dashboard: "monitoring.viavi01.idunaas.ericsson.se"
+  prometheus: "prometheus.viavi01.idunaas.ericsson.se"

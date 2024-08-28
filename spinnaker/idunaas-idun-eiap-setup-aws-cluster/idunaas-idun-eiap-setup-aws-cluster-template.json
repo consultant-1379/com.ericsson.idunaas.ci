@@ -1,0 +1,635 @@
+{
+  "schema": "v2",
+  "variables": [],
+  "id": "idunaas-idun-setup-eiap-aws-cluster-template",
+  "protect": false,
+  "metadata": {
+    "description": "Parent Template for idunaas-idun-setup-eiap-aws-cluster-pipeline",
+    "name": "idunaas-idun-setup-eiap-aws-cluster-template",
+    "owner": "idunaas",
+    "scopes": [
+      "${ var.application_idunaas }"
+    ]
+  },
+  "pipeline": {
+    "keepWaitingPipelines": false,
+    "lastModifiedBy": "zcapett",
+    "limitConcurrent": true,
+    "parameterConfig": [
+      {
+        "default": "${ var.deployment_environment }",
+        "description": "Name of the environment to setup the cluster for (pipeline will abort if a cluster matching the given environment name already exists)",
+        "hasOptions": true,
+        "label": "Environment Name",
+        "name": "ENV_NAME",
+        "options": [
+          {
+            "value": "idunaasdev01"
+          },
+          {
+            "value": "idunaasdev02"
+          },
+          {
+            "value": "ossautoapp01"
+          },
+          {
+            "value": "bnewidun01"
+          },
+          {
+            "value": "bnewidun02"
+          },
+          {
+            "value": "bnewidun03"
+          },
+          {
+            "value": "bnewidun04"
+          },
+          {
+            "value": "bnewidun05"
+          },
+          {
+            "value": "bnew03"
+          },
+          {
+            "value": "bmasidun01"
+          },
+          {
+            "value": "ernidun01"
+          },
+          {
+            "value": "openlab01"
+          },
+          {
+            "value": "infoveiap01"
+          },
+          {
+            "value": "ecosystem01"
+          },
+          {
+            "value": "viavieiap01"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.aws_region }",
+        "description": "The AWS region to setup the cluster in",
+        "hasOptions": true,
+        "label": "AWS Region",
+        "name": "AWS_REGION",
+        "options": [
+          {
+            "value": "eu-west-1"
+          },
+          {
+            "value": "us-east-1"
+          },
+          {
+            "value": "ca-central-1"
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.kubernetes_version }",
+        "description": "The Kubernetes version to install on the cluster ",
+        "hasOptions": true,
+        "label": "Kubernetes Version",
+        "name": "K8S_VERSION",
+        "options": [
+          {
+            "value": "1.19"
+          },
+          {
+            "value": "1.20"
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.primary_vpc_id }",
+        "description": "The ID of the VPC where the cluster will be deployed (will be validated against available resources)",
+        "hasOptions": false,
+        "label": "Primary VPC ID",
+        "name": "VPC_ID",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.control_plane_subnet_ids }",
+        "description": "The subnet IDs (x2, comma-separated) for the EKS control plane (will be validated against available resources)",
+        "hasOptions": false,
+        "label": "Control Plane Subnet IDs",
+        "name": "CONTROL_PLANE_SUBNET_IDS",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.worker_node_subnet_id }",
+        "description": "The subnet ID for the EKS worker nodes (will be validated against available resources)",
+        "hasOptions": false,
+        "label": "Worker Node Subnet ID",
+        "name": "WORKER_NODE_SUBNET_ID",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.secondary_vpc_cidr }",
+        "description": "The secondary CIDR block for the VPC",
+        "hasOptions": false,
+        "label": "Secondary VPC CIDR",
+        "name": "SECONDARY_VPC_CIDR",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.node_instance_type }",
+        "description": "The instance type of the EKS worker nodes",
+        "hasOptions": true,
+        "label": "Node Instance Type",
+        "name": "NODE_INSTANCE_TYPE",
+        "options": [
+          {
+            "value": "c5.2xlarge"
+          },
+          {
+            "value": "m5.2xlarge"
+          },
+          {
+            "value": "m5a.2xlarge"
+          },
+          {
+            "value": "t3a.2xlarge"
+          },
+          {
+            "value": "t3.2xlarge"
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.disk_size }",
+        "description": "The disk size for the deployment, in GB",
+        "hasOptions": true,
+        "label": "Disk Size",
+        "name": "DISK_SIZE",
+        "options": [
+          {
+            "value": "20"
+          },
+          {
+            "value": "30"
+          },
+          {
+            "value": "40"
+          },
+          {
+            "value": "50"
+          },
+          {
+            "value": "60"
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.min_nodes }",
+        "description": "The minimum number of nodes in the cluster",
+        "hasOptions": true,
+        "label": "Min # of Nodes",
+        "name": "MIN_NODES",
+        "options": [
+          {
+            "value": "2"
+          },
+          {
+            "value": "4"
+          },
+          {
+            "value": "6"
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.max_nodes }",
+        "description": "The maximum number of nodes in the cluster",
+        "hasOptions": true,
+        "label": "Max # of Nodes",
+        "name": "MAX_NODES",
+        "options": [
+          {
+            "value": "10"
+          },
+          {
+            "value": "12"
+          },
+          {
+            "value": "14"
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.ssh_key_pair }",
+        "description": "The name of the SSH keypair for the instance, e.g. bnewidun01-key-pair",
+        "hasOptions": false,
+        "label": "SSH Keypair Name",
+        "name": "SSH_KEYPAIR_NAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.private_domain_name }",
+        "description": "The private domain name for the deployment e.g. idunaas.ericsson.se",
+        "hasOptions": false,
+        "label": "Private Domain Name",
+        "name": "PRIVATE_DN",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.install_kubedownscaler }",
+        "description": "Install Kubedownscaler on the EKS cluster",
+        "hasOptions": true,
+        "label": "Install Kube Downscaler?",
+        "name": "KUBEDOWNSCALER",
+        "options": [
+          {
+            "value": "True"
+          },
+          {
+            "value": "False"
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.iam_hostname }",
+        "description": "Hostname for the IAM service",
+        "hasOptions": false,
+        "label": "IAM Hostname",
+        "name": "IAM_HOSTNAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.pf_hostname }",
+        "description": "Hostname for the PF service",
+        "hasOptions": false,
+        "label": "PF Hostname",
+        "name": "PF_HOSTNAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.so_hostname }",
+        "description": "Hostname for the SO service",
+        "hasOptions": false,
+        "label": "SO Hostname",
+        "name": "SO_HOSTNAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.uds_hostname }",
+        "description": "Hostname for the UDS service",
+        "hasOptions": false,
+        "label": "UDS Hostname",
+        "name": "UDS_HOSTNAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.gas_hostname }",
+        "description": "Hostname for the GAS service",
+        "hasOptions": false,
+        "label": "GAS Hostname",
+        "name": "GAS_HOSTNAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.monitoring_hostname }",
+        "description": "Hostname for the monitoring service (prometheus)",
+        "hasOptions": false,
+        "label": "Monitoring hostname",
+        "name": "MONITORING_HOSTNAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.backup_server_instance_family }",
+        "description": "AWS Instance family for the backup server",
+        "hasOptions": false,
+        "label": "",
+        "name": "BACKUP_INSTANCE_TYPE",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.backup_server_ami_id }",
+        "description": "ID of the AMI on AWS for the backup server",
+        "hasOptions": false,
+        "label": "",
+        "name": "BACKUP_AMI_ID",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.backup_server_disk_capacity }",
+        "description": "Capacity of the disk for the backup server",
+        "hasOptions": false,
+        "label": "",
+        "name": "BACKUP_DISK",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "idunaas_backup_user_credentials",
+        "description": "Jenkins secret of the password to conncect to the backup service ",
+        "hasOptions": false,
+        "label": "",
+        "name": "BACKUP_PASS_SECRET",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.adc_hostname }",
+        "description": "",
+        "hasOptions": false,
+        "label": "",
+        "name": "ADC_HOSTNAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.appmgr_hostname }",
+        "description": "",
+        "hasOptions": false,
+        "label": "",
+        "name": "APPMGR_HOSTNAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.os_hostname }",
+        "description": "",
+        "hasOptions": false,
+        "label": "",
+        "name": "OS_HOSTNAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": false,
+        "required": false
+      },
+      {
+        "default": "${ var.disable_public_access }",
+        "description": "'True' for ECN conncected instances and 'False' for public account",
+        "hasOptions": true,
+        "label": "",
+        "name": "DISABLEPUBLICACCESS",
+        "options": [
+          {
+            "value": "True"
+          },
+          {
+            "value": "False"
+          }
+        ],
+        "pinned": false,
+        "required": false
+      }
+    ],
+    "spelEvaluator": "v4",
+    "stages": [
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "eiap_setup__gather_env_details",
+        "master": "${ var.jenkins_fem }",
+        "name": "Gather Env Details",
+        "parameters": {
+          "ADC_HOSTNAME": "${trigger['parameters']['ADC_HOSTNAME']}",
+          "APPMGR_HOSTNAME": "${trigger['parameters']['APPMGR_HOSTNAME']}",
+          "AWS_REGION": "${trigger['parameters']['AWS_REGION']}",
+          "BACKUP_AMI_ID": "${trigger['parameters']['BACKUP_AMI_ID']}",
+          "BACKUP_DISK": "${trigger['parameters']['BACKUP_DISK']}",
+          "BACKUP_INSTANCE_TYPE": "${trigger['parameters']['BACKUP_INSTANCE_TYPE']}",
+          "BACKUP_PASS_SECRET": "${trigger['parameters']['BACKUP_PASS_SECRET']}",
+          "CONTROL_PLANE_SUBNET_IDS": "${trigger['parameters']['CONTROL_PLANE_SUBNET_IDS']}",
+          "DISABLEPUBLICACCESS": "${trigger['parameters']['DISABLEPUBLICACCESS']}",
+          "DISK_SIZE": "${trigger['parameters']['DISK_SIZE']}",
+          "ENV_NAME": "${trigger['parameters']['ENV_NAME']}",
+          "GAS_HOSTNAME": "${trigger['parameters']['GAS_HOSTNAME']}",
+          "IAM_HOSTNAME": "${trigger['parameters']['IAM_HOSTNAME']}",
+          "K8S_VERSION": "${trigger['parameters']['K8S_VERSION']}",
+          "KUBEDOWNSCALER": "${trigger['parameters']['KUBEDOWNSCALER']}",
+          "MAX_NODES": "${trigger['parameters']['MAX_NODES']}",
+          "MIN_NODES": "${trigger['parameters']['MIN_NODES']}",
+          "MONITORING_HOSTNAME": "${trigger['parameters']['MONITORING_HOSTNAME']}",
+          "NODE_INSTANCE_TYPE": "${trigger['parameters']['NODE_INSTANCE_TYPE']}",
+          "OS_HOSTNAME": "${trigger['parameters']['OS_HOSTNAME']}",
+          "PF_HOSTNAME": "${trigger['parameters']['PF_HOSTNAME']}",
+          "PRIVATE_DN": "${trigger['parameters']['PRIVATE_DN']}",
+          "SECONDARY_VPC_CIDR": "${trigger['parameters']['SECONDARY_VPC_CIDR']}",
+          "SO_HOSTNAME": "${trigger['parameters']['SO_HOSTNAME']}",
+          "SSH_KEYPAIR_NAME": "${trigger['parameters']['SSH_KEYPAIR_NAME']}",
+          "UDS_HOSTNAME": "${trigger['parameters']['UDS_HOSTNAME']}",
+          "VPC_ID": "${trigger['parameters']['VPC_ID']}",
+          "WORKER_NODE_SUBNET_ID": "${trigger['parameters']['WORKER_NODE_SUBNET_ID']}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Gather_Env_Details",
+        "requisiteStageRefIds": [],
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "eiap_setup__presetup_checks",
+        "master": "${ var.jenkins_fem }",
+        "name": "Pre Setup Checks",
+        "parameters": {
+          "AWS_REGION": "${#stage(\"Gather Env Details\")[\"context\"][\"AWS_REGION\"]}",
+          "ENV_NAME": "${trigger['parameters']['ENV_NAME']}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "refId": "Pre_Setup_Checks",
+        "requisiteStageRefIds": [
+          "Gather_Env_Details"
+        ],
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "eiap_setup__push_images",
+        "master": "${ var.jenkins_fem }",
+        "name": "Push Images",
+        "parameters": {
+          "ENV_NAME": "${#stage(\"Gather Env Details\")[\"context\"][\"ENV_NAME\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "refId": "Push_Images",
+        "requisiteStageRefIds": [
+          "Pre_Setup_Checks"
+        ],
+        "type": "jenkins",
+        "stageEnabled": {
+          "expression": "#toBoolean(${#stage(\"Gather Env Details\")[\"context\"][\"DISABLEPUBLICACCESS\"]}) == false",
+          "type": "expression"
+        }
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "eiap_setup__setup_aws_cluster",
+        "master": "${ var.jenkins_fem }",
+        "name": "Setup Cluster",
+        "parameters": {
+          "ADC_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"ADC_HOSTNAME\"]}",
+          "APPMGR_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"APPMGR_HOSTNAME\"]}",
+          "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+          "AWS_REGION": "${#stage(\"Gather Env Details\")[\"context\"][\"AWS_REGION\"]}",
+          "BACKUP_AMI_ID": "${#stage(\"Gather Env Details\")[\"context\"][\"BACKUP_AMI_ID\"]}",
+          "BACKUP_DISK": "${#stage(\"Gather Env Details\")[\"context\"][\"BACKUP_DISK\"]}",
+          "BACKUP_INSTANCE_TYPE": "${#stage(\"Gather Env Details\")[\"context\"][\"BACKUP_INSTANCE_TYPE\"]}",
+          "BACKUP_PASS": "${#stage(\"Gather Env Details\")[\"context\"][\"BACKUP_PASS\"]}",
+          "CONTROL_PLANE_SUBNET_IDS": "${#stage(\"Gather Env Details\")[\"context\"][\"CONTROL_PLANE_SUBNET_IDS\"]}",
+          "DISABLEPUBLICACCESS": "${#stage(\"Gather Env Details\")[\"context\"][\"DISABLEPUBLICACCESS\"]}",
+          "DISK_SIZE": "${#stage(\"Gather Env Details\")[\"context\"][\"DISK_SIZE\"]}",
+          "ENV_NAME": "${#stage(\"Gather Env Details\")[\"context\"][\"ENV_NAME\"]}",
+          "FUNCTIONAL_USER_SECRET": "${ var.functional_user_secret }",
+          "GAS_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"GAS_HOSTNAME\"]}",
+          "IAM_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"IAM_HOSTNAME\"]}",
+          "K8S_VERSION": "${#stage(\"Gather Env Details\")[\"context\"][\"K8S_VERSION\"]}",
+          "KUBEDOWNSCALER": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBEDOWNSCALER\"]}",
+          "MAX_NODES": "${#stage(\"Gather Env Details\")[\"context\"][\"MAX_NODES\"]}",
+          "MIN_NODES": "${#stage(\"Gather Env Details\")[\"context\"][\"MIN_NODES\"]}",
+          "MONITORING_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"MONITORING_HOSTNAME\"]}",
+          "NODE_INSTANCE_TYPE": "${#stage(\"Gather Env Details\")[\"context\"][\"NODE_INSTANCE_TYPE\"]}",
+          "OS_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"OS_HOSTNAME\"]}",
+          "PF_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"PF_HOSTNAME\"]}",
+          "PRIVATE_DN": "${#stage(\"Gather Env Details\")[\"context\"][\"PRIVATE_DN\"]}",
+          "SECONDARY_VPC_CIDR": "${#stage(\"Gather Env Details\")[\"context\"][\"SECONDARY_VPC_CIDR\"]}",
+          "SO_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"SO_HOSTNAME\"]}",
+          "SSH_KEYPAIR_NAME": "${#stage(\"Gather Env Details\")[\"context\"][\"SSH_KEYPAIR_NAME\"]}",
+          "UDS_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"UDS_HOSTNAME\"]}",
+          "VPC_ID": "${#stage(\"Gather Env Details\")[\"context\"][\"VPC_ID\"]}",
+          "WORKER_NODE_SUBNET_ID": "${#stage(\"Gather Env Details\")[\"context\"][\"WORKER_NODE_SUBNET_ID\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "refId": "Setup_Cluster",
+        "requisiteStageRefIds": [
+          "Push_Images"
+        ],
+        "type": "jenkins"
+      }
+    ],
+    "triggers": []
+  }
+
+}

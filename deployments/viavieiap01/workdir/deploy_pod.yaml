@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: deploymentmanager
+  labels:
+    app: deploymentmanager
+spec:
+  containers:
+  - name: deploymentmanager
+    image: 778040205325.dkr.ecr.eu-west-1.amazonaws.com/proj-eric-oss-drop/eric-oss-deployment-manager:latest
+    command: [/bin/sleep, 3650d]
+    imagePullPolicy: IfNotPresent
+  imagePullSecrets:
+  - name: k8s-registry-secret
+  restartPolicy: Always

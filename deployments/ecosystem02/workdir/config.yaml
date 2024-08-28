@@ -1,0 +1,31 @@
+EnvironmentName: ecosystem02
+AWSRegion: eu-west-1
+VPCID: vpc-070310ec610bce3cc
+ControlPlaneSubnetIds: subnet-0dfca5ffaceff90c5,subnet-0cbf2ed9f60a621e4
+WorkerNodeSubnetIds: subnet-0dfca5ffaceff90c5
+SecondaryVpcCIDR: 172.16.8.0/21
+DisablePublicAccess: False
+NodeInstanceType: m5.4xlarge
+DiskSize: 80
+MinNodes: 2
+MaxNodes: 10
+SshKeyPairName: ecosystem02-keypair
+PrivateDomainName: ecosystem02.idunaas.ericsson.se
+K8SVersion: '1.24'
+KubeDownscaler: True
+BackupInstanceType: t3.medium
+BackupAmiId: ami-020dc16c3d388b597
+BackupDisk: 80
+BackupPass: shroot12
+Hostnames:
+  iam: iam.ecosystem02.idunaas.ericsson.se
+  pf: pf.ecosystem02.idunaas.ericsson.se
+  so: so.ecosystem02.idunaas.ericsson.se
+  uds: uds.ecosystem02.idunaas.ericsson.se
+  gas: gas.ecosystem02.idunaas.ericsson.se
+  adc: adc.ecosystem02.idunaas.ericsson.se
+  appmgr: appmgr.ecosystem02.idunaas.ericsson.se
+  os: os.ecosystem02.idunaas.ericsson.se
+  th: th.ecosystem02.idunaas.ericsson.se
+  dashboard: monitoring.ecosystem02.idunaas.ericsson.se
+  prometheus: prometheus.ecosystem02.idunaas.ericsson.se

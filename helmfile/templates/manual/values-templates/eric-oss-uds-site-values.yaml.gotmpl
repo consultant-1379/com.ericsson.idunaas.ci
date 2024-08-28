@@ -1,0 +1,13 @@
+global:
+  iam:
+    clientId: {{ .Values | get "global.iam.clientId" }}
+    adminSecret: {{ .Values | get "global.iam.adminSecret" }}
+    userKey: {{ .Values | get "global.iam.userKey" }}
+    passwordKey: {{ .Values | get "global.iam.passwordKey" }}
+  hosts:
+    uds: {{ .Values | get "global.hosts.uds" }}
+    iam: {{ .Values | get "global.hosts.iam" }}
+
+defaultUser:
+  username: {{ .Values | get "eric-oss-uds.defaultUser.username" }}
+  password: {{ .Values | get "eric-oss-uds.defaultUser.password" }}

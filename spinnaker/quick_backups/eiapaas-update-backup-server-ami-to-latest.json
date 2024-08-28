@@ -1,0 +1,105 @@
+{
+  "keepWaitingPipelines": false,
+  "lastModifiedBy": "zcapett",
+  "limitConcurrent": true,
+  "parameterConfig": [
+    {
+      "default": "idunaasdev01",
+      "description": "Name of the Environment to upgrade",
+      "hasOptions": false,
+      "label": "",
+      "name": "ENV_NAME",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "8",
+      "description": "The version of Red Hat Enterprise to use in the backup server (a customized version of Ericsson)",
+      "hasOptions": false,
+      "label": "",
+      "name": "RHEL_VERSION",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    }
+  ],
+  "schema": "1",
+  "spelEvaluator": "v4",
+  "stages": [
+    {
+      "continuePipeline": false,
+      "failPipeline": true,
+      "job": "ami_update__prechecks",
+      "master": "oss-aeonic-fem2s11",
+      "name": "ami update prechecks",
+      "parameters": {
+        "ENV_NAME": "${trigger['parameters']['ENV_NAME']}",
+        "RHEL_VERSION": "${trigger['parameters']['RHEL_VERSION']}"
+      },
+      "propertyFile": "artifact.properties",
+      "refId": "1",
+      "requisiteStageRefIds": [],
+      "type": "jenkins"
+    },
+    {
+      "application": "idunaas",
+      "failPipeline": true,
+      "name": "run update-ami pipeline",
+      "pipeline": "0a1998db-8782-498a-965f-31586c109a7a",
+      "pipelineParameters": {
+        "AMI_ID": "${AMI_ID}",
+        "ENV_NAME": "${trigger['parameters']['ENV_NAME']}",
+        "IS_SHARED_ENV": "${IS_SHARED_ENV}",
+        "SHARED_ENV_NAME": "${SHARED_ENV_NAME}"
+      },
+      "refId": "2",
+      "requisiteStageRefIds": [
+        "3"
+      ],
+      "stageEnabled": {
+        "expression": "\"${RUN_AMI_UPGRADE}\" == \"true\"",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "failOnFailedExpressions": true,
+      "name": "condition",
+      "refId": "3",
+      "requisiteStageRefIds": [
+        "1"
+      ],
+      "type": "evaluateVariables",
+      "variables": [
+        {
+          "key": "RUN_AMI_UPGRADE",
+          "value": "${#stage(\"ami update prechecks\")[\"context\"][\"CURRENT_BACKUP_AMI_ID\"] != #stage(\"ami update prechecks\")[\"context\"][\"LATEST_RHEL_AMI_ID\"] ? \"true\" : \"false\"}"
+        },
+        {
+          "key": "AMI_ID",
+          "value": "${#stage(\"ami update prechecks\")[\"context\"][\"LATEST_RHEL_AMI_ID\"]}"
+        },
+        {
+          "key": "IS_SHARED_ENV",
+          "value": "${#stage(\"ami update prechecks\")[\"context\"][\"OTHER_ENV\"] != \"\" ? \"Y\" : \"N\"}"
+        },
+        {
+          "key": "SHARED_ENV_NAME",
+          "value": "${#stage(\"ami update prechecks\")[\"context\"][\"OTHER_ENV\"]}"
+        }
+      ]
+    }
+  ],
+  "triggers": [],
+  "updateTs": "1678965390479"
+}

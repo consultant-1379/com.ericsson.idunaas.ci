@@ -1,0 +1,34 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMvakNDQWVhZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJek1ESXlNakV6TVRJeE1Gb1hEVE16TURJeE9URXpNVEl4TUZvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTVhBCjQxcVcweklLZzErb1JTbUVjMWRkN3dXL1hucVYrc0tlTjlLR0JGNXV2YXFFOXY1NGdwOWZYVUd3U3JDTmswV1UKZWc4Sjc3RkE4R0J2cWZzMFVlSFdENEJQMFNQWWZOY3I0UkxuQnQ4SXpLRTl2V3hLTUU0TmYxQlh6a0NLZFkycwpNS3BVbExVcXBFVlFnMjlIblhVR0R2Rm43aXFvcTV5Wm9UTHVRV2V4T0YwV3d4TjM2eEUvVXkxYWJVOHNzRlVMCjlDNnMxalY2ODR3VXlJbTJQK0xUY0NVdzBRb1dXYThteUhTWkVtYVNlWGE4VVRtNWhJYUphZVBURWozRit6Z0cKaEdMZUlIVEpwSEpaQTY2UkJ5UlNFZHJxMjdVZGs5dE00cHV3Ylh6YWVxSUlPVy94ZmtuMm1LVjBjejl6VHhWMgpVN1lTMHVKMDIvNHUwRGtYZG1VQ0F3RUFBYU5aTUZjd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZLYnFaTy9Nc2V2Z2tJbVNLdEppcC9HL255dXRNQlVHQTFVZEVRUU8KTUF5Q0NtdDFZbVZ5Ym1WMFpYTXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBQzhtR01KdkZ2N2hJY2NOYmxJSwpMMjgxVTk1ODJVNzlVeXlBZFBXV2tmbjZaaHJOUlRKalE4MEpsK050MEF3VkpaM2pRMUhRdkZMWlNzRnNPTUtlCjdXZnlROHA3RzlodThQR0xFV25uLzhVeHdsWWxuejIxWWVhdndMaU9FRzZLWVN0K3lrRnM4NVZCOEZJVVU5U2cKbWpIaFA0MFluT1NzZkRxYnpyTDcyVnA2S20vem5vRXd2MHo1MzBWdk1xWkMwSDdzTTlISFcxVitDSEtYMnN3YQoxZy9sMEExTkh0MmRRcm5weENUaXRLYXAyemxkdVM5emxldzFUSlVlbjRDa1VyL09sZTR4dG00ckpoMVNwd0VCClJrejNuMCs4YnhaZ214Rys2V2UwUVIwRm1Ka25Mbk9oRGRPY0doZTVZeHh0Z21ZaTQrNTY3WFRyZnkyckZpRy8KRzNzPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    server: https://05363FFFA19DDAF25C08BA43D9E8BE60.yl4.us-east-1.eks.amazonaws.com
+  name: arn:aws:eks:us-east-1:236811837820:cluster/openlab02-EKS-Cluster
+contexts:
+- context:
+    cluster: arn:aws:eks:us-east-1:236811837820:cluster/openlab02-EKS-Cluster
+    user: arn:aws:eks:us-east-1:236811837820:cluster/openlab02-EKS-Cluster
+  name: arn:aws:eks:us-east-1:236811837820:cluster/openlab02-EKS-Cluster
+current-context: arn:aws:eks:us-east-1:236811837820:cluster/openlab02-EKS-Cluster
+kind: Config
+preferences: {}
+users:
+- name: arn:aws:eks:us-east-1:236811837820:cluster/openlab02-EKS-Cluster
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1beta1
+      args:
+      - --region
+      - us-east-1
+      - eks
+      - get-token
+      - --cluster-name
+      - openlab02-EKS-Cluster
+      command: /usr/local/bin/aws
+      env:
+      - name: AWS_PROFILE
+        value: default
+      - name: AWS_CONFIG_FILE
+        value: /workdir/aws/config
+      - name: AWS_SHARED_CREDENTIALS_FILE
+        value: /workdir/aws/credentials

@@ -1,0 +1,17 @@
+global:
+  iam:
+    clientId: {{ .Values | get "global.iam.clientId" }}
+  hosts:
+    so: {{ .Values | get "global.hosts.so" }}
+    iam: {{ .Values | get "global.hosts.iam" }}
+  registry:
+    url: {{ .Values | get "global.registry.url" }}
+    username: {{ .Values | get "global.registry.username" }}
+    password: {{ .Values | get "global.registry.password" }}
+  security:
+    tls:
+      enabled: false
+
+defaultUser:
+  username: {{ .Values | get "eric-eo-so.defaultUser.username" }}
+  password: {{ .Values | get "eric-eo-so.defaultUser.password" }}

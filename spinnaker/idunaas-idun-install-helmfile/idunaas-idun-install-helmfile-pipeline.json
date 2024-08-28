@@ -1,0 +1,57 @@
+{
+  "schema": "v2",
+  "application": "${ var.application_idunaas }",
+  "name": "idunaas-idun-install-helmfile-pipeline",
+  "description": "idunaas-idun-install-helmfile-pipeline, which inherits from the idunaas-idun-install-helmfile-template",
+  "template": {
+    "artifactAccount": "front50ArtifactCredentials",
+    "reference": "spinnaker://idunaas-idun-install-helmfile-template:latest",
+    "type": "front50/pipelineTemplate"
+  },
+  "parameters": [
+    {
+      "default": "idunaasdev01",
+      "description": "Name of the Environment to backup",
+      "hasOptions": false,
+      "label": "",
+      "name": "ENVIRONMENT_NAME",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    }
+  ],
+  "stages": [
+    {
+      "inject": {
+        "after": [
+          "Post_Install"
+        ]
+      },
+      "continuePipeline": false,
+      "failPipeline": true,
+      "job": "idunaas_subsystemsConnect",
+      "master": "${ var.jenkins_fem }",
+      "name": "Subsystem Integration",
+      "parameters": {
+        "IDUN_USER_SECRET": "${ var.idun_user_secret }",
+        "PATH_TO_ENM_CONFIG": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_ENM_CONFIG\"]}",
+        "PATH_TO_EOCM_CONFIG": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_EOCM_CONFIG\"]}",
+        "SO_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_SO_HOSTNAME\"]}",
+        "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+      },
+      "refId": "Subsystem_Integration",
+      "requisiteStageRefIds": [
+        "Post_Install"
+      ],
+      "stageEnabled": {
+        "expression": "\"${ execution.trigger.parameters[\"ENVIRONMENT_NAME\"] }\" == \"bnewidun01\" or \"${ execution.trigger.parameters[\"ENVIRONMENT_NAME\"] }\" == \"bnewidun02\" or \"${ execution.trigger.parameters[\"ENVIRONMENT_NAME\"] }\" == \"bnewidun03\" or \"${ execution.trigger.parameters[\"ENVIRONMENT_NAME\"] }\" == \"ossautoapp01\"",
+        "type": "expression"
+      },
+      "type": "jenkins"
+    }
+  ]
+}

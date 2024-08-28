@@ -1,0 +1,447 @@
+{
+  "schema": "v2",
+  "variables": [
+    {
+      "type": "boolean",
+      "defaultValue": false,
+      "description": "Disable concurrency",
+      "name": "disable_concurrency"
+    }
+  ],
+  "id": "idunaas-idun-upgrade-rollback-helmfile-template",
+  "protect": false,
+  "metadata": {
+    "description": "Parent Template for idunaas-idun-upgrade-rollback-helmfile-pipeline and idunaas-idun-upgrade-rollback-helmfile-public-pipeline",
+    "name": "idunaas-idun-upgrade-rollback-helmfile-template",
+    "owner": "idunaas",
+    "scopes": [
+      "${ var.application_idunaas }"
+    ]
+  },
+  "pipeline": {
+    "keepWaitingPipelines": true,
+    "lastModifiedBy": "zlaigar",
+    "limitConcurrent": "${ templateVariables.disable_concurrency }",
+    "notifications": [],
+    "parameterConfig": [
+      {
+        "default": "${ var.int_chart_version }",
+        "description": "Chart Version to Upgrade to. LATEST will get latest version",
+        "hasOptions": false,
+        "label": "",
+        "name": "CHART_VERSION",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.so_deploy }",
+        "description": "SO Deploy, set true or false",
+        "hasOptions": true,
+        "label": "",
+        "name": "SO_DEPLOY",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.uds_deploy }",
+        "description": "UDS Deploy, set true or false",
+        "hasOptions": true,
+        "label": "",
+        "name": "UDS_DEPLOY",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.pf_deploy }",
+        "description": "PF Deploy, set true or false",
+        "hasOptions": true,
+        "label": "",
+        "name": "PF_DEPLOY",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.platform_deploy }",
+        "description": "Platform Deploy, set true or false",
+        "hasOptions": true,
+        "label": "",
+        "name": "PLATFORM_DEPLOY",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.helm_chart_repo_name }",
+        "description": "Helm Chart Repository name",
+        "hasOptions": false,
+        "label": "",
+        "name": "HELM_REPOSITORY_NAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.int_chart_name }",
+        "description": "Integration Chart Name",
+        "hasOptions": false,
+        "label": "",
+        "name": "INT_CHART_NAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.int_chart_repo }",
+        "description": "Integration Chart Repo",
+        "hasOptions": false,
+        "label": "",
+        "name": "INT_CHART_REPO",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.idun_user_secret }",
+        "description": "Idun User Credentials",
+        "hasOptions": false,
+        "label": "",
+        "name": "IDUN_USER_SECRET",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      }
+    ],
+    "spelEvaluator": "v4",
+    "stages": [
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "OSS-Integration-Retrieve-Environment-Details",
+        "master": "${ var.jenkins_maintrack_fem }",
+        "name": "Gather Env Details",
+        "parameters": {
+          "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Gather_Env_Details",
+        "requisiteStageRefIds": [],
+        "restrictExecutionDuringTimeWindow": false,
+        "restrictedExecutionWindow": {
+          "jitter": {
+            "enabled": false,
+            "maxDelay": 600,
+            "minDelay": 0,
+            "skipManual": false
+          },
+          "whitelist": []
+        },
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "idunaas_get_installed_chart",
+        "master": "${ var.jenkins_fem }",
+        "name": "Get Installed Chart",
+        "parameters": {
+          "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+          "IAM_AUTHENTICATOR": "${#stage(\"Gather Env Details\")[\"context\"][\"IAM_AUTHENTICATOR\"]}",
+          "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+          "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+          "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Get_Installed_Chart",
+        "requisiteStageRefIds": [
+          "Gather_Env_Details"
+        ],
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "idunaas_get_latest_helmfile",
+        "master": "${ var.jenkins_fem }",
+        "name": "Get Chart Version",
+        "parameters": {
+          "FUNCTIONAL_USER_SECRET": "${ var.functional_user_secret }",
+          "INT_CHART_NAME": "${trigger['parameters']['INT_CHART_NAME']}",
+          "INT_CHART_REPO": "${trigger['parameters']['INT_CHART_REPO']}",
+          "INT_CHART_VERSION": "${trigger['parameters']['CHART_VERSION']}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Get_Chart_Version",
+        "requisiteStageRefIds": [
+          "Get_Installed_Chart"
+        ],
+        "restrictExecutionDuringTimeWindow": false,
+        "restrictedExecutionWindow": {
+          "whitelist": []
+        },
+        "type": "jenkins"
+      },
+      {
+        "comments": "This stage checks to see if the installed chart version in this specific environment and the chart version we are going to upgrade to are the same version. \nIf they are the same version, then halt the pipeline, no need to proceed and do not fail the pipeline.\nIf they are not the same version, then proceed with the upgrade.",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": false,
+        "failPipeline": true,
+        "name": "Proceed with upgrade",
+        "preconditions": [
+          {
+            "context": {
+              "expression": "\"${#stage(\"Get Installed Chart\")[\"context\"][\"INSTALLED_CHART_VERSION\"]}\" != \"${#stage(\"Get Chart Version\")[\"context\"][\"INT_CHART_VERSION\"]}\""
+            },
+            "failPipeline": false,
+            "type": "expression"
+          }
+        ],
+        "refId": "Proceed_with_upgrade",
+        "requisiteStageRefIds": [
+          "Get_Chart_Version"
+        ],
+        "type": "checkPreconditions"
+      },
+      {
+        "failOnFailedExpressions": true,
+        "name": "Pre-Append Submodule Path",
+        "refId": "Pre_Append_Submodule_Path",
+        "requisiteStageRefIds": [
+          "Proceed_with_upgrade"
+        ],
+        "stageEnabled": {
+          "expression": "false",
+          "type": "expression"
+        },
+        "type": "evaluateVariables",
+        "variables": [
+          {
+            "key": "PATH_TO_AWS_FILES",
+            "value": "${ var.submodule_path }/${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}"
+          },
+          {
+            "key": "PATH_TO_SITE_VALUES_OVERRIDE_FILE",
+            "value": "${ var.submodule_path }/${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_SITE_VALUES\"]}"
+          },
+          {
+            "key": "PATH_TO_CERTIFICATES_FILES",
+            "value": "${ var.submodule_path }/${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_CERTIFICATES_FILES\"]}"
+          },
+          {
+            "key": "KUBECONFIG_FILE",
+            "value": "${trigger['parameters']['ENVIRONMENT_NAME']}_kubeconfig"
+          }
+        ]
+      },
+      {
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "job": "idunaas_deploy_helmfile",
+        "master": "${ var.jenkins_fem }",
+        "name": "Upgrade",
+        "parameters": {
+          "ADC_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"ADC_HOSTNAME\"]}",
+          "APPMGR_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"APPMGR_HOSTNAME\"]}",
+          "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+          "DOCKER_REGISTRY": "${#stage(\"Gather Env Details\")[\"context\"][\"DOCKER_REGISTRY\"]}",
+          "FUNCTIONAL_USER_SECRET": "${ var.functional_user_secret }",
+          "GAS_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_GAS_HOSTNAME\"]}",
+          "HELM_TIMEOUT": "3600",
+          "IAM_AUTHENTICATOR": "${#stage(\"Gather Env Details\")[\"context\"][\"IAM_AUTHENTICATOR\"]}",
+          "IAM_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"IAM_HOSTNAME\"]}",
+          "IDUN_USER_SECRET": "${ var.idun_user_secret }",
+          "INT_CHART_NAME": "${trigger['parameters']['INT_CHART_NAME']}",
+          "INT_CHART_REPO": "${trigger['parameters']['INT_CHART_REPO']}",
+          "INT_CHART_VERSION": "${#stage(\"Get Chart Version\")[\"context\"][\"INT_CHART_VERSION\"]}",
+          "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+          "OS_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"OS_HOSTNAME\"]}",
+          "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+          "PATH_TO_CERTIFICATES_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_CERTIFICATES_FILES\"]}",
+          "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+          "PATH_TO_SITE_VALUES_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_SITE_VALUES\"]}",
+          "PF_DEPLOY": "${trigger['parameters']['PF_DEPLOY']}",
+          "PF_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_PF_HOSTNAME\"]}",
+          "PLATFORM_DEPLOY": "${trigger['parameters']['PLATFORM_DEPLOY']}",
+          "SO_DEPLOY": "${trigger['parameters']['SO_DEPLOY']}",
+          "SO_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_SO_HOSTNAME\"]}",
+          "TAGS": "${#stage(\"Gather Env Details\")[\"context\"][\"TAGS\"]}",
+          "UDS_DEPLOY": "${trigger['parameters']['UDS_DEPLOY']}",
+          "UDS_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_UDS_HOSTNAME\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "refId": "Upgrade",
+        "requisiteStageRefIds": [
+          "Pre_Append_Submodule_Path"
+        ],
+        "restrictExecutionDuringTimeWindow": false,
+        "restrictedExecutionWindow": {
+          "whitelist": []
+        },
+        "stageTimeoutMs": 5400000,
+        "type": "jenkins"
+      },
+      {
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "job": "idunaas_check_rollback_need_helmfile",
+        "master": "${ var.jenkins_fem }",
+        "name": "Check Rollback Need",
+        "parameters": {
+          "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+          "FUNCTIONAL_USER_SECRET": "${ var.functional_user_secret }",
+          "IDUN_USER_SECRET": "${ var.idun_user_secret }",
+          "INT_CHART_NAME": "${trigger['parameters']['INT_CHART_NAME']}",
+          "INT_CHART_REPO": "${trigger['parameters']['INT_CHART_REPO']}",
+          "INT_CHART_VERSION": "${#stage(\"Get Installed Chart\")[\"context\"][\"INSTALLED_CHART_VERSION\"]}",
+          "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+          "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+          "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+          "PATH_TO_SITE_VALUES_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_SITE_VALUES\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Check_Rollback_Need",
+        "requisiteStageRefIds": [
+          "Upgrade"
+        ],
+        "type": "jenkins"
+      },
+      {
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "job": "idunaas_healthCheck",
+        "master": "${ var.jenkins_fem }",
+        "name": "Health Check",
+        "parameters": {
+          "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+          "DEPLOYMENT_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}",
+          "IAM_AUTHENTICATOR": "${#stage(\"Gather Env Details\")[\"context\"][\"IAM_AUTHENTICATOR\"]}",
+          "IDUN_USER_SECRET": "${ var.idun_user_secret }",
+          "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+          "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+          "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+          "URL_VALUE": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_PF_HOSTNAME\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "refId": "Health_Check",
+        "requisiteStageRefIds": [
+          "Check_Rollback_Need"
+        ],
+        "type": "jenkins"
+      },
+      {
+        "application": "${ var.application_idunaas }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "Resume Kube Downscaler",
+        "pipeline":"${ var.kube_downscaler_pause_resume_pipeline }",
+        "pipelineParameters": {
+          "ACTION": "resume",
+          "ENVIRONMENT_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}"
+        },
+        "refId": "Resume_Kube_Downscaler",
+        "requisiteStageRefIds": [
+          "Health_Check"
+        ],
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "OSS-Integration-Update-Environment-Details",
+        "master": "${ var.jenkins_maintrack_fem }",
+        "name": "Update Latest Chart Version to RPT",
+        "parameters": {
+          "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}",
+          "version": "${#stage(\"Get Chart Version\")[\"context\"][\"INT_CHART_VERSION\"]}"
+        },
+        "refId": "Update_Latest_Chart_Version_to_RPT",
+        "requisiteStageRefIds": [
+          "Resume_Kube_Downscaler"
+        ],
+        "stageEnabled": {
+          "expression": "\"${#stage('Upgrade')['status']}\" == \"SUCCEEDED\"",
+          "type": "expression"
+        },
+        "type": "jenkins"
+      },
+      {
+        "name": "Flow Completion",
+        "preconditions": [
+          {
+            "context": {
+              "expression": "\"${#stage('Upgrade')['status']}\" == \"SUCCEEDED\" and \"${#stage(\"Check Rollback Need\")[\"context\"][\"ROLLBACK_REQUIRED\"]}\" == \"false\" and \"${#stage('Rollback')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          }
+        ],
+        "refId": "Flow_Completion",
+        "requisiteStageRefIds": [
+          "Update_Latest_Chart_Version_to_RPT"
+        ],
+        "type": "checkPreconditions"
+      }
+    ],
+    "triggers": []
+  }
+}

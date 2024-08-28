@@ -1,0 +1,191 @@
+{
+  "schema": "v2",
+  "application": "${ var.application_idunaas }",
+  "name": "idunaas-idun-upgrade-rollback-helmfile-pipeline",
+  "description": "idunaas-idun-upgrade-rollback-helmfile-pipeline, which inherits from the idunaas-idun-upgrade-rollback-helmfile-template",
+  "template": {
+    "artifactAccount": "front50ArtifactCredentials",
+    "reference": "spinnaker://idunaas-idun-upgrade-rollback-helmfile-template:latest",
+    "type": "front50/pipelineTemplate"
+  },
+  "parameters": [
+    {
+      "default": "idunaasdev01",
+      "description": "Name of the Environment to backup",
+      "hasOptions": false,
+      "label": "",
+      "name": "ENVIRONMENT_NAME",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    }
+  ],
+  "stages": [
+    {
+      "inject": {
+        "after": [
+          "Proceed_with_upgrade"
+        ]
+      },
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failPipeline": true,
+      "job": "IDUNaaS_Perform_Backup",
+      "master": "${ var.jenkins_fem }",
+      "name": "Pre Upgrade Backup",
+      "parameters": {
+        "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+        "BACKUP_SERVER": "${#stage(\"Gather Env Details\")[\"context\"][\"BACKUP_SERVER\"]}",
+        "BACKUP_USER_SECRET": "${ var.backup_user_secret }",
+        "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}",
+        "FUNCTIONAL_USER_SECRET": "${ var.functional_user_secret }",
+        "IAM_AUTHENTICATOR": "${#stage(\"Gather Env Details\")[\"context\"][\"IAM_AUTHENTICATOR\"]}",
+        "IDUN_USER_SECRET": "${ var.idun_user_secret }",
+        "INT_CHART_VERSION": "${#stage(\"Get Chart Version\")[\"context\"][\"INT_CHART_VERSION\"]}",
+        "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+        "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+        "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+        "PATH_TO_SITE_VALUES_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_SITE_VALUES\"]}",
+        "SO_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_SO_HOSTNAME\"]}",
+        "TAGS": "${#stage(\"Gather Env Details\")[\"context\"][\"TAGS\"]}",
+        "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+      },
+      "refId": "Pre_Upgrade_Backup",
+      "requisiteStageRefIds": [
+        "Proceed_with_upgrade"
+      ],
+      "type": "jenkins"
+    },
+    {
+      "inject": {
+        "after": [
+          "Pre_Upgrade_Backup"
+        ]
+      },
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": true,
+      "failPipeline": false,
+      "job": "idunaas_pause_resume_grafana_alerts",
+      "master": "${ var.jenkins_fem }",
+      "name": "Pause Grafana Overall Monitoring Alert",
+      "parameters": {
+        "DEPLOYMENT_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}",
+        "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+      },
+      "refId": "Pause_Grafana_Overall_Monitoring_Alert",
+      "requisiteStageRefIds": [
+        "Pre_Upgrade_Backup"
+      ],
+      "type": "jenkins"
+    },
+    {
+      "inject": {
+        "after": [
+          "Check_Rollback_Need"
+        ]
+      },
+      "application": "${ var.application_idunaas }",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": true,
+      "failPipeline": false,
+      "name": "Rollback",
+      "pipeline": "${ var.rollback_pipeline }",
+      "pipelineParameters": {
+        "ENVIRONMENT_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}",
+        "INT_CHART_VERSION": "${#stage(\"Get Installed Chart\")[\"context\"][\"INSTALLED_CHART_VERSION\"]}"
+      },
+      "refId": "Rollback",
+      "requisiteStageRefIds": [
+        "Check_Rollback_Need"
+      ],
+      "stageEnabled": {
+        "expression": "\"${#stage('Check Rollback Need')['status']}\" == \"SUCCEEDED\" and \"${#stage(\"Check Rollback Need\")[\"context\"][\"ROLLBACK_REQUIRED\"]}\" == \"true\"",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "inject": {
+        "after": [
+          "Rollback"
+        ]
+      },
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": true,
+      "failPipeline": false,
+      "job": "idunaas_uds_backend_job_wait",
+      "master": "${ var.jenkins_fem }",
+      "name": "UDS Job Wait",
+      "parameters": {
+        "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+        "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+        "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+        "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+        "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+      },
+      "refId": "UDS_Job_Wait",
+      "requisiteStageRefIds": [
+        "Rollback"
+      ],
+      "stageEnabled": {
+        "expression": "(\"${#stage('Upgrade')['status']}\" == \"SUCCEEDED\" and \"${#stage(\"Check Rollback Need\")[\"context\"][\"ROLLBACK_REQUIRED\"]}\" == \"false\" and \"${#stage('Rollback')['status']}\" == \"SKIPPED\") or (\"${#stage('Upgrade')['status']}\" == \"SUCCEEDED\" and \"${#stage(\"Check Rollback Need\")[\"context\"][\"ROLLBACK_REQUIRED\"]}\" == \"true\" and \"${#stage('Rollback')['status']}\" == \"SUCCEEDED\") or (\"${#stage('Upgrade')['status']}\" == \"FAILED CONTINUE\" and \"${#stage(\"Check Rollback Need\")[\"context\"][\"ROLLBACK_REQUIRED\"]}\" == \"true\" and \"${#stage('Rollback')['status']}\" == \"SUCCEEDED\") or (\"${#stage('Upgrade')['status']}\" == \"FAILED\" and \"${#stage(\"Check Rollback Need\")[\"context\"][\"ROLLBACK_REQUIRED\"]}\" == \"true\" and \"${#stage('Rollback')['status']}\" == \"SUCCEEDED\")",
+        "type": "expression"
+      },
+      "type": "jenkins"
+    },
+    {
+      "inject": {
+        "after": [
+          "Health_Check"
+        ]
+      },
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": true,
+      "failPipeline": false,
+      "job": "idunaas_pause_resume_grafana_alerts",
+      "master": "${ var.jenkins_fem }",
+      "name": "Resume Grafana Overall Monitoring Alert",
+      "parameters": {
+        "ACTION": "resume",
+        "DEPLOYMENT_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}",
+        "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+      },
+      "refId": "Resume_Grafana_Overall_Monitoring_Alert",
+      "requisiteStageRefIds": [
+        "Health_Check"
+      ],
+      "type": "jenkins"
+    },
+    {
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": true,
+      "customHeaders": {
+        "content-type": "application/json"
+      },
+      "failPipeline": false,
+      "method": "POST",
+      "name": "Webhook",
+      "payload": {
+        "parameters": {
+          "CANARY_TYPE": "CANARY_UPGRADE"
+        }
+      },
+      "refId": "Webhook",
+      "requisiteStageRefIds": [
+        "UDS_Job_Wait"
+      ],
+      "stageEnabled": {
+        "expression": "\"${trigger['parameters']['ENVIRONMENT_NAME']}\" == \"bnewidun01\" and \"${#stage('UDS Job Wait')['status']}\" == \"SUCCEEDED\"",
+        "type": "expression"
+      },
+      "statusUrlResolution": "getMethod",
+      "type": "webhook",
+      "url": "${ var.webhook_url }"
+    }
+  ]
+}

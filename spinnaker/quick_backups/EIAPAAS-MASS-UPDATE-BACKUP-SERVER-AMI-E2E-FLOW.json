@@ -1,0 +1,453 @@
+{
+  "appConfig": {},
+  "keepWaitingPipelines": true,
+  "lastModifiedBy": "zcapett",
+  "limitConcurrent": true,
+  "parameterConfig": [
+    {
+      "default": "8",
+      "description": "The version of Red Hat Enterprise to use in the backup server (a customized version of Ericsson)",
+      "hasOptions": false,
+      "label": "",
+      "name": "RHEL_VERSION",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "false",
+      "description": "To skip the upgrade of idunaasdev01 and idunaasdev02 deployment",
+      "hasOptions": false,
+      "label": "",
+      "name": "SKIP_DEV",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "false",
+      "description": "To skip the upgrade of ossautoapp01 deployment",
+      "hasOptions": false,
+      "label": "",
+      "name": "SKIP_OSSAUTOAPP01",
+      "options": [
+        {
+          "value": "true"
+        },
+        {
+          "value": "false"
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "false",
+      "description": "To skip the upgrade of bmasidun01 deployment",
+      "hasOptions": false,
+      "label": "",
+      "name": "SKIP_BMASIDUN01",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "false",
+      "description": "To skip the upgrade of ernidun01 deployment",
+      "hasOptions": false,
+      "label": "",
+      "name": "SKIP_BNEW03",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "false",
+      "description": "To skip the upgrade of bnewidun01 and bnewidun05 deployment",
+      "hasOptions": false,
+      "label": "",
+      "name": "SKIP_BNEWIDUN_01_05",
+      "options": [
+        {
+          "value": "true"
+        },
+        {
+          "value": "false"
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "false",
+      "description": "To skip the upgrade of bnewidun02 deployment",
+      "hasOptions": false,
+      "label": "",
+      "name": "SKIP_BNEWIDUN02",
+      "options": [
+        {
+          "value": "true"
+        },
+        {
+          "value": "false"
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "false",
+      "description": "To skip the upgrade of ecosystem01 deployment",
+      "hasOptions": false,
+      "label": "",
+      "name": "SKIP_ECOSYSTEM01",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "false",
+      "description": "To skip the upgrade of ecosystem03 deployment",
+      "hasOptions": false,
+      "label": "",
+      "name": "SKIP_ECOSYSTEM03",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "false",
+      "description": "To skip the upgrade of openlab01 and openlab02 deployment",
+      "hasOptions": false,
+      "label": "",
+      "name": "SKIP_OPENLAB",
+      "options": [
+        {
+          "value": "true"
+        },
+        {
+          "value": "false"
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "false",
+      "description": "To skip the upgrade of prototype01 deployment",
+      "hasOptions": false,
+      "label": "",
+      "name": "SKIP_PROTOTYPE01",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "false",
+      "description": "To skip the upgrade of viavi01 deployment",
+      "hasOptions": false,
+      "label": "",
+      "name": "SKIP_VIAVI01",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    },
+    {
+      "default": "false",
+      "description": "To skip the upgrade of ecosystem02 deployment",
+      "hasOptions": false,
+      "label": "",
+      "name": "SKIP_ECOSYSTEM02",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    }
+  ],
+  "schema": "1",
+  "spelEvaluator": "v4",
+  "stages": [
+    {
+      "application": "idunaas",
+      "failPipeline": true,
+      "name": "ossautoapp01",
+      "notifications": [],
+      "pipeline": "87586ffe-dce5-478b-a4e2-37dd357a476b",
+      "pipelineParameters": {
+        "ENV_NAME": "ossautoapp01",
+        "RHEL_VERSION": "${trigger['parameters']['RHEL_VERSION']}"
+      },
+      "refId": "1",
+      "requisiteStageRefIds": [
+        "8"
+      ],
+      "sendNotifications": false,
+      "stageEnabled": {
+        "expression": "\"${#stage('idunaasdev01')['status']}\" == \"SUCCEEDED\" and ${execution.trigger.parameters[\"SKIP_OSSAUTOAPP01\"] } == false",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "application": "idunaas",
+      "completeOtherBranchesThenFail": false,
+      "continuePipeline": false,
+      "failOnFailedExpressions": false,
+      "failPipeline": true,
+      "name": "bmasidun01",
+      "notifications": [],
+      "pipeline": "87586ffe-dce5-478b-a4e2-37dd357a476b",
+      "pipelineParameters": {
+        "ENV_NAME": "bmasidun01",
+        "RHEL_VERSION": "${trigger['parameters']['RHEL_VERSION']}"
+      },
+      "refId": "6",
+      "requisiteStageRefIds": [
+        "8"
+      ],
+      "sendNotifications": false,
+      "stageEnabled": {
+        "expression": "\"${#stage('idunaasdev01')['status']}\" == \"SUCCEEDED\" and ${execution.trigger.parameters[\"SKIP_BMASIDUN01\"] } == false",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "application": "idunaas",
+      "failPipeline": true,
+      "name": "bnew03",
+      "pipeline": "87586ffe-dce5-478b-a4e2-37dd357a476b",
+      "pipelineParameters": {
+        "ENV_NAME": "bnew03",
+        "RHEL_VERSION": "${trigger['parameters']['RHEL_VERSION']}"
+      },
+      "refId": "7",
+      "requisiteStageRefIds": [
+        "8"
+      ],
+      "stageEnabled": {
+        "expression": "\"${#stage('idunaasdev01')['status']}\" == \"SUCCEEDED\" and ${execution.trigger.parameters[\"SKIP_BNEW03\"] } == false",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "application": "idunaas",
+      "failPipeline": true,
+      "name": "idunaasdev01",
+      "pipeline": "87586ffe-dce5-478b-a4e2-37dd357a476b",
+      "pipelineParameters": {
+        "ENV_NAME": "idunaasdev01",
+        "RHEL_VERSION": "${trigger['parameters']['RHEL_VERSION']}"
+      },
+      "refId": "8",
+      "requisiteStageRefIds": [],
+      "stageEnabled": {
+        "expression": "${execution.trigger.parameters[\"SKIP_DEV\"] } == false",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "application": "idunaas",
+      "failPipeline": true,
+      "name": "bnewidun01 and bnewidun05",
+      "pipeline": "87586ffe-dce5-478b-a4e2-37dd357a476b",
+      "pipelineParameters": {
+        "ENV_NAME": "bnewidun01",
+        "RHEL_VERSION": "${trigger['parameters']['RHEL_VERSION']}"
+      },
+      "refId": "9",
+      "requisiteStageRefIds": [
+        "8"
+      ],
+      "stageEnabled": {
+        "expression": "\"${#stage('idunaasdev01')['status']}\" == \"SUCCEEDED\" and ${execution.trigger.parameters[\"SKIP_BNEWIDUN_01_05\"] } == false",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "application": "idunaas",
+      "failPipeline": true,
+      "name": "bnewidun02",
+      "pipeline": "87586ffe-dce5-478b-a4e2-37dd357a476b",
+      "pipelineParameters": {
+        "ENV_NAME": "bnewidun02",
+        "RHEL_VERSION": "${trigger['parameters']['RHEL_VERSION']}"
+      },
+      "refId": "10",
+      "requisiteStageRefIds": [
+        "8"
+      ],
+      "stageEnabled": {
+        "expression": "\"${#stage('idunaasdev01')['status']}\" == \"SUCCEEDED\" and ${execution.trigger.parameters[\"SKIP_BNEWIDUN02\"] } == false",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "application": "idunaas",
+      "failPipeline": true,
+      "name": "ecosystem01",
+      "pipeline": "87586ffe-dce5-478b-a4e2-37dd357a476b",
+      "pipelineParameters": {
+        "ENV_NAME": "ecosystem01",
+        "RHEL_VERSION": "${trigger['parameters']['RHEL_VERSION']}"
+      },
+      "refId": "11",
+      "requisiteStageRefIds": [
+        "8"
+      ],
+      "stageEnabled": {
+        "expression": "\"${#stage('idunaasdev01')['status']}\" == \"SUCCEEDED\" and ${execution.trigger.parameters[\"SKIP_ECOSYSTEM01\"] } == false",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "application": "idunaas",
+      "failPipeline": true,
+      "name": "ecosystem03",
+      "pipeline": "87586ffe-dce5-478b-a4e2-37dd357a476b",
+      "pipelineParameters": {
+        "ENV_NAME": "ecosystem03",
+        "RHEL_VERSION": "${trigger['parameters']['RHEL_VERSION']}"
+      },
+      "refId": "12",
+      "requisiteStageRefIds": [
+        "8"
+      ],
+      "stageEnabled": {
+        "expression": "\"${#stage('idunaasdev01')['status']}\" == \"SUCCEEDED\" and ${execution.trigger.parameters[\"SKIP_ECOSYSTEM03\"] } == false",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "application": "idunaas",
+      "failPipeline": true,
+      "name": "openlab02",
+      "pipeline": "87586ffe-dce5-478b-a4e2-37dd357a476b",
+      "pipelineParameters": {
+        "ENV_NAME": "openlab02",
+        "RHEL_VERSION": "${trigger['parameters']['RHEL_VERSION']}"
+      },
+      "refId": "13",
+      "requisiteStageRefIds": [
+        "8"
+      ],
+      "stageEnabled": {
+        "expression": "\"${#stage('idunaasdev01')['status']}\" == \"SUCCEEDED\" and ${execution.trigger.parameters[\"SKIP_OPENLAB\"] } == false",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "application": "idunaas",
+      "failPipeline": true,
+      "name": "ossautoapp02",
+      "pipeline": "87586ffe-dce5-478b-a4e2-37dd357a476b",
+      "pipelineParameters": {
+        "ENV_NAME": "ossautoapp02",
+        "RHEL_VERSION": "${trigger['parameters']['RHEL_VERSION']}"
+      },
+      "refId": "14",
+      "requisiteStageRefIds": [
+        "8"
+      ],
+      "stageEnabled": {
+        "expression": "\"${#stage('idunaasdev01')['status']}\" == \"SUCCEEDED\" and ${execution.trigger.parameters[\"SKIP_PROTOTYPE01\"] } == false",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "application": "idunaas",
+      "failPipeline": true,
+      "name": "viavieiap01",
+      "pipeline": "87586ffe-dce5-478b-a4e2-37dd357a476b",
+      "pipelineParameters": {
+        "ENV_NAME": "viavieiap01",
+        "RHEL_VERSION": "${trigger['parameters']['RHEL_VERSION']}"
+      },
+      "refId": "15",
+      "requisiteStageRefIds": [
+        "8"
+      ],
+      "stageEnabled": {
+        "expression": "\"${#stage('idunaasdev01')['status']}\" == \"SUCCEEDED\" and ${execution.trigger.parameters[\"SKIP_VIAVI01\"] } == false",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    },
+    {
+      "application": "idunaas",
+      "failPipeline": true,
+      "name": "ecosystem02",
+      "pipeline": "87586ffe-dce5-478b-a4e2-37dd357a476b",
+      "pipelineParameters": {
+        "ENV_NAME": "ecosystem02",
+        "RHEL_VERSION": "${trigger['parameters']['RHEL_VERSION']}"
+      },
+      "refId": "16",
+      "requisiteStageRefIds": [
+        "8"
+      ],
+      "stageEnabled": {
+        "expression": "\"${#stage('idunaasdev01')['status']}\" == \"SUCCEEDED\" and ${execution.trigger.parameters[\"SKIP_ECOSYSTEM02\"] } == false",
+        "type": "expression"
+      },
+      "type": "pipeline",
+      "waitForCompletion": true
+    }
+  ],
+  "triggers": [],
+  "updateTs": "1680685342695"
+}

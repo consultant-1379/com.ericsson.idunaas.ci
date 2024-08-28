@@ -1,0 +1,12 @@
+requests==2.25.0
+click==7.0
+docker
+boto3
+pyyaml
+kubernetes
+pymongo
+prometheus-api-client==0.5.1
+dnspython
+retry
+jira
+minio

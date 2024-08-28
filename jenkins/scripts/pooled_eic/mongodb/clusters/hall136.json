@@ -1,0 +1,24 @@
+{
+  "cluster_id": "hall136",
+  "path_to_certs": "minio/eic/hall136/certificates/",
+  "kubeconfig_path": "minio/eic/kubeconfigs/hall136_kubeconfig",
+  "lock_status": false,
+  "external_lbs": {
+    "10.156.76.157": "*.pool.hall136-eiap.ews.gic.ericsson.se",
+    "10.156.76.158": "*.pool.hall136-x1.ews.gic.ericsson.se",
+    "10.156.76.159": "*.pool.hall136-x2.ews.gic.ericsson.se",
+    "10.156.76.160": "*.pool.hall136-x3.ews.gic.ericsson.se",
+    "10.156.76.161": "*.pool.hall136-x4.ews.gic.ericsson.se",
+    "10.156.76.162": "*.pool.hall136-x5.ews.gic.ericsson.se",
+    "10.156.76.163": "*.pool.hall136-x6.ews.gic.ericsson.se"
+  },
+  "fqdn_ns_map": {
+    "hall136-eric-eic-0": "*.pool.hall136-eiap.ews.gic.ericsson.se",
+    "hall136-eric-eic-1": "*.pool.hall136-x1.ews.gic.ericsson.se",
+    "hall136-eric-eic-2": "*.pool.hall136-x2.ews.gic.ericsson.se",
+    "hall136-eric-eic-3": "*.pool.hall136-x3.ews.gic.ericsson.se",
+    "hall136-eric-eic-4": "*.pool.hall136-x4.ews.gic.ericsson.se",
+    "hall136-eric-eic-5": "*.pool.hall136-x5.ews.gic.ericsson.se",
+    "hall136-eric-eic-6": "*.pool.hall136-x6.ews.gic.ericsson.se"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "schema": "v2",
+  "variables": [],
+  "id": "idunaas-idun-standalone-export-backup-template",
+  "protect": false,
+  "metadata": {
+    "description": "Parent Template for idunaas-idun-standalone-export-backup-pipeline and idunaas-idun-standalone-export-backup-public-pipeline",
+    "name": "idunaas-idun-standalone-export-backup-template",
+    "owner": "idunaas",
+    "scopes": [
+      "${ var.application_idunaas }"
+    ]
+  },
+  "pipeline": {
+    "keepWaitingPipelines": false,
+    "lastModifiedBy": "zlaigar",
+    "limitConcurrent": true,
+    "notifications": [],
+    "parameterConfig": [
+      {
+        "default": "${ var.so_deploy }",
+        "description": "SO Deploy, set true or false",
+        "hasOptions": true,
+        "label": "",
+        "name": "SO_DEPLOY",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.uds_deploy }",
+        "description": "UDS Deploy, set true or false",
+        "hasOptions": true,
+        "label": "",
+        "name": "UDS_DEPLOY",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.pf_deploy }",
+        "description": "PF Deploy, set true or false",
+        "hasOptions": true,
+        "label": "",
+        "name": "PF_DEPLOY",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.platform_deploy }",
+        "description": "Platform Deploy, set true or false",
+        "hasOptions": true,
+        "label": "",
+        "name": "PLATFORM_DEPLOY",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.helm_chart_repo_name }",
+        "description": "Helm Chart Repository name",
+        "hasOptions": false,
+        "label": "",
+        "name": "HELM_REPOSITORY_NAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      }
+    ],
+    "spelEvaluator": "v4",
+    "stages": [
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "OSS-Integration-Retrieve-Environment-Details",
+        "master": "${ var.jenkins_maintrack_fem }",
+        "name": "Gather Env Details",
+        "parameters": {
+          "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Gather_Env_Details",
+        "requisiteStageRefIds": [],
+        "restrictExecutionDuringTimeWindow": false,
+        "restrictedExecutionWindow": {
+          "jitter": {
+            "enabled": false,
+            "maxDelay": 600,
+            "minDelay": 0,
+            "skipManual": false
+          },
+          "whitelist": []
+        },
+        "type": "jenkins"
+      }
+    ],
+    "triggers": []
+  }
+}

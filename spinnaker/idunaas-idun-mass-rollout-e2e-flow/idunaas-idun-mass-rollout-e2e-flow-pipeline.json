@@ -1,0 +1,11 @@
+{
+  "schema": "v2",
+  "application": "${ var.application_idunaas }",
+  "name": "IDUNAAS-MASS-ROLLOUT-E2E-Flow",
+  "description": "IDUNaas-MASS-ROLLOUT-E2E-Flow pipeline, which inherits from the idunaas-idun-mass-rollout-e2e-flow-template",
+  "template": {
+    "artifactAccount": "front50ArtifactCredentials",
+    "reference": "spinnaker://idunaas-idun-mass-rollout-e2e-flow-template:latest",
+    "type": "front50/pipelineTemplate"
+  }
+}

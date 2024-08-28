@@ -1,0 +1,11 @@
+{
+  "schema": "v2",
+  "application": "${ var.application_idunaas }",
+  "name": "idunaas-idun-retrigger-failed-aas-e2e-flow-pipeline",
+  "description": "idunaas-idun-retrigger-failed-aas-e2e-flow-pipeline, which inherits from the idunaas-idun-retrigger-failed-aas-e2e-flow-template",
+  "template": {
+    "artifactAccount": "front50ArtifactCredentials",
+    "reference": "spinnaker://idunaas-idun-retrigger-failed-aas-e2e-flow-template:latest",
+    "type": "front50/pipelineTemplate"
+  }
+}

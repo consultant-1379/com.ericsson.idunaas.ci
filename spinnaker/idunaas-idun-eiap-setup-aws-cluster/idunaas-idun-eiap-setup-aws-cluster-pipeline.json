@@ -1,0 +1,11 @@
+{
+  "schema": "v2",
+  "application": "${ var.application_idunaas }",
+  "name": "idunaas-idun-setup-eiap-aws-cluster-pipeline",
+  "description":"idunaas-idun-setup-aws-cluster-pipeline, which inherits from the idunaas-idun-setup-eiap-aws-cluster-template",
+  "template": {
+    "artifactAccount": "front50ArtifactCredentials",
+    "reference": "spinnaker://idunaas-idun-setup-eiap-aws-cluster-template:latest",
+    "type": "front50/pipelineTemplate"
+  }
+}

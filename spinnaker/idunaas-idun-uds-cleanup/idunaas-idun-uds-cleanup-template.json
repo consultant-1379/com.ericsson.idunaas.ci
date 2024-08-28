@@ -1,0 +1,74 @@
+{
+  "schema": "v2",
+  "variables": [],
+  "id": "idunaas-idun-uds-cleanup-template",
+  "protect": false,
+  "metadata": {
+    "description": "Parent Template for idunaas-idun-uds-cleanup-pipeline",
+    "name": "idunaas-idun-uds-cleanup-template",
+    "owner": "idunaas",
+    "scopes": [
+      "${ var.application_idunaas }"
+    ]
+  },
+  "pipeline": {
+    "keepWaitingPipelines": false,
+    "lastModifiedBy": "zlaigar",
+    "limitConcurrent": true,
+    "parameterConfig": [
+      {
+        "default": "${ var.deployment_environment }",
+        "description": "Name of the Environment to run the uds cleanup against",
+        "hasOptions": false,
+        "label": "",
+        "name": "ENVIRONMENT_NAME",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      }
+    ],
+    "spelEvaluator": "v4",
+    "stages": [
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "OSS-Integration-Retrieve-Environment-Details",
+        "master": "${ var.jenkins_maintrack_fem }",
+        "name": "Gather Env Details",
+        "parameters": {
+          "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Gather_Env_Details",
+        "requisiteStageRefIds": [],
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "idunaas_uds_cleanup",
+        "master": "${ var.jenkins_fem }",
+        "name": "UDS Cleanup",
+        "parameters": {
+          "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+          "CASSANDRA_USER_SECRET": "${ var.cassandra_user_secret }",
+          "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}",
+          "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+          "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+          "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "refId": "UDS_Cleanup",
+        "requisiteStageRefIds": [
+          "Gather_Env_Details"
+        ],
+        "type": "jenkins"
+      }
+    ],
+    "triggers": []
+  }
+}

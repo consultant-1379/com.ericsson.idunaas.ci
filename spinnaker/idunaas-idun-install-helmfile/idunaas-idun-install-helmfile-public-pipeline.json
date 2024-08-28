@@ -1,0 +1,100 @@
+{
+  "schema": "v2",
+  "application": "${ var.application_idunaas }",
+  "name": "idunaas-idun-install-helmfile-public-pipeline",
+  "description": "idunaas-idun-install-helmfile-public-pipeline, which inherits from the idunaas-idun-install-helmfile-template",
+  "template": {
+    "artifactAccount": "front50ArtifactCredentials",
+    "reference": "spinnaker://idunaas-idun-install-helmfile-template:latest",
+    "type": "front50/pipelineTemplate"
+  },
+  "variables": {
+    "disable_concurrency": true
+  },
+  "parameters": [
+    {
+      "default": "openlab01",
+      "description": "Name of the Environment to backup",
+      "hasOptions": false,
+      "label": "",
+      "name": "ENVIRONMENT_NAME",
+      "options": [
+        {
+          "value": ""
+        }
+      ],
+      "pinned": true,
+      "required": true
+    }
+  ],
+  "stages": [
+    {
+      "inject": {
+        "after": [
+          "Get_Version_To_Clean"
+        ]
+      },
+      "continuePipeline": false,
+      "failPipeline": true,
+      "job": "idunaas_push_image_ecr_europe",
+      "master": "${ var.jenkins_fem }",
+      "name": "Push Image",
+      "parameters": {
+        "ADC_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"ADC_HOSTNAME\"]}",
+        "APPMGR_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"APPMGR_HOSTNAME\"]}",
+        "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+        "AWS_ECR_URL": "${#stage(\"Gather Env Details\")[\"context\"][\"AWS_ECR_URL\"]}",
+        "AWS_REGION": "${#stage(\"Gather Env Details\")[\"context\"][\"AWS_REGION\"]}",
+        "FUNCTIONAL_USER_SECRET": "${ var.functional_user_secret }",
+        "GAS_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_GAS_HOSTNAME\"]}",
+        "IAM_AUTHENTICATOR": "${#stage(\"Gather Env Details\")[\"context\"][\"IAM_AUTHENTICATOR\"]}",
+        "IAM_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"IAM_HOSTNAME\"]}",
+        "IDUN_USER_SECRET": "${ var.idun_user_secret }",
+        "INT_CHART_NAME": "${trigger['parameters']['INT_CHART_NAME']}",
+        "INT_CHART_VERSION": "${#stage(\"Get Chart Version\")[\"context\"][\"INT_CHART_VERSION\"]}",
+        "OS_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"OS_HOSTNAME\"]}",
+        "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+        "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+        "PATH_TO_SITE_VALUES_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_SITE_VALUES\"]}",
+        "PATH_TO_WORKDIR": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_WORKDIR\"]}",
+        "PF_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_PF_HOSTNAME\"]}",
+        "SO_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_SO_HOSTNAME\"]}",
+        "TAGS": "${#stage(\"Gather Env Details\")[\"context\"][\"TAGS\"]}",
+        "UDS_HOSTNAME": "${#stage(\"Gather Env Details\")[\"context\"][\"EO_UDS_HOSTNAME\"]}",
+        "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+      },
+      "refId": "Push_Image",
+      "requisiteStageRefIds": [
+        "Get_Version_To_Clean"
+      ],
+      "type": "jenkins"
+    },
+    {
+      "inject": {
+        "after": [
+          "Pre_Append_Submodule_Path"
+        ]
+      },
+      "continuePipeline": false,
+      "failPipeline": true,
+      "job": "idunaas_create_aws_ecr_token",
+      "master": "${ var.jenkins_fem }",
+      "name": "Create AWS ECR Token",
+      "parameters": {
+        "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+        "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        
+      },
+      "propertyFile": "artifact.properties",
+      "refId": "Create_AWS_ECR_Token",
+      "requisiteStageRefIds": [
+        "Pre_Append_Submodule_Path"
+      ],
+      "stageEnabled": {
+        "expression": "false",
+        "type": "expression"
+      },
+      "type": "jenkins"
+    }
+  ]
+}

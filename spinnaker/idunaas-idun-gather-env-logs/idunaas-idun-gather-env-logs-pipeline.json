@@ -1,0 +1,11 @@
+{
+    "schema": "v2",
+    "application": "${ var.application_idunaas}",
+    "name": "idunaas-idun-gather-env-logs-pipeline",
+    "description": "idunaas-idun-gather-env-logs-pipeline, which inherits from the idunaas-idun-gather-env-logs-template",
+    "template": {
+      "artifactAccount": "front50ArtifactCredentials",
+      "reference": "spinnaker://idunaas-idun-gather-env-logs-template:latest",
+      "type": "front50/pipelineTemplate"
+    }
+  }

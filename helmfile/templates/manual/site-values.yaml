@@ -1,0 +1,113 @@
+global:
+  iam:
+    clientId: oss
+    adminSecret: eric-sec-access-mgmt-creds
+    userKey: kcadminid
+    passwordKey: kcpasswd
+  hosts:
+    so: "SO_HOST_REPLACE"
+    iam: "IAM_HOST_REPLACE"
+    pf: "PF_HOST_REPLACE"
+    uds: "UDS_HOST_REPLACE"
+    gr: "GR_HOST_REPLACE"
+    gas: "GAS_HOST_REPLACE"
+  registry:
+    # If deploying from the director node on a CCD environment, the url can be retrieved using:
+    # kubectl get ingress eric-lcm-container-registry-ingress -n kube-system -o jsonpath="{.spec.tls[*].hosts[0]}"; echo
+    url: "armdocker.rnd.ericsson.se"
+    # Docker registry username
+    username: "USERNAME_REPLACE"
+    # Docker registry password
+    password: "PASSWORD_REPLACE"
+  support:
+    ipv6:
+      enabled: false
+  timezone: UTC
+  createClusterRoles: true
+
+# Warning! If changing these application tags from true to false and that application
+# is already installed, then that application will be removed and data will be lost!
+tags:
+  so: SO_DEPLOY_REPLACE
+  pf: PF_DEPLOY_REPLACE
+  uds: UDS_DEPLOY_REPLACE
+  platform: PLATFORM_DEPLOY_REPLACE
+
+system-user:
+  credentials:
+    username: "system-user"
+    password: "Ericsson123!"
+
+eric-eo-api-gateway:
+  iam:
+    kubernetesSecret: eric-oss-common-base-iam-client-secret
+
+# This is the same as the global.iam hostname
+eric-sec-access-mgmt:
+  ingress:
+    hostname: "IAM_HOST_REPLACE"
+  replicaCount: 2
+
+gas:
+  defaultUser:
+    username: "gas-user"
+    password: "Ericsson123!"
+
+# Please refer to the EO dimensioning guide for the appropriate size of the BRO volume
+# The size will be dependent on which applications are being deployed
+eric-ctrl-bro:
+  persistence:
+    persistentVolumeClaim:
+      size: "20Gi"
+  sftp:
+    username: "dummy"
+    password: "dummy"
+
+eric-data-search-engine:
+  service:
+    network:
+      protocol:
+        IPv6: false
+
+# Fill only if deploying EO Service Orchestration (EO SO)
+eric-eo-so:
+  defaultUser:
+    username: "so-user"
+    password: "Ericsson123!"
+
+# Fill only if deploying EO PF Orchestration (EO PF)
+eric-oss-pf:
+  defaultUser:
+    username: "pf-user"
+    password: "Ericsson123!"
+
+# Fill only if deploying EO PF Orchestration (EO PF)
+eric-oss-uds:
+  defaultUser:
+    username: "uds-user"
+    password: "Ericsson123!"
+
+# Fill in values in the following section only if deploying EO Georedundancy
+# Please refer to EO Installation Documentation for guidance on geo-redundant config
+geo-redundancy:
+  enabled: false
+eric-gr-bur-orchestrator:
+  credentials:
+    username: ""
+    password: ""
+  gr:
+    bro:
+      autoDelete:
+        backupsLimit: 10
+    sftp:
+      url: ""
+      username: ""
+      password: ""
+    cluster:
+      role: ""
+      # note that the secondary_hostnames variable should only be defined if the role is set to "PRIMARY".
+      # secondary_hostnames should be commented out if role is set to "SECONDARY".
+      secondary_hostnames:
+        - ""
+    registry:
+      secondarySiteContainerRegistryHostname:

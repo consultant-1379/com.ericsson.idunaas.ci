@@ -1,0 +1,17 @@
+global:
+  iam:
+    clientId: {{ .Values | get "global.iam.clientId" }}
+  hosts:
+    pf: {{ .Values | get "global.hosts.pf" }}
+    iam: {{ .Values | get "global.hosts.iam" }}
+  support:
+    ipv6:
+      enabled: false
+  registry:
+    url: {{ .Values | get "global.registry.url" }}
+    username: {{ .Values | get "global.registry.username" }}
+    password: {{ .Values | get "global.registry.password" }}
+
+defaultUser:
+  username: {{ .Values | get "eric-oss-pf.defaultUser.username" }}
+  password: {{ .Values | get "eric-oss-pf.defaultUser.password" }}

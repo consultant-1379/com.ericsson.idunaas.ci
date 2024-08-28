@@ -1,0 +1,28 @@
+EnvironmentName: bmasdev01
+AWSRegion: eu-west-1
+K8SVersion: "1.24"
+VPCID: vpc-00fdcb823f28eef65
+ControlPlaneSubnetIds: "subnet-092241fee9486b169,subnet-00fe165b07dd49fc6"
+WorkerNodeSubnetIds: subnet-00fe165b07dd49fc6
+SecondaryVpcCIDR: 100.64.0.0/22
+DisablePublicAccess: True
+NodeInstanceType: m5.4xlarge
+DiskSize: 80
+MinNodes: 2
+MaxNodes: 10
+SshKeyPairName: bmasidun01-key-pair
+KubeDownscaler: True
+BackupInstanceType: t3.medium
+BackupAmiId: ami-020dc16c3d388b597
+BackupDisk: 50
+BackupPass: shroot12
+PrivateDomainName: 438920917196.eu-west-1.ac.ericsson.se
+Hostnames:
+  iam: iam.438920917196.eu-west-1.ac.ericsson.se
+  pf: pf.438920917196.eu-west-1.ac.ericsson.se
+  so: so.438920917196.eu-west-1.ac.ericsson.se
+  uds: uds.438920917196.eu-west-1.ac.ericsson.se
+  gas: gas.438920917196.eu-west-1.ac.ericsson.se
+  th: th.438920917196.eu-west-1.ac.ericsson.se
+  dashboard: monitoring.438920917196.eu-west-1.ac.ericsson.se
+  prometheus: prometheus.438920917196.eu-west-1.ac.ericsson.se

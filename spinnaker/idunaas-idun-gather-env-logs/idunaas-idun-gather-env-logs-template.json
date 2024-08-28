@@ -1,0 +1,133 @@
+{
+    "schema": "v2",
+    "variables": [],
+    "id": "idunaas-idun-gather-env-logs-template",
+    "protect": false,
+    "metadata": {
+        "description": "Parent Template for idunaas-idun-gather-env-logs-pipeline",
+        "name": "idunaas-idun-gather-env-logs-template",
+        "owner": "idunaas",
+        "scopes": [
+            "${ var.application_idunaas }"
+        ]
+    },
+    "pipeline": {
+        "keepWaitingPipelines": false,
+        "lastModifiedBy": "zlaigar",
+        "limitConcurrent": false,
+        "parameterConfig": [
+            {
+                "default": "${ var.deployment_environment }",
+                "description": "The name of the environment that we wish to gather logs for 123",
+                "hasOptions": false,
+                "label": "",
+                "name": "ENVIRONMENT_NAME",
+                "options": [
+                    {
+                        "value": ""
+                    }
+                ],
+                "pinned": true,
+                "required": true
+            },
+            {
+                "default": "${ var.collect_logs_with_dm }",
+                "description": "Use adp to collect logs or deployment manager. Default is to use adp",
+                "hasOptions": true,
+                "label": "",
+                "name": "COLLECT_LOGS_WITH_DM",
+                "options": [
+                  {
+                    "value": "false"
+                  },
+                  {
+                    "value": "true"
+                  }
+                ],
+                "pinned": true,
+                "required": true
+              }
+        ],
+        "spelEvaluator": "v4",
+        "stages": [
+            {
+                "completeOtherBranchesThenFail": false,
+                "continuePipeline": false,
+                "failPipeline": true,
+                "job": "OSS-Integration-Retrieve-Environment-Details",
+                "master": "${ var.jenkins_maintrack_fem }",
+                "name": "Gather Env Details",
+                "parameters": {
+                    "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}"
+                },
+                "propertyFile": "artifact.properties",
+                "refId": "Gather_Env_Details",
+                "requisiteStageRefIds": [],
+                "stageTimeoutMs": 600000,
+                "type": "jenkins"
+            },
+            {
+                "continuePipeline": false,
+                "failPipeline": true,
+                "job": "idunaas_get_installed_chart",
+                "master": "${ var.jenkins_fem }",
+                "name": "Get Installed Chart",
+                "parameters": {
+                    "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+                    "IAM_AUTHENTICATOR": "${#stage(\"Gather Env Details\")[\"context\"][\"IAM_AUTHENTICATOR\"]}",
+                    "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+                    "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+                    "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+                    "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+                },
+                "propertyFile": "artifact.properties",
+                "refId": "Get_Installed_Chart",
+                "requisiteStageRefIds": [
+                    "Gather_Env_Details"
+                ],
+                "stageTimeoutMs": 600000,
+                "type": "jenkins"
+            },
+            {
+                "completeOtherBranchesThenFail": false,
+                "continuePipeline": true,
+                "failPipeline": false,
+                "job": "idunaas_gather_env_logs",
+                "master": "${ var.jenkins_fem }",
+                "name": "Gather Logs",
+                "parameters": {
+                    "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+                    "COLLECT_LOGS_WITH_DM": "${trigger['parameters']['COLLECT_LOGS_WITH_DM']}",
+                    "KUBECONFIG_FILE": "${trigger['parameters']['ENVIRONMENT_NAME']}_kubeconfig",
+                    "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+                    "PATH_TO_AWS_FILES": "${ var.submodule_path }/${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+                    "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+                },
+                "refId": "Gather_Logs",
+                "requisiteStageRefIds": [
+                    "Get_Installed_Chart"
+                ],
+                "stageTimeoutMs": 7200000,
+                "type": "jenkins"
+            },
+            {
+                "name": "Flow Completion",
+                "preconditions": [
+                    {
+                        "context": {
+                            "expression": "\"${#stage('Gather Logs')['status']}\" == \"SUCCEEDED\""
+                        },
+                        "failPipeline": true,
+                        "type": "expression"
+                    }
+                ],
+                "refId": "Flow_Completion",
+                "requisiteStageRefIds": [
+                    "Gather_Logs"
+                ],
+                "type": "checkPreconditions"
+            }
+        ],
+        "triggers": []
+    }
+}

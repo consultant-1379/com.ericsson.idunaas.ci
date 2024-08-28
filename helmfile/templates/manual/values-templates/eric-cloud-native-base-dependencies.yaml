@@ -1,0 +1,54 @@
+eric-cm-mediator:
+  enabled: false
+eric-fh-snmp-alarm-provider:
+  enabled: false
+eric-data-document-database-pg:
+  enabled: false
+eric-fh-alarm-handler-db-pg:
+  enabled: false
+eric-sec-access-mgmt-db-pg:
+  enabled: true
+eric-lm-combined-server-db-pg:
+  enabled: false
+eric-pm-server:
+  enabled: true
+eric-data-message-bus-kf:
+  enabled: true
+eric-data-coordinator-zk:
+  enabled: true
+eric-sec-key-management:
+  enabled: false
+eric-fh-alarm-handler:
+  enabled: false
+eric-sec-access-mgmt:
+  enabled: true
+eric-sec-sip-tls:
+  enabled: false
+eric-odca-diagnostic-data-collector:
+  enabled: false
+eric-data-distributed-coordinator-ed:
+  enabled: false
+eric-sec-certm:
+  enabled: false
+eric-ctrl-bro:
+  enabled: true
+eric-lm-combined-server:
+  enabled: false
+eric-data-search-engine:
+  enabled: true
+eric-data-search-engine-curator:
+  enabled: true
+eric-log-transformer:
+  enabled: true
+eric-log-shipper:
+  enabled: true
+eric-data-object-storage-mn:
+  enabled: false
+eric-dst-agent:
+  enabled: false
+eric-dst-collector:
+  enabled: false
+eric-dst-query:
+  enabled: false
+eric-tm-ingress-controller-cr:
+  enabled: false

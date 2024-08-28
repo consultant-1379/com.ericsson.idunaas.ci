@@ -1,0 +1,102 @@
+{
+  "schema": "v2",
+  "variables": [],
+  "id": "idunaas-idun-rollback-helmfile-template",
+  "protect": false,
+  "metadata": {
+    "description": "Parent Template for idunaas-idun-rollback-helmfile-pipeline and idunaas-idun-rollback-helmfile-public-pipeline",
+    "name": "idunaas-idun-rollback-helmfile-template",
+    "owner": "idunaas",
+    "scopes": [
+      "${ var.application_idunaas }"
+    ]
+  },
+  "pipeline": {
+    "keepWaitingPipelines": false,
+    "lastModifiedBy": "zlaigar",
+    "limitConcurrent": true,
+    "parameterConfig": [
+      {
+        "default": "${ var.int_chart_version }",
+        "description": "Chart Version to Upgrade to. LATEST will get latest version",
+        "hasOptions": false,
+        "label": "",
+        "name": "INT_CHART_VERSION",
+        "options": [
+          {
+            "value": ""
+          }
+        ],
+        "pinned": true,
+        "required": true
+      }
+    ],
+    "spelEvaluator": "v4",
+    "stages": [
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "OSS-Integration-Retrieve-Environment-Details",
+        "master": "${ var.jenkins_maintrack_fem }",
+        "name": "Gather Env Details",
+        "parameters": {
+          "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Gather_Env_Details",
+        "requisiteStageRefIds": [],
+        "type": "jenkins"
+      },
+      {
+        "continuePipeline": false,
+        "failPipeline": true,
+        "job": "idunaas_check_rollback_need_helmfile",
+        "master": "${ var.jenkins_fem }",
+        "name": "Check Rollback Needed",
+        "parameters": {
+          "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+          "FUNCTIONAL_USER_SECRET": "${ var.functional_user_secret }",
+          "IDUN_USER_SECRET": "${ var.idun_user_secret }",
+          "INT_CHART_NAME": "${ var.int_chart_name }",
+          "INT_CHART_VERSION": "${trigger['parameters']['INT_CHART_VERSION']}",
+          "NAMESPACE": "${#stage(\"Gather Env Details\")[\"context\"][\"NAMESPACE\"]}",
+          "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+          "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+          "PATH_TO_SITE_VALUES_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_SITE_VALUES\"]}",
+          "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+        },
+        "propertyFile": "artifact.properties",
+        "refId": "Check_Rollback_Needed",
+        "requisiteStageRefIds": [
+          "Gather_Env_Details"
+        ],
+        "type": "jenkins"
+      },
+      {
+        "name": "Flow Completed",
+        "preconditions": [
+          {
+            "context": {
+              "expression": "\"${#stage('Cleanup And Deploy')['status']}\" == \"SUCCEEDED\" or \"${#stage('Cleanup And Deploy')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('Restore From Backup')['status']}\" == \"SUCCEEDED\" or \"${#stage('Restore From Backup')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          }
+        ],
+        "refId": "Flow_Completed",
+        "requisiteStageRefIds": [
+          "Cleanup_And_Deploy"
+        ],
+        "type": "checkPreconditions"
+      }
+    ],
+    "triggers": []
+  }
+}

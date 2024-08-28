@@ -1,0 +1,36 @@
+[
+    {
+        "name": "stsossflexcenm1009",
+        "vendor": "Ericsson",
+        "url": "https://stsossflexcenm1009-12360.stsoss.sero.gic.ericsson.se",
+        "adapterLink": "eric-eo-enm-adapter",
+        "subsystemType": {
+            "type": "DomainManager"
+        },
+        "connectionProperties": [
+            {
+                "name": "ENM",
+                "username": "administrator",
+                "password": "ENM_PASSWORD",
+                "scriptingVMs": "10.65.10.81",
+                "sftpPort": "22"
+            }
+        ]
+    },
+    {
+        "name": "RESTSim",
+        "vendor": "Ericsson",
+        "url": "http://restsim.stsvp1accd25.stsoss.sero.gic.ericsson.se",
+        "adapterLink": "eric-eo-enm-adapter",
+        "subsystemType": {
+            "type": "DomainManager"
+        },
+        "connectionProperties": [
+            {
+                "name": "ENM",
+                "username": "administrator",
+                "password": "ENM_PASSWORD"
+            }
+        ]
+    }
+]

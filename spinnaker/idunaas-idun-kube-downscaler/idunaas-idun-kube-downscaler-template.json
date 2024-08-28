@@ -1,0 +1,102 @@
+{
+    "schema": "v2",
+    "variables": [],
+    "id": "idunaas-idun-kube-downscaler-pause-resume-template",
+    "protect": false,
+    "metadata": {
+        "description": "Parent Template for idunaas-idun-kube-downscaler-pause-resume-pipeline",
+        "name": "idunaas-idun-kube-downscaler-pause-resume-template",
+        "owner": "idunaas",
+        "scopes": [
+            "${ var.application_idunaas }"
+        ]
+    },
+    "pipeline": {
+        "keepWaitingPipelines": false,
+        "lastModifiedBy": "zlaigar",
+        "limitConcurrent": false,
+        "notifications": [],
+        "parameterConfig": [
+            {
+                "default": "${ var.deployment_environment }",
+                "description": "Name of the Environment to run kube downscaler on",
+                "hasOptions": false,
+                "label": "",
+                "name": "ENVIRONMENT_NAME",
+                "options": [
+                    {
+                        "value": ""
+                    }
+                ],
+                "pinned": true,
+                "required": true
+            },
+            {
+                "default": "${ var.pause_resume_kubedownscaler }",
+                "description": "Pause or Resume action for kube downscaler",
+                "hasOptions": true,
+                "label": "",
+                "name": "ACTION",
+                "options": [
+                    {
+                        "value": "pause"
+                    },
+                    {
+                        "value": "resume"
+                    }
+                ],
+                "pinned": true,
+                "required": true
+            }
+        ],
+        "spelEvaluator": "v4",
+        "stages": [
+            {
+                "continuePipeline": false,
+                "failPipeline": true,
+                "job": "OSS-Integration-Retrieve-Environment-Details",
+                "master": "${ var.jenkins_maintrack_fem }",
+                "name": "Gather Env Details",
+                "parameters": {
+                    "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}"
+                },
+                "propertyFile": "artifact.properties",
+                "refId": "Gather_Env_Details",
+                "requisiteStageRefIds": [],
+                "restrictExecutionDuringTimeWindow": false,
+                "restrictedExecutionWindow": {
+                    "jitter": {
+                        "enabled": false,
+                        "maxDelay": 600,
+                        "minDelay": 0,
+                        "skipManual": false
+                    },
+                    "whitelist": []
+                },
+                "type": "jenkins"
+            },
+            {
+                "completeOtherBranchesThenFail": false,
+                "continuePipeline": true,
+                "failPipeline": false,
+                "job": "idunaas_kube_downscaler_pause_resume",
+                "master": "${ var.jenkins_fem }",
+                "name": "Kube Downscaler Pause Resume",
+                "parameters": {
+                    "ACTION": "${trigger['parameters']['ACTION']}",
+                    "ARMDOCKER_USER_SECRET": "${ var.armdocker_user_secret }",
+                    "ENV_NAME": "${trigger['parameters']['ENVIRONMENT_NAME']}",
+                    "PATH_TO_AWS_FILES": "${#stage(\"Gather Env Details\")[\"context\"][\"PATH_TO_AWS_FILES\"]}",
+                    "PATH_TO_KUBECONFIG_FILE": "${#stage(\"Gather Env Details\")[\"context\"][\"KUBE_CONFIG\"]}",
+                    "SLAVE_LABEL": "${ var.jenkins_fem_slave }"
+                },
+                "propertyFile": "",
+                "refId": "Kube_Downscaler_Pause_Resume",
+                "requisiteStageRefIds": [
+                    "Gather_Env_Details"
+                ],
+                "type": "jenkins"
+            }
+        ]
+    }
+}

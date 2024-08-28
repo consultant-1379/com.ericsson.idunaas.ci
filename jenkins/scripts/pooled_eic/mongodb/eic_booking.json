@@ -1,0 +1,15 @@
+{
+    "jira_id": "DETS-17665",
+    "team_name": "team rolf",
+    "team_users": ["zshicna", "zmcddec"],
+    "cluster_name": "hall144",
+    "namespace": "hall144-eric-eic-0",
+    "app_set": "os_eic_cicd",
+    "fqdn": "x1.test.ericsson.com",
+    "eic_version": "2.3.4.5-1",
+    "booking_start_date" : "29-05-2023",
+    "booking_end_date" : "12-08-2023",
+    "booking_status": "ACTIVE",
+    "team_email": "test.email.com"
+
+}

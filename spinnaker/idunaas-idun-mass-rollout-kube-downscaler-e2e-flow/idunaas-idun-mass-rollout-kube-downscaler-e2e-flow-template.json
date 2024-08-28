@@ -1,0 +1,443 @@
+{
+  "schema": "v2",
+  "variables": [],
+  "id": "idunaas-idun-mass-rollout-kube-downscaler-e2e-flow-template",
+  "protect": false,
+  "metadata": {
+    "description": "Parent Template for idunaas-idun-mass-rollout-kube-downscaler-e2e-flow-pipeline",
+    "name": "idunaas-idun-mass-rollout-kube-downscaler-e2e-flow-template",
+    "owner": "idunaas",
+    "scopes": [
+      "${ var.application_idunaasnew }"
+    ]
+  },
+  "pipeline": {
+    "appConfig": {},
+    "keepWaitingPipelines": true,
+    "lastModifiedBy": "zlaigar",
+    "limitConcurrent": true,
+    "parameterConfig": [
+      {
+        "default": "${ var.skip_ossautoapp01 }",
+        "description": "To skip the upgrade of ossautoapp01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_OSSAUTOAPP01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_openlab01 }",
+        "description": "To skip the upgrade of openlab01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_OPENLAB01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_bmasidun01 }",
+        "description": "To skip the upgrade of bmasidun01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_BMASIDUN01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_ernidun01 }",
+        "description": "To skip the upgrade of ernidun01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_ERNIDUN01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_infoveiap01 }",
+        "description": "To skip the upgrade of infoveiap01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_INFOVEIAP01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_viavieiap01 }",
+        "description": "To skip the upgrade of viavieiap01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_VIAVIEIAP01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.skip_ecosystem01 }",
+        "description": "To skip the upgrade of ecosystem01 deployment",
+        "hasOptions": true,
+        "label": "",
+        "name": "SKIP_ECOSYSTEM01",
+        "options": [
+          {
+            "value": "true"
+          },
+          {
+            "value": "false"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      },
+      {
+        "default": "${ var.pause_resume_kubedownscaler }",
+        "description": "Pause or Resume action for kube downscaler",
+        "hasOptions": true,
+        "label": "",
+        "name": "ACTION",
+        "options": [
+          {
+            "value": "pause"
+          },
+          {
+            "value": "resume"
+          }
+        ],
+        "pinned": true,
+        "required": true
+      }
+    ],
+    "spelEvaluator": "v4",
+    "stages": [
+      {
+        "application": "${ var.application_idunaasnew }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "ossautoapp01_upgrade_Staging",
+        "notifications": [
+          {
+            "address": "${ var.team_email }",
+            "level": "stage",
+            "type": "email",
+            "when": [
+              "stage.failed"
+            ]
+          }
+        ],
+        "pipeline": "${ var.kube_downscaler_pause_resume_pipeline }",
+        "pipelineParameters": {
+          "ACTION": "${trigger['parameters']['ACTION']}",
+          "ENVIRONMENT_NAME": "ossautoapp01"
+        },
+        "refId": "ossautoapp01_upgrade_Staging",
+        "requisiteStageRefIds": [],
+        "sendNotifications": true,
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"SKIP_OSSAUTOAPP01\"] } == false",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaasnew }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "bmasidun01_upgrade_Staging",
+        "notifications": [
+          {
+            "address": "${ var.team_email }",
+            "level": "stage",
+            "type": "email",
+            "when": [
+              "stage.failed"
+            ]
+          }
+        ],
+        "pipeline": "${ var.kube_downscaler_pause_resume_pipeline }",
+        "pipelineParameters": {
+          "ACTION": "${trigger['parameters']['ACTION']}",
+          "ENVIRONMENT_NAME": "bmasidun01"
+        },
+        "refId": "bmasidun01_upgrade_Staging",
+        "requisiteStageRefIds": [
+          "ossautoapp01_upgrade_Staging"
+        ],
+        "sendNotifications": true,
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"SKIP_BMASIDUN01\"] } == false",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaasnew }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "ernidun01_upgrade_Staging",
+        "notifications": [
+          {
+            "address": "${ var.team_email }",
+            "level": "stage",
+            "type": "email",
+            "when": [
+              "stage.failed"
+            ]
+          }
+        ],
+        "pipeline": "${ var.kube_downscaler_pause_resume_pipeline }",
+        "pipelineParameters": {
+          "ACTION": "${trigger['parameters']['ACTION']}",
+          "ENVIRONMENT_NAME": "ernidun01"
+        },
+        "refId": "ernidun01_upgrade_Staging",
+        "requisiteStageRefIds": [
+          "ossautoapp01_upgrade_Staging"
+        ],
+        "sendNotifications": true,
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"SKIP_ERNIDUN01\"] } == false",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaasnew }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "ecosystem01_upgrade_Staging",
+        "pipeline": "${ var.kube_downscaler_pause_resume_pipeline }",
+        "pipelineParameters": {
+          "ACTION": "${trigger['parameters']['ACTION']}",
+          "ENVIRONMENT_NAME": "ecosystem01"
+        },
+        "refId": "ecosystem01_upgrade_Staging",
+        "requisiteStageRefIds": [
+          "ossautoapp01_upgrade_Staging"
+        ],
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"SKIP_ECOSYSTEM01\"] } == false",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaasnew }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "openlab01_upgrade_Staging",
+        "notifications": [
+          {
+            "address": "${ var.team_email }",
+            "level": "stage",
+            "type": "email",
+            "when": [
+              "stage.failed"
+            ]
+          }
+        ],
+        "pipeline": "${ var.kube_downscaler_pause_resume_pipeline }",
+        "pipelineParameters": {
+          "ACTION": "${trigger['parameters']['ACTION']}",
+          "ENVIRONMENT_NAME": "openlab01"
+        },
+        "refId": "openlab01_upgrade_Staging",
+        "requisiteStageRefIds": [
+          "bmasidun01_upgrade_Staging",
+          "ernidun01_upgrade_Staging",
+          "ecosystem01_upgrade_Staging"
+        ],
+        "sendNotifications": true,
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"SKIP_OPENLAB01\"] } == false",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaasnew }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "infoveiap01_upgrade_Staging",
+        "notifications": [
+          {
+            "address": "${ var.team_email }",
+            "level": "stage",
+            "type": "email",
+            "when": [
+              "stage.failed"
+            ]
+          }
+        ],
+        "pipeline": "${ var.kube_downscaler_pause_resume_pipeline }",
+        "pipelineParameters": {
+          "ACTION": "${trigger['parameters']['ACTION']}",
+          "ENVIRONMENT_NAME": "infoveiap01"
+        },
+        "refId": "infoveiap01_upgrade_Staging",
+        "requisiteStageRefIds": [
+          "openlab01_upgrade_Staging"
+        ],
+        "sendNotifications": true,
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"SKIP_INFOVEIAP01\"] } == false",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "application": "${ var.application_idunaasnew }",
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": true,
+        "failPipeline": false,
+        "name": "viavieiap01_upgrade_Staging",
+        "notifications": [
+          {
+            "address": "${ var.team_email }",
+            "level": "stage",
+            "type": "email",
+            "when": [
+              "stage.failed"
+            ]
+          }
+        ],
+        "pipeline": "${ var.kube_downscaler_pause_resume_pipeline }",
+        "pipelineParameters": {
+          "ACTION": "${trigger['parameters']['ACTION']}",
+          "ENVIRONMENT_NAME": "viavieiap01"
+        },
+        "refId": "viavieiap01_upgrade_Staging",
+        "requisiteStageRefIds": [
+          "infoveiap01_upgrade_Staging"
+        ],
+        "sendNotifications": true,
+        "stageEnabled": {
+          "expression": "${ execution.trigger.parameters[\"SKIP_VIAVIEIAP01\"] } == false",
+          "type": "expression"
+        },
+        "type": "pipeline",
+        "waitForCompletion": true
+      },
+      {
+        "completeOtherBranchesThenFail": false,
+        "continuePipeline": false,
+        "failPipeline": false,
+        "name": "Flow Completion",
+        "preconditions": [
+          {
+            "context": {
+              "expression": "\"${#stage('ossautoapp01_upgrade_Staging')['status']}\" == \"SUCCEEDED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('openlab01_upgrade_Staging')['status']}\" == \"SUCCEEDED\" or \"${#stage('openlab01_upgrade_Staging')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('bmasidun01_upgrade_Staging')['status']}\" == \"SUCCEEDED\" or \"${#stage('bmasidun01_upgrade_Staging')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('ernidun01_upgrade_Staging')['status']}\" == \"SUCCEEDED\" or \"${#stage('ernidun01_upgrade_Staging')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('infoveiap01_upgrade_Staging')['status']}\" == \"SUCCEEDED\" or \"${#stage('infoveiap01_upgrade_Staging')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('viavieiap01_upgrade_Staging')['status']}\" == \"SUCCEEDED\" or \"${#stage('viavieiap01_upgrade_Staging')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          },
+          {
+            "context": {
+              "expression": "\"${#stage('ecosystem01_upgrade_Staging')['status']}\" == \"SUCCEEDED\" or \"${#stage('ecosystem01_upgrade_Staging')['status']}\" == \"SKIPPED\""
+            },
+            "failPipeline": true,
+            "type": "expression"
+          }
+        ],
+        "refId": "Flow Completion",
+        "requisiteStageRefIds": [
+          "viavieiap01_upgrade_Staging"
+        ],
+        "type": "checkPreconditions"
+      }
+    ]
+  }
+}

@@ -1,0 +1,182 @@
+global:
+  security:
+    tls:
+      enabled: true
+  hosts:
+    iam: 'IAM_HOST_REPLACE'
+    gas: 'GAS_HOST_REPLACE'
+    os: 'OS_HOST_REPLACE'
+    appmgr: 'APPMGR_HOST_REPLACE'
+    adc: 'ADC_HOST_REPLACE'
+    th: 'TH_HOST_REPLACE'
+    ml: 'ML_HOST_REPLACE'
+    la: 'LA_HOST_REPLACE'
+    kafkaBootstrap: 'KAFKA_BOOTSTRAP_HOST_REPLACE'
+  registry:
+    url: 'DOCKER_REGISTRY_REPLACE'
+    username: 'USERNAME_REPLACE'
+    password: 'PASSWORD_REPLACE'
+  support:
+    ipv6:
+      enabled: IPV6_ENABLE_REPLACE
+  timezone: UTC
+  createClusterRoles: true
+  licensing:
+    sites:
+      - hostname: 'nelsaas-vnf2-thrift.sero.gic.ericsson.se'
+  ericsson:
+    licensing:
+      licenseDomains:
+        - productType: 'EIC'
+          swltId: 'STB-EIC-2'
+          customerId: 800141
+
+tags:
+  adc: false
+  dmm: false
+  th: false
+  eas: false
+  ch: false
+  appmgr: false
+  os: false
+  pmh: false
+  ml: false
+  teh: false
+  tieh: false
+  sef: false
+  sep: false
+  cs: false
+
+eric-cloud-native-base:
+  eric-data-search-engine-curator:
+    cronjob:
+      curator:
+        schedule: "0 */2 * * *"
+    actions: ''
+  eric-sec-access-mgmt:
+    accountManager:
+      enabled: false
+      inactivityThreshold: 9999
+    replicaCount: 2
+  eric-ctrl-bro:
+    persistence:
+      persistentVolumeClaim:
+        size: '15Gi'
+    sftp:
+      username: 'dummy'
+      password: 'dummy'
+  eric-log-transformer:
+    egress:
+      syslog:
+        enabled: false
+        remoteHosts: []
+  eric-data-search-engine:
+    service:
+      network:
+        protocol:
+          IPv6: IPV6_ENABLE_REPLACE
+    persistence:
+      data:
+        persistentVolumeClaim:
+          size: "10Gi"
+  eric-data-object-storage-mn:
+    brAgent:
+      properties:
+        backup_data_path: ""
+    persistentVolumeClaim:
+      size: "75Gi"
+  eric-fh-snmp-alarm-provider:
+    sendAlarm: false
+    service:
+      loadBalancerIP: FH_SNMP_ALARM_IP_REPLACE
+      annotations:
+        cloudProviderLB: {}
+  eric-odca-diagnostic-data-collector:
+    sftpServerHost: ""
+eric-oss-common-base:
+  sessionTokens:
+    maxSessionDurationSecs: 36000
+    maxIdleTimeSecs: 1800
+  service-mesh-ingress-gateway:
+    service:
+      loadBalancerIP: 'INGRESS_IP_REPLACE'
+      annotations:
+        cloudProviderLB: {}
+    externalTrafficPolicy: Cluster
+  system-user:
+    credentials:
+      username: 'system-user'
+      password: 'Ericsson123!'
+  gas:
+    defaultUser:
+      username: 'gas-user'
+      password: 'Ericsson123!'
+  eric-eo-usermgmt:
+    replicaCount: 2
+  eric-eo-usermgmt-ui:
+    replicaCount: 2
+  eric-oss-ddc:
+    autoUpload:
+      enabled: DDP_AUTOUPLOAD_ENABLED_REPLACE
+eric-topology-handling:
+  eric-oss-common-topology-svc:
+    eric-oss-cmn-topology-svc-core:
+      defaultUser:
+        username: "cts-user"
+        password: "Ericsson123!"
+      useGasHost:
+        enabled: true
+eric-oss-oran-support:
+  eric-oss-a1-policy-mngmt-svc:
+    defaultUser:
+      username: 'a1-user'
+      password: 'DefaultP12345!'
+eric-oss-ericsson-adaptation:
+  eric-oss-ran-topology-adapter:
+    rtaUser:
+      username: 'rta-user'
+      password: 'Ericsson123!'
+eric-oss-config-handling:
+  cps-user:
+    credentials:
+      username: 'cps-user'
+      password: 'Ericsson123!'
+  dmi-user:
+    credentials:
+      username: 'dmi-user'
+      password: 'Ericsson123!'
+eric-oss-adc:
+  ingress:
+    tls:
+      secretName: ves-tls-secret
+eric-oss-ml-execution-env:
+  credentials:
+    objectStorage:
+      jobUser:
+        password: "objectStorageJobUserPassword"
+      serviceUser:
+        password: "objectStorageServiceUserPassword"
+    containerRegistry:
+      username: "dockeruser"
+      password: "dockerpassword"
+    database:
+      custom:
+        password: "modellcmpasswd"
+      metrics:
+        password: "exporter"
+      replica:
+        password: "replica"
+      super:
+        password: "Postgres1#"
+eric-oss-dmm:
+  eric-oss-dmm-kf-op-sz:
+    kafka-cluster:
+      kafka:
+        jbod:
+          size: 50Gi
+eric-oss-connected-systems-registry:
+  eric-eo-subsystem-management:
+    gas:
+      defaultUser:
+        username: 'gas-user'
+        password: 'Ericsson123!'

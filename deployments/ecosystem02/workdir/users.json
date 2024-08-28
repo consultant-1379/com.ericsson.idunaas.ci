@@ -1,0 +1,9 @@
+{
+ "users":[
+    {
+      "name": "appmgr-user",
+      "password": "PASSWORD_REPLACE",
+      "roles": ["AppMgrAdmin", "AppMgrOperator", "default-roles-master"]
+    }
+  ]
+}
